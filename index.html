@@ -1,8 +1,12 @@
 
-```html
+
+
+  ```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,287 +14,482 @@
 
 <style>
 
+/* =====================================================
+   FONTS
+===================================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Special+Elite&display=swap');
+
+
+/* =====================================================
+   GENERAL
+===================================================== */
 
 * {
     box-sizing: border-box;
 }
 
 body {
+
     margin: 0;
-    background: #070a12;
-    color: #eee;
+
+    background: #070a11;
+
+    color: #eeeeee;
+
     font-family: "DM Sans", sans-serif;
+
     overflow: hidden;
 }
 
-/* ================= TOP ================= */
+
+/* =====================================================
+   TOP BAR
+===================================================== */
 
 #topbar {
-    height: 75px;
-    background: #0b1020;
+
+    height: 72px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #101626,
+            #090e19
+        );
+
     border-bottom: 1px solid #293149;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    padding: 0 30px;
+    padding: 0 28px;
 
     position: relative;
-    z-index: 20;
+
+    z-index: 50;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.4);
 }
+
 
 #title {
+
     font-family: "Special Elite", cursive;
-    font-size: 27px;
-    letter-spacing: 3px;
-    color: #f1e7cf;
+
+    font-size: 26px;
+
+    letter-spacing: 4px;
+
+    color: #e9dfca;
+
+    text-shadow:
+        0 0 12px rgba(255,230,180,.08);
 }
+
 
 #timerBox {
+
     text-align: right;
+
+    min-width: 100px;
 }
+
 
 #timerLabel {
-    font-size: 10px;
-    letter-spacing: 2px;
-    color: #8c96ad;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    color: #737e96;
 }
+
 
 #timer {
-    font-size: 25px;
+
+    font-size: 26px;
+
     font-weight: bold;
-    color: #e7b96a;
+
+    color: #d9aa5b;
+
+    transition: .3s;
 }
 
-/* ================= ROOM ================= */
+
+.lowTime {
+
+    color: #d66d6d !important;
+
+    animation: timerPulse .55s infinite;
+}
+
+
+@keyframes timerPulse {
+
+    50% {
+        opacity: .45;
+        transform: scale(1.06);
+    }
+
+}
+
+
+/* =====================================================
+   ROOM
+===================================================== */
 
 #room {
+
     position: relative;
-    height: calc(100vh - 135px);
+
+    height: calc(100vh - 132px);
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 20%,
+            rgba(120,140,180,.17),
+            transparent 38%
+        ),
+
+        radial-gradient(
+            ellipse at 80% 70%,
+            rgba(80,65,45,.08),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            rgba(15,21,37,.25),
+            rgba(3,6,12,.8)
+        ),
+
+        #151b2b;
+
+    transition: filter .3s;
+}
+
+
+/* =====================================================
+   CEILING LIGHT
+===================================================== */
+
+#light {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 250px;
+
+    height: 230px;
+
+    pointer-events: none;
 
     background:
         radial-gradient(
-            circle at 50% 35%,
-            rgba(112,126,169,.22),
-            transparent 35%
-        ),
-        linear-gradient(
-            rgba(18,25,44,.25),
-            rgba(6,9,18,.7)
-        ),
-        #151c2c;
+            ellipse,
+            rgba(220,210,170,.13),
+            transparent 68%
+        );
 
-    overflow: hidden;
+    animation: flicker 7s infinite;
+
 }
 
-/* ================= WINDOW ================= */
+
+@keyframes flicker {
+
+    0%, 94%, 100% {
+        opacity: 1;
+    }
+
+    95% {
+        opacity: .65;
+    }
+
+    96% {
+        opacity: .95;
+    }
+
+    97% {
+        opacity: .55;
+    }
+
+    98% {
+        opacity: 1;
+    }
+
+}
+
+
+/* =====================================================
+   WINDOW
+===================================================== */
 
 #window {
+
     position: absolute;
 
-    left: 7%;
+    left: 6%;
+
     top: 14%;
 
-    width: 190px;
-    height: 170px;
+    width: 185px;
+
+    height: 165px;
 
     background:
+
         repeating-linear-gradient(
             90deg,
             transparent 0,
-            transparent 91px,
-            #293247 92px,
-            #293247 98px
+            transparent 87px,
+            #293346 88px,
+            #293346 94px
         ),
+
         repeating-linear-gradient(
             0deg,
             transparent 0,
-            transparent 81px,
-            #293247 82px,
-            #293247 88px
+            transparent 78px,
+            #293346 79px,
+            #293346 85px
         ),
-        #202b40;
 
-    border: 9px solid #0b1020;
+        #1d293d;
+
+    border: 9px solid #080d18;
 
     box-shadow:
-        0 0 35px rgba(91,117,170,.18);
+        0 0 35px rgba(70,100,155,.16),
+
+        inset 0 0 35px rgba(0,0,0,.5);
+
+    z-index: 2;
 }
+
+
+/* =====================================================
+   RAIN
+===================================================== */
 
 #rain {
+
     position: absolute;
+
     inset: 0;
 
+    opacity: .65;
+
     background:
+
         repeating-linear-gradient(
-            110deg,
+            108deg,
             transparent 0,
-            transparent 13px,
-            rgba(170,190,220,.15) 14px,
-            transparent 15px
+            transparent 12px,
+            rgba(180,200,225,.13) 13px,
+            transparent 14px
         );
 
-    animation: rainMove .8s linear infinite;
+    animation: rain 1s linear infinite;
 }
 
-@keyframes rainMove {
+
+@keyframes rain {
 
     from {
         background-position: 0 0;
     }
 
     to {
-        background-position: 30px 60px;
+        background-position: 25px 60px;
     }
 
 }
 
-/* ================= BOARD ================= */
+
+/* =====================================================
+   BOARD
+===================================================== */
 
 #board {
+
     position: absolute;
 
-    left: 32%;
-    top: 13%;
+    left: 31%;
 
-    width: 38%;
-    height: 190px;
+    top: 12%;
 
-    background: #17261f;
+    width: 40%;
 
-    border: 10px solid #493b2e;
+    height: 185px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background:
+
+        radial-gradient(
+            ellipse,
+            rgba(70,100,75,.15),
+            transparent
+        ),
+
+        #16251e;
+
+    border: 10px solid #493b2d;
+
+    border-radius: 3px;
 
     box-shadow:
-        0 12px 25px rgba(0,0,0,.35);
 
-    z-index: 2;
+        0 15px 30px rgba(0,0,0,.4),
+
+        inset 0 0 35px rgba(0,0,0,.35);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 3;
 }
 
+
 #boardText {
+
     font-family: "Special Elite", cursive;
 
-    font-size: 22px;
-
-    color: #bfc6ad;
+    color: #aeb9a4;
 
     text-align: center;
 
     transform: rotate(-1deg);
+
+    font-size: 21px;
+
+    opacity: .82;
+
 }
 
-#boardText span {
-    font-size: 13px;
-    color: #7e8978;
+
+#boardText .small {
+
+    font-size: 12px;
+
+    color: #6f7c70;
+
+    line-height: 1.8;
 }
 
-/* ================= FLOOR ================= */
+
+/* =====================================================
+   FLOOR
+===================================================== */
 
 #floor {
+
     position: absolute;
 
     bottom: 0;
 
     width: 100%;
+
     height: 29%;
 
     background:
+
         repeating-linear-gradient(
             90deg,
             #302b2b 0,
-            #302b2b 80px,
-            #272326 80px,
-            #272326 160px
+            #302b2b 78px,
+            #262226 79px,
+            #262226 156px
         );
 
-    border-top: 4px solid #17151a;
+    border-top: 5px solid #17151a;
+
+    box-shadow:
+        inset 0 15px 25px rgba(0,0,0,.3);
+
 }
 
-/* ================= OBJECTS ================= */
+
+/* =====================================================
+   OBJECTS
+===================================================== */
 
 .object {
+
     position: absolute;
 
     cursor: pointer;
+
+    user-select: none;
 
     transition:
         transform .2s,
         filter .2s;
 
-    user-select: none;
-
-    z-index: 5;
+    z-index: 10;
 }
+
 
 .object:hover {
-    transform: translateY(-5px) scale(1.05);
-    filter: brightness(1.3);
+
+    transform:
+        translateY(-4px)
+        scale(1.035);
+
+    filter:
+        brightness(1.22)
+        drop-shadow(
+            0 0 9px rgba(210,180,120,.16)
+        );
 }
 
-.objectLabel {
-    position: absolute;
 
-    white-space: nowrap;
-
-    background: rgba(7,10,18,.9);
-
-    padding: 5px 9px;
-
-    border-radius: 5px;
-
-    font-size: 12px;
-
-    color: #cbd2e0;
-
-    opacity: 0;
-
-    transition: .2s;
-
-    pointer-events: none;
-}
-
-.object:hover .objectLabel {
-    opacity: 1;
-}
-
-/* ================= CLOCK ================= */
-
-#clock {
-    left: 18%;
-    top: 10%;
-
-    font-size: 55px;
-}
-
-#clock .objectLabel {
-    top: -20px;
-}
-
-/* ================= DESK ================= */
+/* =====================================================
+   DESK
+===================================================== */
 
 #desk {
-    left: 12%;
+
+    left: 11%;
+
     bottom: 23%;
 
-    width: 210px;
-    height: 100px;
+    width: 220px;
+
+    height: 105px;
 
     background:
+
         linear-gradient(
-            #79583d,
-            #503a29
+            180deg,
+            #79593f,
+            #543b29
         );
 
     border-radius: 7px;
 
     box-shadow:
-        0 15px 0 #35271e;
+
+        0 14px 0 #34251c,
+
+        0 20px 25px rgba(0,0,0,.45);
 }
+
 
 #desk::before {
 
@@ -298,82 +497,149 @@ body {
 
     position: absolute;
 
-    width: 48px;
-    height: 48px;
+    right: 22px;
 
-    right: 20px;
     top: 25px;
 
-    border: 3px solid #302219;
+    width: 52px;
+
+    height: 48px;
+
+    border:
+
+        3px solid #302219;
 
     border-radius: 4px;
-}
-
-#desk .objectLabel {
-    top: -32px;
-    left: 60px;
-}
-
-/* ================= BOOKS ================= */
-
-#books {
-    left: 42%;
-    bottom: 26%;
-
-    font-size: 65px;
-}
-
-#books .objectLabel {
-    top: -25px;
-}
-
-/* ================= BAG ================= */
-
-#bag {
-    left: 67%;
-    bottom: 20%;
-
-    font-size: 70px;
-}
-
-#bag .objectLabel {
-    top: -20px;
-}
-
-/* ================= COMPUTER ================= */
-
-#computer {
-    right: 18%;
-    top: 36%;
-
-    font-size: 65px;
-}
-
-#computer .objectLabel {
-    top: -25px;
-}
-
-/* ================= CABINET ================= */
-
-#cabinet {
-    right: 22%;
-    bottom: 22%;
-
-    width: 115px;
-    height: 140px;
 
     background:
-        linear-gradient(
-            90deg,
-            #392d26,
-            #584438,
-            #30241f
-        );
-
-    border: 6px solid #211914;
+        rgba(0,0,0,.08);
 }
 
-#cabinet::before,
+
+#desk::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 15px;
+
+    bottom: -55px;
+
+    width: 15px;
+
+    height: 55px;
+
+    background: #3b2b21;
+
+    box-shadow:
+        175px 0 #3b2b21;
+}
+
+
+/* =====================================================
+   BOOKS
+===================================================== */
+
+#books {
+
+    left: 40%;
+
+    bottom: 25%;
+
+    font-size: 64px;
+
+    filter:
+        drop-shadow(0 10px 8px rgba(0,0,0,.45));
+}
+
+
+/* =====================================================
+   BAG
+===================================================== */
+
+#bag {
+
+    left: 66%;
+
+    bottom: 20%;
+
+    font-size: 67px;
+
+    filter:
+        drop-shadow(0 10px 8px rgba(0,0,0,.45));
+}
+
+
+/* =====================================================
+   COMPUTER
+===================================================== */
+
+#computer {
+
+    right: 16%;
+
+    top: 35%;
+
+    font-size: 63px;
+
+    filter:
+        drop-shadow(0 10px 8px rgba(0,0,0,.5));
+}
+
+
+/* =====================================================
+   CABINET
+===================================================== */
+
+#cabinet {
+
+    right: 28%;
+
+    bottom: 21%;
+
+    width: 120px;
+
+    height: 145px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #33271f,
+            #594235,
+            #30231d
+        );
+
+    border: 7px solid #211813;
+
+    box-shadow:
+
+        0 15px 20px rgba(0,0,0,.45),
+
+        inset 0 0 20px rgba(0,0,0,.35);
+}
+
+
+#cabinet::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 10px;
+
+    right: 10px;
+
+    top: 18px;
+
+    height: 43px;
+
+    border:
+        2px solid #201713;
+}
+
+
 #cabinet::after {
 
     content: "";
@@ -381,45 +647,47 @@ body {
     position: absolute;
 
     left: 10px;
+
     right: 10px;
 
-    height: 42px;
-
-    border: 2px solid #201713;
-}
-
-#cabinet::before {
-    top: 18px;
-}
-
-#cabinet::after {
     bottom: 18px;
+
+    height: 43px;
+
+    border:
+        2px solid #201713;
 }
 
-#cabinet .objectLabel {
-    top: -30px;
-}
 
-/* ================= DOOR ================= */
+/* =====================================================
+   DOOR
+===================================================== */
 
 #door {
 
     right: 4%;
-    top: 12%;
 
-    width: 125px;
+    top: 11%;
+
+    width: 126px;
+
     height: 250px;
 
     background:
+
         linear-gradient(
             90deg,
-            #473225,
-            #60442e,
-            #3b291f
+            #3d2b21,
+            #654832,
+            #39271e
         );
 
-    border: 8px solid #211812;
+    border: 8px solid #201711;
+
+    box-shadow:
+        -15px 15px 30px rgba(0,0,0,.35);
 }
+
 
 #door::before {
 
@@ -427,19 +695,23 @@ body {
 
     position: absolute;
 
-    top: 18px;
-    left: 29px;
+    top: 17px;
 
-    color: #d6ad65;
+    left: 28px;
+
+    padding: 5px 7px;
+
+    border: 1px solid #80633b;
+
+    color: #d1a55c;
 
     font-weight: bold;
 
     letter-spacing: 2px;
 
-    border: 1px solid #80653d;
-
-    padding: 4px 7px;
+    font-size: 12px;
 }
+
 
 #door::after {
 
@@ -447,102 +719,170 @@ body {
 
     position: absolute;
 
-    right: 17px;
+    right: 16px;
+
     top: 130px;
 
     width: 10px;
+
     height: 10px;
 
-    background: #c4a26a;
-
     border-radius: 50%;
+
+    background: #c6a269;
+
+    box-shadow:
+        0 0 8px rgba(200,160,90,.35);
 }
 
-#door .objectLabel {
-    top: 265px;
-    left: 30px;
+
+/* =====================================================
+   CLOCK
+===================================================== */
+
+#clock {
+
+    left: 21%;
+
+    top: 10%;
+
+    font-size: 48px;
+
+    filter:
+        drop-shadow(0 5px 8px rgba(0,0,0,.5));
 }
 
-/* ================= MESSAGE ================= */
+
+/* =====================================================
+   MESSAGE
+===================================================== */
 
 #message {
 
     position: absolute;
 
     left: 50%;
-    bottom: 20px;
+
+    bottom: 18px;
 
     transform: translateX(-50%);
 
-    min-width: 330px;
-    max-width: 560px;
+    width: min(570px, 75%);
 
-    background: rgba(9,13,24,.95);
+    min-height: 58px;
 
-    border: 1px solid #303a52;
+    padding: 12px 20px;
 
-    padding: 13px 22px;
+    background:
+        rgba(7,10,18,.94);
+
+    border:
+        1px solid #303a52;
 
     border-radius: 8px;
 
     text-align: center;
 
-    font-size: 14px;
+    font-size: 13px;
+
+    line-height: 1.55;
 
     box-shadow:
-        0 8px 25px rgba(0,0,0,.25);
+        0 10px 30px rgba(0,0,0,.4);
 
-    z-index: 15;
+    z-index: 25;
+
+    animation: messageIn .2s ease;
 }
 
-/* ================= INVENTORY ================= */
+
+@keyframes messageIn {
+
+    from {
+        opacity: .4;
+        transform: translateX(-50%) translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%);
+    }
+
+}
+
+
+/* =====================================================
+   INVENTORY
+===================================================== */
 
 #inventory {
 
     height: 60px;
 
-    background: #090d18;
+    background:
+        linear-gradient(
+            #090e19,
+            #070a12
+        );
 
-    border-top: 1px solid #252d40;
+    border-top:
+        1px solid #252d40;
 
     display: flex;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 9px;
 
-    padding-left: 22px;
+    padding:
+        0 20px;
 
     overflow-x: auto;
+
+    z-index: 50;
 }
+
 
 .inventoryTitle {
 
     color: #727c93;
 
-    font-size: 11px;
+    font-size: 10px;
 
     letter-spacing: 2px;
 
     margin-right: 5px;
 }
 
+
 .item {
 
-    background: #171e30;
+    background:
+        linear-gradient(
+            #1a2233,
+            #121927
+        );
 
-    border: 1px solid #303a52;
+    border:
+        1px solid #35405a;
 
-    padding: 7px 13px;
+    padding:
+        7px 12px;
 
-    border-radius: 6px;
+    border-radius: 5px;
 
-    font-size: 12px;
+    font-size: 11px;
 
     white-space: nowrap;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.04);
 }
 
-/* ================= PUZZLE ================= */
+
+/* =====================================================
+   PUZZLE WINDOW
+===================================================== */
 
 #puzzle {
 
@@ -552,199 +892,322 @@ body {
 
     inset: 0;
 
-    background: rgba(3,5,10,.85);
+    background:
+        rgba(2,4,9,.88);
 
     justify-content: center;
 
     align-items: center;
 
-    z-index: 50;
+    z-index: 100;
 }
+
 
 #puzzleBox {
 
-    width: 420px;
+    width: 410px;
 
-    background: #121827;
-
-    border: 1px solid #38435d;
+    max-width: 90%;
 
     padding: 30px;
 
-    border-radius: 12px;
+    background:
+
+        linear-gradient(
+            145deg,
+            #151c2d,
+            #0d1320
+        );
+
+    border:
+        1px solid #3a4660;
+
+    border-radius: 11px;
 
     text-align: center;
 
     box-shadow:
-        0 20px 70px rgba(0,0,0,.7);
+        0 25px 80px rgba(0,0,0,.7);
+
+    animation:
+        puzzleOpen .2s ease;
 }
 
-#puzzleBox h2 {
+
+@keyframes puzzleOpen {
+
+    from {
+        opacity: 0;
+        transform: scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+#puzzleTitle {
 
     font-family:
         "Special Elite",
         cursive;
 
     color: #e7dbc3;
+
+    letter-spacing: 2px;
 }
+
 
 #puzzleDescription {
 
-    color: #aeb6c8;
+    color: #aeb7c8;
 
-    line-height: 1.6;
+    line-height: 1.65;
+
+    font-size: 13px;
 }
+
 
 #password {
 
     width: 100%;
 
-    background: #080c16;
+    padding: 12px;
 
-    color: white;
+    margin:
+        12px 0;
 
-    border: 1px solid #3c465e;
+    background: #070b14;
+
+    border:
+        1px solid #3b465e;
 
     border-radius: 6px;
 
-    padding: 12px;
-
-    text-align: center;
+    color: white;
 
     font-size: 20px;
 
-    margin: 12px 0;
+    text-align: center;
 
-    letter-spacing: 4px;
+    letter-spacing: 6px;
+
+    outline: none;
 }
 
+
+#password:focus {
+
+    border-color: #8b744e;
+
+    box-shadow:
+        0 0 10px rgba(180,145,80,.12);
+}
+
+
 button {
+
+    padding:
+        10px 20px;
 
     border: none;
 
     border-radius: 6px;
 
-    padding: 10px 20px;
+    font-weight: bold;
 
     cursor: pointer;
-
-    font-weight: bold;
 }
+
 
 #submit {
 
     background: #d2a85f;
 
-    color: #15100a;
+    color: #171108;
 }
+
 
 #close {
 
-    background: #30384a;
+    margin-left: 7px;
+
+    background: #30394c;
 
     color: white;
-
-    margin-left: 6px;
 }
+
 
 #wrong {
 
+    min-height: 18px;
+
     color: #d77b7b;
 
-    min-height: 20px;
+    font-size: 12px;
 }
 
-/* ================= TIMER ================= */
 
-.lowTime {
-    animation: pulse 1s infinite;
+/* =====================================================
+   END SCREEN
+===================================================== */
+
+#endScreen {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(2,4,8,.95);
+
+    z-index: 200;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
 }
 
-@keyframes pulse {
 
-    50% {
-        opacity: .45;
-    }
+#endBox {
 
+    padding: 40px;
+
+    max-width: 500px;
 }
 
-/* ================= MOBILE ================= */
+
+#endBox h1 {
+
+    font-family:
+        "Special Elite",
+        cursive;
+
+    font-size: 34px;
+
+    color: #e8dcc5;
+
+    letter-spacing: 3px;
+}
+
+
+#endBox p {
+
+    color: #aab3c4;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:700px) {
 
     #title {
-        font-size: 18px;
+        font-size: 17px;
+        letter-spacing: 2px;
+    }
+
+    #topbar {
+        padding: 0 15px;
     }
 
     #window {
-        left: 3%;
+        left: 2%;
         width: 120px;
         height: 110px;
     }
 
     #board {
-        left: 25%;
-        width: 50%;
-        height: 130px;
+        left: 23%;
+        width: 54%;
+        height: 135px;
     }
 
     #boardText {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     #desk {
-        left: 5%;
-        width: 150px;
+        left: 4%;
+        width: 145px;
     }
 
     #books {
-        left: 38%;
-        font-size: 45px;
+        left: 37%;
+        font-size: 43px;
     }
 
     #bag {
-        left: 58%;
-        font-size: 50px;
+        left: 57%;
+        font-size: 48px;
     }
 
     #computer {
-        right: 20%;
+        right: 16%;
         font-size: 45px;
     }
 
     #clock {
-        font-size: 40px;
+        font-size: 36px;
+        left: 15%;
     }
 
     #cabinet {
-        right: 27%;
+        right: 26%;
         transform: scale(.75);
     }
 
     #door {
-        width: 85px;
+        width: 82px;
         height: 180px;
     }
 
     #message {
-        min-width: 280px;
-        font-size: 12px;
-    }
-
-    #puzzleBox {
         width: 90%;
+        font-size: 11px;
     }
 
 }
 
+
+/* =====================================================
+   HIDDEN DETAILS
+===================================================== */
+
+.secretMark {
+
+    opacity: .08;
+
+    transition: opacity .3s;
+}
+
+
+.object:hover .secretMark {
+
+    opacity: .45;
+}
+
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- ================= TOP ================= -->
+<!-- ===================================================
+     TOP
+=================================================== -->
 
 <div id="topbar">
 
@@ -759,7 +1222,7 @@ button {
         </div>
 
         <div id="timer">
-            02:00
+            01:30
         </div>
 
     </div>
@@ -767,15 +1230,22 @@ button {
 </div>
 
 
-<!-- ================= ROOM ================= -->
+<!-- ===================================================
+     ROOM
+=================================================== -->
 
 <div id="room">
+
+
+    <div id="light"></div>
 
 
     <!-- WINDOW -->
 
     <div id="window">
+
         <div id="rain"></div>
+
     </div>
 
 
@@ -789,12 +1259,28 @@ button {
 
             <br><br>
 
-            <span>
-                Four things were left behind.
+            <span class="small">
+
+                Three things were left behind.
                 <br>
-                Only three belong together.
+
+                They were not left for you.
                 <br><br>
-                <b>ORDER MATTERS.</b>
+
+                One is written.
+                <br>
+
+                One is broken.
+                <br>
+
+                One has stopped.
+
+                <br><br>
+
+                <b>
+                    Don't begin with the beginning.
+                </b>
+
             </span>
 
         </div>
@@ -817,10 +1303,6 @@ button {
 
         🕒
 
-        <div class="objectLabel">
-            BROKEN CLOCK
-        </div>
-
     </div>
 
 
@@ -832,8 +1314,8 @@ button {
         onclick="inspect('desk')"
     >
 
-        <div class="objectLabel">
-            TEACHER'S DESK
+        <div class="secretMark">
+            ·
         </div>
 
     </div>
@@ -849,10 +1331,6 @@ button {
 
         📚
 
-        <div class="objectLabel">
-            OLD BOOKS
-        </div>
-
     </div>
 
 
@@ -865,10 +1343,6 @@ button {
     >
 
         🎒
-
-        <div class="objectLabel">
-            SCHOOL BAG
-        </div>
 
     </div>
 
@@ -883,10 +1357,6 @@ button {
 
         💻
 
-        <div class="objectLabel">
-            COMPUTER
-        </div>
-
     </div>
 
 
@@ -897,10 +1367,6 @@ button {
         id="cabinet"
         onclick="inspect('cabinet')"
     >
-
-        <div class="objectLabel">
-            LOCKED CABINET
-        </div>
 
     </div>
 
@@ -913,10 +1379,6 @@ button {
         onclick="inspect('door')"
     >
 
-        <div class="objectLabel">
-            EXIT
-        </div>
-
     </div>
 
 
@@ -924,12 +1386,12 @@ button {
 
     <div id="message">
 
-        The classroom is empty...
+        The classroom is empty.
 
-        <br><br>
+        <br>
 
         <b>
-            Something feels wrong.
+            You have 90 seconds.
         </b>
 
     </div>
@@ -937,18 +1399,22 @@ button {
 </div>
 
 
-<!-- ================= INVENTORY ================= -->
+<!-- ===================================================
+     INVENTORY
+=================================================== -->
 
 <div id="inventory">
 
     <div class="inventoryTitle">
-        INVENTORY
+        EVIDENCE
     </div>
 
 </div>
 
 
-<!-- ================= PUZZLE ================= -->
+<!-- ===================================================
+     PUZZLE
+=================================================== -->
 
 <div id="puzzle">
 
@@ -964,6 +1430,8 @@ button {
             id="password"
             type="text"
             maxlength="3"
+            inputmode="numeric"
+            autocomplete="off"
             placeholder="___"
         >
 
@@ -990,76 +1458,61 @@ button {
 </div>
 
 
+<!-- ===================================================
+     END SCREEN
+=================================================== -->
+
+<div id="endScreen">
+
+    <div id="endBox">
+
+        <h1>
+            YOU ESCAPED
+        </h1>
+
+        <p>
+            The classroom door slowly closes behind you.
+        </p>
+
+        <p>
+            You made it out.
+        </p>
+
+        <p>
+            <i>
+                But someone knew you would find the clues.
+            </i>
+        </p>
+
+    </div>
+
+</div>
+
+
 <script>
+
 
 /* =====================================================
    GAME STATE
 ===================================================== */
 
-let time = 120;
+let time = 90;
 
-let clueBook = false;
-let clueBag = false;
-let clueClock = false;
+let bookFound = false;
+
+let bagFound = false;
+
+let clockFound = false;
 
 let computerUnlocked = false;
+
 let cabinetUnlocked = false;
+
 let hasKey = false;
 
-let finalPuzzle = false;
+let currentPuzzle = "";
+
 let escaped = false;
-
-
-/* =====================================================
-   TIMER
-===================================================== */
-
-const timer = setInterval(() => {
-
-    if (escaped) return;
-
-    let minutes =
-        Math.floor(time / 60);
-
-    let seconds =
-        time % 60;
-
-    document.getElementById("timer")
-        .textContent =
-        String(minutes).padStart(2, "0")
-        + ":" +
-        String(seconds).padStart(2, "0");
-
-
-    if (time <= 30) {
-
-        document
-            .getElementById("timer")
-            .classList.add("lowTime");
-
-    }
-
-
-    if (time <= 0) {
-
-        clearInterval(timer);
-
-        showMessage(
-
-            "⏰ <b>TIME'S UP.</b><br><br>" +
-
-            "The classroom lights go out.<br><br>" +
-
-            "<i>You stayed too long.</i>"
-
-        );
-
-        return;
-    }
-
-    time--;
-
-}, 1000);
 
 
 /* =====================================================
@@ -1076,115 +1529,254 @@ function showMessage(text) {
 
 
 /* =====================================================
-   INSPECT OBJECTS
+   TIMER
+===================================================== */
+
+const timer = setInterval(function() {
+
+    if (escaped) {
+        return;
+    }
+
+
+    time--;
+
+
+    let minutes =
+        Math.floor(time / 60);
+
+
+    let seconds =
+        time % 60;
+
+
+    document
+        .getElementById("timer")
+        .textContent =
+
+        String(minutes).padStart(2, "0")
+        +
+        ":"
+        +
+        String(seconds).padStart(2, "0");
+
+
+    if (time <= 30) {
+
+        document
+            .getElementById("timer")
+            .classList.add("lowTime");
+
+    }
+
+
+    if (time <= 0) {
+
+        clearInterval(timer);
+
+        escaped = true;
+
+        showMessage(
+
+            "⏰ <b>TIME'S UP.</b><br><br>" +
+
+            "The lights suddenly go out.<br><br>" +
+
+            "<i>"
+            + "You were close."
+            + "</i>"
+
+        );
+
+    }
+
+}, 1000);
+
+
+/* =====================================================
+   INSPECT
 ===================================================== */
 
 function inspect(object) {
 
 
-    /* ================= BOOKS ================= */
+    /* =================================================
+       BOOKS
+    ================================================= */
 
     if (object === "books") {
 
-        clueBook = true;
+        if (!bookFound) {
 
-        showMessage(
+            bookFound = true;
 
-            "You pull out a dusty history book.<br><br>" +
-
-            "One page has been folded over.<br><br>" +
-
-            "<span style='font-size:24px'>IV</span><br><br>" +
-
-            "<i>"
-            + "Someone has circled it."
-            + "</i>"
-
-        );
-
-        addItem("📖 Marked Page");
-
-        return;
-    }
-
-
-    /* ================= BAG ================= */
-
-    if (object === "bag") {
-
-        clueBag = true;
-
-        showMessage(
-
-            "Inside the bag you find a torn piece of paper.<br><br>" +
-
-            "<b>JXII</b><br><br>" +
-
-            "<small>"
-            + "The first letter is wrong."
-            + "</small>"
-
-        );
-
-        addItem("📜 Strange Note");
-
-        return;
-    }
-
-
-    /* ================= CLOCK ================= */
-
-    if (object === "clock") {
-
-        clueClock = true;
-
-        showMessage(
-
-            "The clock stopped at <b>2:00</b>.<br><br>" +
-
-            "Someone scratched underneath it:<br><br>" +
-
-            "<i>"
-            + "\"Never begin where you finish.\""
-            + "</i>"
-
-        );
-
-        addItem("🕒 Clock Clue");
-
-        return;
-    }
-
-
-    /* ================= COMPUTER ================= */
-
-    if (object === "computer") {
-
-        if (
-            !clueBook ||
-            !clueBag ||
-            !clueClock
-        ) {
 
             showMessage(
 
-                "The computer is locked.<br><br>" +
+                "You pull one book from the shelf.<br><br>" +
 
-                "Its screen says:<br><br>" +
+                "A loose page falls onto the floor.<br><br>" +
 
-                "<b>"
-                + "\"THREE CLUES. ONE SEQUENCE.\""
-                + "</b><br><br>" +
+                "Most of it is ordinary history notes.<br><br>" +
 
-                "Maybe something else in the room explains it."
+                "Near the bottom, someone has written:<br><br>" +
+
+                "<b style='font-size:23px'>IV</b><br><br>" +
+
+                "<i>"
+                + "\"The old way of counting still works.\""
+                + "</i>"
+
+            );
+
+
+            addItem("📖 Loose Page");
+
+        }
+
+        else {
+
+            showMessage(
+
+                "You search the books again.<br><br>" +
+
+                "Nothing else stands out."
 
             );
 
         }
 
-        else if (!computerUnlocked) {
+        return;
+    }
 
-            openComputerPuzzle();
+
+    /* =================================================
+       BAG
+    ================================================= */
+
+    if (object === "bag") {
+
+        if (!bagFound) {
+
+            bagFound = true;
+
+
+            showMessage(
+
+                "The bag smells like old paper and dust.<br><br>" +
+
+                "You find a torn scrap hidden inside the smallest pocket.<br><br>" +
+
+                "<b style='letter-spacing:3px'>JXII</b><br><br>" +
+
+                "The first mark has been crossed out twice.<br><br>" +
+
+                "<i>"
+                + "\"Something here was never supposed to exist.\""
+                + "</i>"
+
+            );
+
+
+            addItem("🎒 Torn Scrap");
+
+        }
+
+        else {
+
+            showMessage(
+
+                "The bag is empty now."
+
+            );
+
+        }
+
+        return;
+    }
+
+
+    /* =================================================
+       CLOCK
+    ================================================= */
+
+    if (object === "clock") {
+
+        if (!clockFound) {
+
+            clockFound = true;
+
+
+            showMessage(
+
+                "You look closely at the classroom clock.<br><br>" +
+
+                "The second hand doesn't move.<br><br>" +
+
+                "Neither does the minute hand.<br><br>" +
+
+                "It has been stopped for a very long time.<br><br>" +
+
+                "<b>2:00</b><br><br>" +
+
+                "A tiny scratch beneath the glass reads:<br>" +
+
+                "<i>\"When the circle ends, begin again.\"</i>"
+
+            );
+
+
+            addItem("🕒 Clock Observation");
+
+        }
+
+        else {
+
+            showMessage(
+
+                "Still frozen at 2:00."
+
+            );
+
+        }
+
+        return;
+    }
+
+
+    /* =================================================
+       COMPUTER
+    ================================================= */
+
+    if (object === "computer") {
+
+
+        if (!bookFound ||
+            !bagFound ||
+            !clockFound) {
+
+
+            showMessage(
+
+                "The monitor flickers once.<br><br>" +
+
+                "<b>ACCESS DENIED.</b><br><br>" +
+
+                "A line appears for half a second:<br><br>" +
+
+                "<i>"
+                + "\"You haven't seen everything.\""
+                + "</i>"
+
+            );
+
+            return;
+        }
+
+
+        if (!computerUnlocked) {
+
+            openComputer();
 
         }
 
@@ -1194,9 +1786,9 @@ function inspect(object) {
 
                 "The computer is already unlocked.<br><br>" +
 
-                "The screen displays:<br><br>" +
+                "One folder remains open:<br>" +
 
-                "<b>CABINET SECURITY: ACTIVE</b>"
+                "<b>CABINET SECURITY</b>"
 
             );
 
@@ -1206,25 +1798,30 @@ function inspect(object) {
     }
 
 
-    /* ================= CABINET ================= */
+    /* =================================================
+       CABINET
+    ================================================= */
 
     if (object === "cabinet") {
+
 
         if (!computerUnlocked) {
 
             showMessage(
 
-                "The cabinet is electronically locked.<br><br>" +
+                "The cabinet has a small keypad.<br><br>" +
 
-                "A red light blinks beside the keypad."
+                "The display is completely dark."
 
             );
 
+            return;
         }
 
-        else if (!cabinetUnlocked) {
 
-            openCabinetPuzzle();
+        if (!cabinetUnlocked) {
+
+            openCabinet();
 
         }
 
@@ -1232,9 +1829,7 @@ function inspect(object) {
 
             showMessage(
 
-                "The cabinet is already open.<br><br>" +
-
-                "You took everything useful."
+                "The cabinet door is already open."
 
             );
 
@@ -1244,35 +1839,44 @@ function inspect(object) {
     }
 
 
-    /* ================= DESK ================= */
+    /* =================================================
+       DESK
+    ================================================= */
 
     if (object === "desk") {
+
 
         if (!cabinetUnlocked) {
 
             showMessage(
 
-                "You search the teacher's desk.<br><br>" +
+                "A teacher's desk.<br><br>" +
 
-                "One drawer is locked."
+                "The drawers don't seem to contain anything useful."
 
             );
 
+            return;
         }
 
-        else if (!hasKey) {
+
+        if (!hasKey) {
 
             hasKey = true;
 
+
             showMessage(
 
-                "You use the brass key on the hidden drawer.<br><br>" +
+                "You notice a keyhole underneath the desk.<br><br>" +
+
+                "The brass key fits perfectly.<br><br>" +
 
                 "<b>CLICK.</b><br><br>" +
 
-                "🗝️ <b>ESCAPE KEY FOUND.</b>"
+                "A hidden compartment opens."
 
             );
+
 
             addItem("🗝️ Escape Key");
 
@@ -1281,7 +1885,9 @@ function inspect(object) {
         else {
 
             showMessage(
-                "The hidden drawer is empty."
+
+                "The hidden compartment is empty."
+
             );
 
         }
@@ -1290,19 +1896,22 @@ function inspect(object) {
     }
 
 
-    /* ================= DOOR ================= */
+    /* =================================================
+       DOOR
+    ================================================= */
 
     if (object === "door") {
+
 
         if (!hasKey) {
 
             showMessage(
 
-                "You try the exit.<br><br>" +
+                "You try the handle.<br><br>" +
 
-                "🔒 <b>LOCKED.</b><br><br>" +
+                "<b>LOCKED.</b><br><br>" +
 
-                "You need the escape key."
+                "There must be another way."
 
             );
 
@@ -1314,19 +1923,15 @@ function inspect(object) {
 
             clearInterval(timer);
 
+
+            document
+                .getElementById("endScreen")
+                .style.display = "flex";
+
+
             showMessage(
 
-                "🔓 <b>THE DOOR OPENS.</b><br><br>" +
-
-                "Cold air rushes into the hallway.<br><br>" +
-
-                "🏃 <b>YOU ESCAPED!</b><br><br>" +
-
-                "<small>"
-                + "But one question remains..."
-                + "<br><br>" +
-                "\"Who locked you in?\""
-                + "</small>"
+                "🔓 <b>THE DOOR OPENS.</b>"
 
             );
 
@@ -1341,7 +1946,10 @@ function inspect(object) {
    COMPUTER PUZZLE
 ===================================================== */
 
-function openComputerPuzzle() {
+function openComputer() {
+
+    currentPuzzle = "computer";
+
 
     document
         .getElementById("puzzle")
@@ -1358,31 +1966,21 @@ function openComputerPuzzle() {
         .getElementById("puzzleDescription")
         .innerHTML =
 
-        "Three fragments have been found:<br><br>" +
+        "Three fragments have been discovered.<br><br>" +
 
-        "<b>IV</b> &nbsp;&nbsp; " +
-        "<b>JXII</b> &nbsp;&nbsp; " +
+        "<b>IV</b> &nbsp;&nbsp;&nbsp; " +
+        "<b>JXII</b> &nbsp;&nbsp;&nbsp; " +
         "<b>2:00</b>" +
 
         "<br><br>" +
 
-        "One contains a mistake.<br>" +
+        "Something is wrong with one of them.<br><br>" +
 
-        "Correct it, then find the three-digit sequence.";
+        "Correct it.<br>" +
 
-    document
-        .getElementById("password")
-        .value = "";
+        "Then decide what belongs first.";
 
-    document
-        .getElementById("wrong")
-        .textContent = "";
-
-    finalPuzzle = false;
-
-    document
-        .getElementById("password")
-        .focus();
+    resetInput();
 
 }
 
@@ -1391,7 +1989,10 @@ function openComputerPuzzle() {
    CABINET PUZZLE
 ===================================================== */
 
-function openCabinetPuzzle() {
+function openCabinet() {
+
+    currentPuzzle = "cabinet";
+
 
     document
         .getElementById("puzzle")
@@ -1401,48 +2002,34 @@ function openCabinetPuzzle() {
     document
         .getElementById("puzzleTitle")
         .textContent =
-        "CABINET SECURITY";
+        "CABINET LOCKED";
 
 
     document
         .getElementById("puzzleDescription")
         .innerHTML =
 
-        "The computer displays:<br><br>" +
+        "The computer has accepted the first sequence.<br><br>" +
 
-        "<b>4 &nbsp;&nbsp; 7 &nbsp;&nbsp; 2</b>" +
-
-        "<br><br>" +
-
-        "Then another sentence appears:<br><br>" +
+        "Its final message reads:<br><br>" +
 
         "<i>"
-        + "\"Never begin where you finish.\""
-        + "</i>" +
+        + "\"Three numbers were never meant to be read plainly.\""
+        + "</i><br><br>" +
 
-        "<br><br>" +
+        "The old note remains in your evidence.<br><br>" +
 
-        "The cabinet requires a three-digit code.";
+        "<b>"
+        + "\"Don't begin with the beginning.\""
+        + "</b>";
 
-    document
-        .getElementById("password")
-        .value = "";
-
-    document
-        .getElementById("wrong")
-        .textContent = "";
-
-    finalPuzzle = true;
-
-    document
-        .getElementById("password")
-        .focus();
+    resetInput();
 
 }
 
 
 /* =====================================================
-   PASSWORD CHECK
+   CHECK PASSWORD
 ===================================================== */
 
 function checkPassword() {
@@ -1459,44 +2046,44 @@ function checkPassword() {
             .getElementById("wrong");
 
 
-    /* ================= COMPUTER ================= */
+    /* =================================================
+       COMPUTER
+    ================================================= */
 
-    if (!finalPuzzle) {
+    if (currentPuzzle === "computer") {
+
 
         if (password === "412") {
 
             computerUnlocked = true;
 
-            document
-                .getElementById("puzzle")
-                .style.display = "none";
+
+            closePuzzle();
 
 
             showMessage(
 
                 "💻 <b>ACCESS GRANTED.</b><br><br>" +
 
-                "The computer unlocks.<br><br>" +
+                "The screen turns black.<br><br>" +
 
-                "<b>CABINET SECURITY ACTIVE</b><br><br>" +
-
-                "A message appears:<br>" +
+                "A single message appears:<br><br>" +
 
                 "<i>"
-                + "\"The obvious answer is rarely the right one.\""
+                + "\"The numbers were only the beginning.\""
                 + "</i>"
 
             );
 
 
-            addItem("💻 Computer Unlocked");
+            addItem("💻 Computer Access");
 
         }
 
         else {
 
             wrong.textContent =
-                "Wrong. Check the clues again.";
+                "No. Something in the clues is being misread.";
 
         }
 
@@ -1504,40 +2091,46 @@ function checkPassword() {
     }
 
 
-    /* ================= CABINET ================= */
+    /* =================================================
+       CABINET
+    ================================================= */
 
-    if (password === "247") {
-
-        cabinetUnlocked = true;
-
-        document
-            .getElementById("puzzle")
-            .style.display = "none";
+    if (currentPuzzle === "cabinet") {
 
 
-        showMessage(
+        if (password === "247") {
 
-            "🔓 <b>CABINET UNLOCKED.</b><br><br>" +
-
-            "Inside is a small brass key.<br><br>" +
-
-            "<i>"
-            + "\"For the drawer that isn't there.\""
-            + "</i><br><br>" +
-
-            "Maybe the teacher's desk isn't as ordinary as it looks."
-
-        );
+            cabinetUnlocked = true;
 
 
-        addItem("🔑 Brass Key");
+            closePuzzle();
 
-    }
 
-    else {
+            showMessage(
 
-        wrong.textContent =
-            "Wrong code. Think about the order.";
+                "🔓 <b>CLICK.</b><br><br>" +
+
+                "The cabinet opens slowly.<br><br>" +
+
+                "Inside is a small brass key.<br><br>" +
+
+                "<i>"
+                + "\"For the drawer that isn't there.\""
+                + "</i>"
+
+            );
+
+
+            addItem("🔑 Brass Key");
+
+        }
+
+        else {
+
+            wrong.textContent =
+                "Wrong. The order matters.";
+
+        }
 
     }
 
@@ -1545,7 +2138,34 @@ function checkPassword() {
 
 
 /* =====================================================
-   CLOSE PUZZLE
+   RESET INPUT
+===================================================== */
+
+function resetInput() {
+
+    document
+        .getElementById("password")
+        .value = "";
+
+
+    document
+        .getElementById("wrong")
+        .textContent = "";
+
+
+    setTimeout(function() {
+
+        document
+            .getElementById("password")
+            .focus();
+
+    }, 100);
+
+}
+
+
+/* =====================================================
+   CLOSE
 ===================================================== */
 
 function closePuzzle() {
@@ -1573,9 +2193,13 @@ function addItem(item) {
             .createElement("div");
 
 
-    newItem.className = "item";
+    newItem.className =
+        "item";
 
-    newItem.textContent = item;
+
+    newItem.textContent =
+        item;
+
 
     inventory.appendChild(newItem);
 
@@ -1583,7 +2207,7 @@ function addItem(item) {
 
 
 /* =====================================================
-   ENTER KEY
+   KEYBOARD
 ===================================================== */
 
 document
@@ -1593,18 +2217,45 @@ document
         function(event) {
 
             if (event.key === "Enter") {
+
                 checkPassword();
+
             }
 
+
             if (event.key === "Escape") {
+
                 closePuzzle();
+
             }
 
         }
     );
 
+
+/* =====================================================
+   START MESSAGE
+===================================================== */
+
+setTimeout(function() {
+
+    showMessage(
+
+        "The classroom is empty.<br><br>" +
+
+        "<b>Something here doesn't belong.</b><br><br>" +
+
+        "<small>"
+        + "You have 90 seconds."
+        + "</small>"
+
+    );
+
+}, 1200);
+
 </script>
 
 </body>
+
 </html>
 ```
