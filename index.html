@@ -1,4 +1,5 @@
 
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,23 +17,21 @@
 
 body {
     margin: 0;
-    background: #090d18;
+    background: #070a12;
     color: #eee;
     font-family: "DM Sans", sans-serif;
     overflow: hidden;
 }
 
-/* ---------- TOP ---------- */
+/* TOP BAR */
 
 #topbar {
     height: 75px;
     background: #0b1020;
     border-bottom: 1px solid #293149;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 30px;
 }
 
@@ -59,7 +58,17 @@ body {
     color: #e7b96a;
 }
 
-/* ---------- ROOM ---------- */
+#status {
+    position: absolute;
+    top: 85px;
+    left: 20px;
+    z-index: 5;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #8993aa;
+}
+
+/* ROOM */
 
 #room {
     position: relative;
@@ -67,24 +76,37 @@ body {
 
     background:
         radial-gradient(circle at 50% 35%,
-        rgba(112,126,169,.22),
+        rgba(112,126,169,.20),
         transparent 35%),
         linear-gradient(
         rgba(18,25,44,.25),
-        rgba(6,9,18,.65)
+        rgba(6,9,18,.7)
         ),
         #151c2c;
 
     overflow: hidden;
 }
 
-/* Window */
+/* LIGHT */
+
+#room::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at 50% 40%,
+        transparent 20%,
+        rgba(0,0,0,.45) 100%
+    );
+}
+
+/* WINDOW */
 
 #window {
     position: absolute;
     left: 7%;
     top: 14%;
-
     width: 190px;
     height: 170px;
 
@@ -121,15 +143,21 @@ body {
             rgba(170,190,220,.15) 14px,
             transparent 15px
         );
+
+    animation: rainMove .8s linear infinite;
 }
 
-/* Blackboard */
+@keyframes rainMove {
+    from { background-position: 0 0; }
+    to { background-position: 30px 60px; }
+}
+
+/* BOARD */
 
 #board {
     position: absolute;
     left: 32%;
     top: 13%;
-
     width: 38%;
     height: 190px;
 
@@ -146,18 +174,18 @@ body {
 
 #boardText {
     font-family: "Special Elite", cursive;
-    font-size: 27px;
+    font-size: 25px;
     color: #bfc6ad;
     text-align: center;
     transform: rotate(-1deg);
 }
 
 #boardText span {
-    font-size: 15px;
+    font-size: 14px;
     color: #7e8978;
 }
 
-/* Floor */
+/* FLOOR */
 
 #floor {
     position: absolute;
@@ -177,17 +205,14 @@ body {
     border-top: 4px solid #17151a;
 }
 
-/* ---------- OBJECTS ---------- */
+/* OBJECTS */
 
 .object {
     position: absolute;
     cursor: pointer;
-
-    transition:
-        transform .2s,
-        filter .2s;
-
+    transition: transform .2s, filter .2s;
     user-select: none;
+    z-index: 3;
 }
 
 .object:hover {
@@ -199,7 +224,7 @@ body {
     position: absolute;
     white-space: nowrap;
 
-    background: rgba(7,10,18,.8);
+    background: rgba(7,10,18,.9);
     padding: 5px 9px;
 
     border-radius: 5px;
@@ -216,19 +241,15 @@ body {
     opacity: 1;
 }
 
-/* Desk */
+/* DESK */
 
 #desk {
     left: 12%;
     bottom: 23%;
-
     width: 210px;
     height: 100px;
 
-    background: linear-gradient(
-        #79583d,
-        #503a29
-    );
+    background: linear-gradient(#79583d,#503a29);
 
     border-radius: 7px;
     box-shadow: 0 15px 0 #35271e;
@@ -253,49 +274,97 @@ body {
     left: 70px;
 }
 
-/* Books */
+/* BOOKS */
 
 #books {
     left: 42%;
     bottom: 26%;
-
     font-size: 65px;
 }
 
 #books .objectLabel {
     top: -25px;
-    left: 0;
 }
 
-/* Bag */
+/* BAG */
 
 #bag {
     left: 67%;
     bottom: 20%;
-
     font-size: 70px;
 }
 
 #bag .objectLabel {
     top: -20px;
-    left: 5px;
 }
 
-/* Computer */
+/* COMPUTER */
 
 #computer {
     right: 18%;
     top: 36%;
-
     font-size: 65px;
 }
 
 #computer .objectLabel {
     top: -25px;
-    left: 0;
 }
 
-/* Door */
+/* CLOCK */
+
+#clock {
+    left: 18%;
+    top: 10%;
+    font-size: 55px;
+}
+
+#clock .objectLabel {
+    top: -20px;
+}
+
+/* CABINET */
+
+#cabinet {
+    right: 22%;
+    bottom: 22%;
+    width: 115px;
+    height: 140px;
+
+    background: linear-gradient(
+        90deg,
+        #392d26,
+        #584438,
+        #30241f
+    );
+
+    border: 6px solid #211914;
+}
+
+#cabinet::before,
+#cabinet::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 42px;
+
+    border: 2px solid #201713;
+}
+
+#cabinet::before {
+    top: 18px;
+}
+
+#cabinet::after {
+    bottom: 18px;
+}
+
+#cabinet .objectLabel {
+    top: -30px;
+    left: 10px;
+}
+
+/* DOOR */
 
 #door {
     right: 4%;
@@ -348,7 +417,7 @@ body {
     left: 30px;
 }
 
-/* ---------- MESSAGE ---------- */
+/* MESSAGE */
 
 #message {
     position: absolute;
@@ -361,7 +430,7 @@ body {
     min-width: 330px;
     max-width: 550px;
 
-    background: rgba(9,13,24,.92);
+    background: rgba(9,13,24,.94);
     border: 1px solid #303a52;
 
     padding: 13px 22px;
@@ -372,9 +441,11 @@ body {
     font-size: 14px;
 
     box-shadow: 0 8px 25px rgba(0,0,0,.25);
+
+    z-index: 10;
 }
 
-/* ---------- INVENTORY ---------- */
+/* INVENTORY */
 
 #inventory {
     height: 60px;
@@ -387,6 +458,8 @@ body {
 
     gap: 10px;
     padding-left: 22px;
+
+    overflow-x: auto;
 }
 
 .inventoryTitle {
@@ -405,9 +478,10 @@ body {
     border-radius: 6px;
 
     font-size: 12px;
+    white-space: nowrap;
 }
 
-/* ---------- PUZZLE ---------- */
+/* PUZZLE */
 
 #puzzle {
     display: none;
@@ -415,7 +489,7 @@ body {
     position: fixed;
     inset: 0;
 
-    background: rgba(3,5,10,.78);
+    background: rgba(3,5,10,.82);
 
     justify-content: center;
     align-items: center;
@@ -424,7 +498,7 @@ body {
 }
 
 #puzzleBox {
-    width: 360px;
+    width: 390px;
 
     background: #121827;
     border: 1px solid #38435d;
@@ -486,7 +560,7 @@ button {
     min-height: 20px;
 }
 
-/* ---------- LOW TIMER ---------- */
+/* LOW TIMER */
 
 .lowTime {
     animation: pulse 1s infinite;
@@ -494,13 +568,25 @@ button {
 
 @keyframes pulse {
     50% {
-        opacity: .55;
+        opacity: .45;
     }
 }
 
-/* ---------- MOBILE ---------- */
+/* FLASH */
 
-@media(max-width: 700px) {
+.flash {
+    animation: flash .2s;
+}
+
+@keyframes flash {
+    50% {
+        filter: brightness(2);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
 
     #title {
         font-size: 18px;
@@ -528,7 +614,7 @@ button {
     }
 
     #books {
-        left: 40%;
+        left: 38%;
         font-size: 45px;
     }
 
@@ -542,6 +628,15 @@ button {
         font-size: 45px;
     }
 
+    #clock {
+        font-size: 40px;
+    }
+
+    #cabinet {
+        right: 27%;
+        transform: scale(.75);
+    }
+
     #door {
         width: 85px;
         height: 180px;
@@ -550,6 +645,10 @@ button {
     #message {
         min-width: 280px;
         font-size: 12px;
+    }
+
+    #puzzleBox {
+        width: 90%;
     }
 }
 </style>
@@ -570,64 +669,142 @@ button {
 
 </div>
 
+<div id="status">
+    OBJECTIVE: FIND A WAY OUT
+</div>
 
 <div id="room">
+
+    <!-- WINDOW -->
 
     <div id="window">
         <div id="rain"></div>
     </div>
 
+    <!-- BOARD -->
 
     <div id="board">
+
         <div id="boardText">
+
             Why are you still here?
+
             <br>
-            <span>— Three clues. One answer. Don't rush.</span>
-            <br><br>
-    <span>CLUE #3: The final number is 2.</span>
+
+            <span>
+                Three clues. One answer.
+                <br>
+                Don't trust everything you see.
+            </span>
+
         </div>
+
     </div>
 
+    <!-- FLOOR -->
 
     <div id="floor"></div>
 
+    <!-- CLOCK -->
 
-    <div class="object" id="desk" onclick="inspect('desk')">
-        <div class="objectLabel">DESK</div>
+    <div class="object" id="clock"
+         onclick="inspect('clock')">
+
+        🕒
+
+        <div class="objectLabel">
+            OLD CLOCK
+        </div>
+
     </div>
 
+    <!-- DESK -->
 
-    <div class="object" id="books" onclick="inspect('books')">
+    <div class="object" id="desk"
+         onclick="inspect('desk')">
+
+        <div class="objectLabel">
+            TEACHER'S DESK
+        </div>
+
+    </div>
+
+    <!-- BOOKS -->
+
+    <div class="object" id="books"
+         onclick="inspect('books')">
+
         📚
-        <div class="objectLabel">BOOKSHELF</div>
+
+        <div class="objectLabel">
+            BOOKSHELF
+        </div>
+
     </div>
 
+    <!-- BAG -->
 
-    <div class="object" id="bag" onclick="inspect('bag')">
+    <div class="object" id="bag"
+         onclick="inspect('bag')">
+
         🎒
-        <div class="objectLabel">SCHOOL BAG</div>
+
+        <div class="objectLabel">
+            SCHOOL BAG
+        </div>
+
     </div>
 
+    <!-- COMPUTER -->
 
-    <div class="object" id="computer" onclick="inspect('computer')">
+    <div class="object" id="computer"
+         onclick="inspect('computer')">
+
         💻
-        <div class="objectLabel">COMPUTER</div>
+
+        <div class="objectLabel">
+            COMPUTER
+        </div>
+
     </div>
 
+    <!-- CABINET -->
 
-    <div class="object" id="door" onclick="inspect('door')">
-        <div class="objectLabel">EXIT</div>
+    <div class="object" id="cabinet"
+         onclick="inspect('cabinet')">
+
+        <div class="objectLabel">
+            LOCKED CABINET
+        </div>
+
     </div>
 
+    <!-- DOOR -->
+
+    <div class="object" id="door"
+         onclick="inspect('door')">
+
+        <div class="objectLabel">
+            EXIT
+        </div>
+
+    </div>
+
+    <!-- MESSAGE -->
 
     <div id="message">
+
         The classroom is empty...
-        <br>
+
+        <br><br>
+
         <b>Find a way out.</b>
+
     </div>
 
 </div>
 
+<!-- INVENTORY -->
 
 <div id="inventory">
 
@@ -637,16 +814,17 @@ button {
 
 </div>
 
-
 <!-- PUZZLE -->
 
 <div id="puzzle">
 
     <div id="puzzleBox">
 
-        <h2>COMPUTER LOCKED</h2>
+        <h2 id="puzzleTitle">
+            COMPUTER LOCKED
+        </h2>
 
-        <p>
+        <p id="puzzleDescription">
             The screen asks for a 3-digit password.
         </p>
 
@@ -659,11 +837,13 @@ button {
 
         <br>
 
-        <button id="submit" onclick="checkPassword()">
+        <button id="submit"
+                onclick="checkPassword()">
             UNLOCK
         </button>
 
-        <button id="close" onclick="closePuzzle()">
+        <button id="close"
+                onclick="closePuzzle()">
             CLOSE
         </button>
 
@@ -678,10 +858,17 @@ button {
 
 let time = 300;
 
-let foundClue = false;
+let foundClue1 = false;
+let foundClue2 = false;
+let foundClue3 = false;
+
 let computerUnlocked = false;
+let cabinetUnlocked = false;
 let hasKey = false;
+
 let escaped = false;
+
+let finalPuzzle = false;
 
 
 /* TIMER */
@@ -696,10 +883,9 @@ const timer = setInterval(() => {
     let seconds = time % 60;
 
     document.getElementById("timer").textContent =
-        String(minutes).padStart(2, "0") +
+        String(minutes).padStart(2,"0") +
         ":" +
-        String(seconds).padStart(2, "0");
-
+        String(seconds).padStart(2,"0");
 
     if (time <= 30) {
 
@@ -709,61 +895,130 @@ const timer = setInterval(() => {
 
     }
 
-
     if (time <= 0) {
 
         clearInterval(timer);
 
         document.getElementById("message").innerHTML =
-            "⏰ <b>TIME'S UP.</b><br>" +
-            "You stayed too long.";
+            "⏰ <b>TIME'S UP.</b><br><br>" +
+            "The classroom falls silent.";
 
     }
 
-}, 1000);
+},1000);
 
 
-/* INTERACTIONS */
+/* MESSAGE HELPER */
+
+function showMessage(text) {
+
+    document.getElementById("message").innerHTML = text;
+
+}
+
+
+/* OBJECTS */
 
 function inspect(object) {
 
-    const message =
-        document.getElementById("message");
-
+    /* BOOKS */
 
     if (object === "books") {
 
-        foundClue = true;
+        foundClue1 = true;
 
-        message.innerHTML =
-            "You open the old books...<br><br>" +
-            "A folded note falls out.<br>" +
-            "<b>CLUE 1 The first number is 4</b>";
+        showMessage(
+            "You search through the old books...<br><br>" +
+            "A folded note falls out.<br><br>" +
+            "<b>CLUE #1</b><br>" +
+            "The first number is <b>4</b>."
+        );
+
+        addItem("📜 Clue #1");
 
         return;
     }
 
 
+    /* BAG */
+
+    if (object === "bag") {
+
+        foundClue2 = true;
+
+        showMessage(
+            "You unzip the forgotten school bag.<br><br>" +
+            "Inside is a scribbled message:<br><br>" +
+            "<b>CLUE #2</b><br>" +
+            "The second number is <b>7</b>.<br><br>" +
+            "<i>Why does someone need a password in a classroom?</i>"
+        );
+
+        addItem("📜 Clue #2");
+
+        return;
+    }
+
+
+    /* CLOCK */
+
+    if (object === "clock") {
+
+        foundClue3 = true;
+
+        showMessage(
+            "The old clock stopped at exactly <b>2:00</b>.<br><br>" +
+            "Written underneath it:<br><br>" +
+            "<b>CLUE #3</b><br>" +
+            "The final number is <b>2</b>."
+        );
+
+        addItem("🕒 Clue #3");
+
+        return;
+    }
+
+
+    /* COMPUTER */
+
     if (object === "computer") {
 
-        if (!foundClue) {
+        if (!foundClue1 || !foundClue2 || !foundClue3) {
 
-            message.innerHTML =
-                "The computer is locked.<br>" +
-                "<b>Maybe there's a clue somewhere.</b>";
+            showMessage(
+                "The computer is locked.<br><br>" +
+                "<b>Maybe you should investigate the room first.</b>"
+            );
 
-        } else if (!computerUnlocked) {
+        }
 
-            document.getElementById("puzzle")
-                .style.display = "flex";
+        else if (!computerUnlocked) {
 
-            document.getElementById("password")
-                .focus();
+            document.getElementById("puzzle").style.display = "flex";
 
-        } else {
+            document.getElementById("puzzleTitle").textContent =
+                "COMPUTER LOCKED";
 
-            message.innerHTML =
-                "The computer is already unlocked.";
+            document.getElementById("puzzleDescription").innerHTML =
+                "Enter the 3-digit password.";
+
+            document.getElementById("password").value = "";
+
+            document.getElementById("wrong").textContent = "";
+
+            document.getElementById("password").focus();
+
+            finalPuzzle = false;
+
+        }
+
+        else {
+
+            showMessage(
+                "The computer screen flickers.<br><br>" +
+                "<b>ACCESS GRANTED.</b><br>" +
+                "A message appears: <i>CHECK THE CABINET.</i>"
+            );
 
         }
 
@@ -771,21 +1026,66 @@ function inspect(object) {
     }
 
 
-    if (object === "desk") {
+    /* CABINET */
+
+    if (object === "cabinet") {
 
         if (!computerUnlocked) {
 
-            message.innerHTML =
-                "Just an ordinary teacher's desk.<br>" +
-                "There's nothing you can use yet.";
+            showMessage(
+                "The cabinet is locked.<br><br>" +
+                "A small electronic panel is blinking."
+            );
 
-        } else if (!hasKey) {
+        }
+
+        else if (!cabinetUnlocked) {
+
+            document.getElementById("puzzle").style.display = "flex";
+
+            document.getElementById("puzzleTitle").textContent =
+                "CABINET SECURITY";
+
+            document.getElementById("puzzleDescription").innerHTML =
+                "The cabinet asks for a final code.<br>" +
+                "<small>The computer left you a clue...</small>";
+
+            document.getElementById("password").value = "";
+
+            document.getElementById("wrong").textContent = "";
+
+            document.getElementById("password").focus();
+
+            finalPuzzle = true;
+
+        }
+
+        return;
+    }
+
+
+    /* DESK */
+
+    if (object === "desk") {
+
+        if (!cabinetUnlocked) {
+
+            showMessage(
+                "You search the teacher's desk.<br><br>" +
+                "Nothing useful... yet."
+            );
+
+        }
+
+        else if (!hasKey) {
 
             hasKey = true;
 
-            message.innerHTML =
-                "You hear a tiny CLICK...<br><br>" +
-                "🗝️ <b>A hidden drawer opened.</b>";
+            showMessage(
+                "You hear a tiny <b>CLICK.</b><br><br>" +
+                "A hidden drawer opens.<br><br>" +
+                "🗝️ <b>ESCAPE KEY FOUND.</b>"
+            );
 
             addItem("🗝️ Escape Key");
 
@@ -795,35 +1095,36 @@ function inspect(object) {
     }
 
 
-    if (object === "bag") {
-
-        message.innerHTML =
-            "A forgotten school bag.<br><br>" +
-            "<b>CLUE #2:</b> The second number is 7.<br><br>" +
-        "<i>Someone really should clean this bag.</i>";
-
-        return;
-    }
-
+    /* DOOR */
 
     if (object === "door") {
 
         if (!hasKey) {
 
-            message.innerHTML =
-                "The exit is locked.<br>" +
-                "<b>Something is missing.</b>";
+            showMessage(
+                "You try the handle.<br><br>" +
+                "🔒 <b>LOCKED.</b><br>" +
+                "You need something."
+            );
 
-        } else {
+        }
+
+        else {
 
             escaped = true;
 
             clearInterval(timer);
 
-            message.innerHTML =
+            document.getElementById("room")
+                .classList.add("flash");
+
+            showMessage(
                 "🔓 <b>THE DOOR OPENS.</b><br><br>" +
-                "You escaped.<br>" +
-                "<small>...but who locked you in?</small>";
+                "Cold air rushes in.<br><br>" +
+                "<b>YOU ESCAPED.</b><br><br>" +
+                "<small>But as you step outside...</small><br>" +
+                "<i>you hear the classroom door lock behind you.</i>"
+            );
 
         }
 
@@ -843,23 +1144,86 @@ function checkPassword() {
         document.getElementById("wrong");
 
 
-    if (password === "472") {
+    /* COMPUTER */
 
-        computerUnlocked = true;
+    if (!finalPuzzle) {
 
-        document.getElementById("puzzle")
-            .style.display = "none";
+        if (password === "472") {
 
-        message.innerHTML =
-            "💻 <b>ACCESS GRANTED.</b><br>" +
-            "You hear something click inside the desk.";
+            computerUnlocked = true;
 
-        addItem("💻 Computer Unlocked");
+            document.getElementById("puzzle")
+                .style.display = "none";
 
-    } else {
+            showMessage(
+                "💻 <b>ACCESS GRANTED.</b><br><br>" +
+                "The computer screen flashes:<br><br>" +
+                "<b>SECURITY SYSTEM DISABLED.</b><br><br>" +
+                "Something clicks inside the cabinet."
+            );
 
-        wrong.textContent =
-            "Wrong password. Think carefully.";
+            addItem("💻 Computer Unlocked");
+
+        }
+
+        else {
+
+            wrong.textContent =
+                "Wrong password. Look around carefully.";
+
+        }
+
+    }
+
+
+    /* CABINET */
+
+    else {
+
+        /*
+            The second puzzle:
+            The computer tells the player
+            to check the cabinet.
+            
+            The cabinet code is hidden
+            in the room's story:
+            
+            DON'T GET CAUGHT
+            = D G C
+            
+            Alphabet positions:
+            D = 4
+            G = 7
+            C = 3
+            
+            Therefore:
+            473
+        */
+
+        if (password === "473") {
+
+            cabinetUnlocked = true;
+
+            document.getElementById("puzzle")
+                .style.display = "none";
+
+            showMessage(
+                "🔓 <b>CABINET UNLOCKED.</b><br><br>" +
+                "Inside is a small key.<br><br>" +
+                "But it isn't the exit key.<br>" +
+                "It unlocks something hidden in the desk."
+            );
+
+            addItem("🔑 Cabinet Unlocked");
+
+        }
+
+        else {
+
+            wrong.textContent =
+                "Incorrect. The room is trying to tell you something.";
+
+        }
 
     }
 
@@ -898,3 +1262,4 @@ function addItem(item) {
 
 </body>
 </html>
+```
