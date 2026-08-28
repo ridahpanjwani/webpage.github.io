@@ -582,7 +582,9 @@ button {
         <div id="boardText">
             Why are you still here?
             <br>
-            <span>— The bell rang an hour ago.</span>
+            <span>— Three clues. One answer. Don't rush.</span>
+            <br><br>
+    <span>CLUE #3: The final number is 2.</span>
         </div>
     </div>
 
@@ -736,7 +738,7 @@ function inspect(object) {
         message.innerHTML =
             "You open the old books...<br><br>" +
             "A folded note falls out.<br>" +
-            "<b>THE PASSWORD IS 472</b>";
+            "<b>CLUE 1 The first number is 4</b>";
 
         return;
     }
@@ -797,7 +799,8 @@ function inspect(object) {
 
         message.innerHTML =
             "A forgotten school bag.<br><br>" +
-            "<i>You probably shouldn't be snooping.</i>";
+            "<b>CLUE #2:</b> The second number is 7.<br><br>" +
+        "<i>Someone really should clean this bag.</i>";
 
         return;
     }
