@@ -1708,8 +1708,25 @@ function checkPassword() {
         */
 
         if (password === "247") {
+    cabinetUnlocked = true;
 
-            cabinetUnlocked = true;
+    document.getElementById("puzzle").style.display = "none";
+
+    showMessage(
+        "🔓 <b>CABINET UNLOCKED.</b><br><br>" +
+        "Inside you find a small brass key.<br><br>" +
+        "A label is attached:<br><br>" +
+        "<i>\"For the drawer that isn't there.\"</i><br><br>" +
+        "Maybe the desk has another secret."
+    );
+
+    addItem("🔑 Brass Key");
+} else {
+    wrong.textContent =
+        "Wrong. The answer isn't as obvious as it looks.";
+}
+
+        
 
             document
                 .getElementById("puzzle")
