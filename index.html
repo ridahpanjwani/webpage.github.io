@@ -1,9 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>DON'T GET CAUGHT</title>
 
 <style>
@@ -14,24 +14,21 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #111;
+    background: #090b10;
     color: white;
     overflow: hidden;
 }
 
 #game {
     height: 100vh;
-    position: relative;
-    background: linear-gradient(#202838, #10131a);
 }
 
-/* TOP BAR */
 #topbar {
     height: 70px;
     background: #090b10;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     padding: 0 25px;
     border-bottom: 2px solid #333;
 }
@@ -43,17 +40,16 @@ body {
 }
 
 #timer {
-    font-size: 25px;
+    font-size: 26px;
     color: #ff5555;
     font-weight: bold;
 }
 
-/* CLASSROOM */
 #room {
     position: relative;
     height: calc(100vh - 130px);
     background:
-        linear-gradient(rgba(20,25,35,.25), rgba(5,7,10,.7)),
+        linear-gradient(rgba(20,25,35,.2), rgba(5,7,10,.75)),
         repeating-linear-gradient(
             90deg,
             #303744 0px,
@@ -63,7 +59,6 @@ body {
         );
 }
 
-/* FLOOR */
 #floor {
     position: absolute;
     bottom: 0;
@@ -81,6 +76,7 @@ body {
 }
 
 /* OBJECTS */
+
 .object {
     position: absolute;
     cursor: pointer;
@@ -90,7 +86,7 @@ body {
 
 .object:hover {
     transform: scale(1.08);
-    filter: brightness(1.35);
+    filter: brightness(1.4);
 }
 
 #desk {
@@ -148,20 +144,22 @@ body {
 }
 
 /* MESSAGE */
+
 #message {
     position: absolute;
     left: 50%;
     bottom: 20px;
     transform: translateX(-50%);
-    background: rgba(0,0,0,.8);
+    background: rgba(0,0,0,.85);
     padding: 15px 25px;
     border-radius: 10px;
     font-size: 17px;
     text-align: center;
-    max-width: 500px;
+    max-width: 550px;
 }
 
 /* INVENTORY */
+
 #inventory {
     height: 60px;
     background: #090b10;
@@ -176,6 +174,64 @@ body {
     border: 1px solid #555;
     padding: 8px 14px;
     border-radius: 8px;
+}
+
+/* PUZZLE */
+
+#puzzle {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#puzzleBox {
+    background: #171b24;
+    padding: 35px;
+    border-radius: 18px;
+    width: 350px;
+    text-align: center;
+    border: 2px solid #444;
+    box-shadow: 0 0 40px rgba(0,0,0,.7);
+}
+
+#puzzleBox h2 {
+    margin-top: 0;
+}
+
+#password {
+    width: 100%;
+    padding: 13px;
+    margin: 15px 0;
+    background: #0c0f15;
+    border: 1px solid #555;
+    border-radius: 8px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+button {
+    padding: 11px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#submit {
+    background: #4caf50;
+    color: white;
+}
+
+#close {
+    background: #444;
+    color: white;
+    margin-left: 8px;
 }
 </style>
 </head>
@@ -223,12 +279,55 @@ body {
 
 </div>
 
+
+<!-- PUZZLE WINDOW -->
+
+<div id="puzzle">
+
+    <div id="puzzleBox">
+
+        <h2>💻 COMPUTER LOCKED</h2>
+
+        <p>Enter the password you discovered.</p>
+
+        <input
+            id="password"
+            type="text"
+            placeholder="Password"
+        >
+
+        <br>
+
+        <button id="submit" onclick="checkPassword()">
+            UNLOCK
+        </button>
+
+        <button id="close" onclick="closePuzzle()">
+            CLOSE
+        </button>
+
+        <p id="wrong"></p>
+
+    </div>
+
+</div>
+
+
 <script>
 
 let time = 300;
+
+let foundClue = false;
+let computerUnlocked = false;
 let hasKey = false;
+let escaped = false;
+
+
+/* TIMER */
 
 const timer = setInterval(() => {
+
+    if (escaped) return;
 
     time--;
 
@@ -239,94 +338,192 @@ const timer = setInterval(() => {
         String(minutes).padStart(2, "0") + ":" +
         String(seconds).padStart(2, "0");
 
+    if (time <= 30) {
+        document.getElementById("timer").style.color = "red";
+    }
+
     if (time <= 0) {
+
         clearInterval(timer);
 
         document.getElementById("message").innerHTML =
-            "🚨 TOO LATE!<br><b>You got caught.</b>";
+            "🚨 TIME'S UP!<br><br>" +
+            "<b>You got caught.</b>";
     }
 
 }, 1000);
 
 
+/* OBJECT INTERACTIONS */
+
 function inspect(object) {
 
     const message = document.getElementById("message");
 
-    if (object === "desk") {
 
-        if (!hasKey) {
-            hasKey = true;
-
-            message.innerHTML =
-                "You searched the desk...<br>🔑 <b>You found a key!</b>";
-
-            addItem("🔑 Key");
-
-        } else {
-            message.innerHTML =
-                "There's nothing else useful here.";
-        }
-    }
-
+    /* BOOKS */
 
     if (object === "books") {
 
+        foundClue = true;
+
         message.innerHTML =
-            "One book looks suspicious...<br>" +
-            "Someone wrote: <b>THE PASSWORD IS 472</b>";
+            "You flip through the books...<br><br>" +
+            "📖 A note falls out:<br>" +
+            "<b>THE PASSWORD IS 472</b>";
+
+        return;
     }
 
+
+    /* COMPUTER */
+
+    if (object === "computer") {
+
+        if (!foundClue) {
+
+            message.innerHTML =
+                "💻 The computer is locked.<br>" +
+                "Maybe there's a clue somewhere.";
+
+        } else if (!computerUnlocked) {
+
+            document.getElementById("puzzle").style.display = "flex";
+
+        } else {
+
+            message.innerHTML =
+                "The computer is already unlocked.";
+        }
+
+        return;
+    }
+
+
+    /* DESK */
+
+    if (object === "desk") {
+
+        if (!computerUnlocked) {
+
+            message.innerHTML =
+                "🗄️ Nothing useful here...<br>" +
+                "Maybe unlock the computer first.";
+
+        } else if (!hasKey) {
+
+            hasKey = true;
+
+            message.innerHTML =
+                "🗝️ You open the secret drawer...<br>" +
+                "<b>You found the escape key!</b>";
+
+            addItem("🗝️ Escape Key");
+
+        }
+
+        return;
+    }
+
+
+    /* BAG */
 
     if (object === "bag") {
 
         message.innerHTML =
-            "Just an old school bag.<br>" +
-            "Nothing useful inside.";
+            "🎒 Just someone's school bag.<br>" +
+            "Definitely not yours.";
+
+        return;
     }
 
 
-    if (object === "computer") {
-
-        message.innerHTML =
-            "The computer is locked.<br>" +
-            "Maybe you can find the password somewhere...";
-    }
-
+    /* DOOR */
 
     if (object === "door") {
 
-        if (hasKey) {
+        if (!hasKey) {
+
+            message.innerHTML =
+                "🔒 LOCKED.<br>" +
+                "You need the escape key.";
+
+        } else {
+
+            escaped = true;
 
             clearInterval(timer);
 
             message.innerHTML =
                 "🔓 CLICK!<br><br>" +
-                "🎉 <b>YOU ESCAPED!</b><br>" +
+                "🎉 <b>YOU ESCAPED!</b><br><br>" +
                 "You made it out before the teacher returned.";
 
-        } else {
-
-            message.innerHTML =
-                "🔒 The door is locked.<br>" +
-                "You need a key.";
-
         }
+
     }
+
 }
 
 
+/* PASSWORD */
+
+function checkPassword() {
+
+    const password =
+        document.getElementById("password").value;
+
+    const wrong =
+        document.getElementById("wrong");
+
+
+    if (password === "472") {
+
+        computerUnlocked = true;
+
+        document.getElementById("puzzle").style.display = "none";
+
+        document.getElementById("message").innerHTML =
+            "💻 ACCESS GRANTED!<br><br>" +
+            "The computer unlocked a secret drawer.";
+
+        addItem("💻 Computer Unlocked");
+
+    } else {
+
+        wrong.textContent =
+            "❌ Wrong password. Look for another clue.";
+
+    }
+
+}
+
+
+/* CLOSE PUZZLE */
+
+function closePuzzle() {
+
+    document.getElementById("puzzle").style.display = "none";
+
+}
+
+
+/* INVENTORY */
+
 function addItem(item) {
 
-    const inventory = document.getElementById("inventory");
+    const inventory =
+        document.getElementById("inventory");
 
-    const newItem = document.createElement("div");
+    const newItem =
+        document.createElement("div");
 
     newItem.className = "item";
 
     newItem.textContent = item;
 
     inventory.appendChild(newItem);
+
 }
 
 </script>
