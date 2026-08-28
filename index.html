@@ -4,296 +4,655 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>DON'T GET CAUGHT</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Special+Elite&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #090b10;
-    color: white;
+    background: #090d18;
+    color: #eee;
+    font-family: "DM Sans", sans-serif;
     overflow: hidden;
 }
 
-#game {
-    height: 100vh;
-}
+/* ---------- TOP ---------- */
 
 #topbar {
-    height: 70px;
-    background: #090b10;
+    height: 75px;
+    background: #0b1020;
+    border-bottom: 1px solid #293149;
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 25px;
-    border-bottom: 2px solid #333;
+    justify-content: space-between;
+
+    padding: 0 30px;
 }
 
 #title {
-    font-size: 25px;
-    font-weight: bold;
+    font-family: "Special Elite", cursive;
+    font-size: 27px;
     letter-spacing: 3px;
+    color: #f1e7cf;
+}
+
+#timerBox {
+    text-align: right;
+}
+
+#timerLabel {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #8c96ad;
 }
 
 #timer {
-    font-size: 26px;
-    color: #ff5555;
+    font-size: 25px;
     font-weight: bold;
+    color: #e7b96a;
 }
+
+/* ---------- ROOM ---------- */
 
 #room {
     position: relative;
-    height: calc(100vh - 130px);
+    height: calc(100vh - 135px);
+
     background:
-        linear-gradient(rgba(20,25,35,.2), rgba(5,7,10,.75)),
+        radial-gradient(circle at 50% 35%,
+        rgba(112,126,169,.22),
+        transparent 35%),
+        linear-gradient(
+        rgba(18,25,44,.25),
+        rgba(6,9,18,.65)
+        ),
+        #151c2c;
+
+    overflow: hidden;
+}
+
+/* Window */
+
+#window {
+    position: absolute;
+    left: 7%;
+    top: 14%;
+
+    width: 190px;
+    height: 170px;
+
+    background:
         repeating-linear-gradient(
             90deg,
-            #303744 0px,
-            #303744 80px,
-            #29303b 80px,
-            #29303b 160px
+            transparent 0,
+            transparent 91px,
+            #293247 92px,
+            #293247 98px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 81px,
+            #293247 82px,
+            #293247 88px
+        ),
+        #202b40;
+
+    border: 9px solid #0b1020;
+    box-shadow: 0 0 35px rgba(91,117,170,.18);
+}
+
+#rain {
+    position: absolute;
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            110deg,
+            transparent 0px,
+            transparent 13px,
+            rgba(170,190,220,.15) 14px,
+            transparent 15px
         );
 }
+
+/* Blackboard */
+
+#board {
+    position: absolute;
+    left: 32%;
+    top: 13%;
+
+    width: 38%;
+    height: 190px;
+
+    background: #17261f;
+    border: 10px solid #493b2e;
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 12px 25px rgba(0,0,0,.35);
+}
+
+#boardText {
+    font-family: "Special Elite", cursive;
+    font-size: 27px;
+    color: #bfc6ad;
+    text-align: center;
+    transform: rotate(-1deg);
+}
+
+#boardText span {
+    font-size: 15px;
+    color: #7e8978;
+}
+
+/* Floor */
 
 #floor {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 28%;
+    height: 29%;
+
     background:
         repeating-linear-gradient(
             90deg,
-            #4b362b 0px,
-            #4b362b 70px,
-            #3d2c24 70px,
-            #3d2c24 140px
+            #302b2b 0,
+            #302b2b 80px,
+            #272326 80px,
+            #272326 160px
         );
-    border-top: 5px solid #241a16;
+
+    border-top: 4px solid #17151a;
 }
 
-/* OBJECTS */
+/* ---------- OBJECTS ---------- */
 
 .object {
     position: absolute;
     cursor: pointer;
-    transition: .2s;
+
+    transition:
+        transform .2s,
+        filter .2s;
+
     user-select: none;
 }
 
 .object:hover {
-    transform: scale(1.08);
-    filter: brightness(1.4);
+    transform: translateY(-5px) scale(1.05);
+    filter: brightness(1.3);
 }
 
+.objectLabel {
+    position: absolute;
+    white-space: nowrap;
+
+    background: rgba(7,10,18,.8);
+    padding: 5px 9px;
+
+    border-radius: 5px;
+    font-size: 12px;
+    color: #cbd2e0;
+
+    opacity: 0;
+    transition: .2s;
+
+    pointer-events: none;
+}
+
+.object:hover .objectLabel {
+    opacity: 1;
+}
+
+/* Desk */
+
 #desk {
-    width: 190px;
-    height: 90px;
-    background: #754c2d;
-    left: 18%;
-    bottom: 24%;
-    border-radius: 8px;
-    box-shadow: 0 15px 0 #4a301f;
+    left: 12%;
+    bottom: 23%;
+
+    width: 210px;
+    height: 100px;
+
+    background: linear-gradient(
+        #79583d,
+        #503a29
+    );
+
+    border-radius: 7px;
+    box-shadow: 0 15px 0 #35271e;
 }
 
 #desk::before {
-    content: "🗄️";
-    font-size: 55px;
+    content: "";
     position: absolute;
-    left: 65px;
-    top: 15px;
-}
 
-#books {
-    font-size: 75px;
-    left: 45%;
-    bottom: 30%;
-}
+    width: 48px;
+    height: 48px;
 
-#bag {
-    font-size: 75px;
-    left: 70%;
-    bottom: 25%;
-}
+    right: 20px;
+    top: 25px;
 
-#computer {
-    font-size: 75px;
-    left: 75%;
-    top: 22%;
-}
-
-#door {
-    width: 130px;
-    height: 250px;
-    background: #553622;
-    right: 5%;
-    top: 15%;
-    border: 8px solid #291b13;
+    border: 3px solid #302219;
     border-radius: 4px;
 }
 
-#door::after {
-    content: "🚪";
-    font-size: 75px;
-    position: absolute;
-    top: 80px;
-    left: 25px;
+#desk .objectLabel {
+    top: -32px;
+    left: 70px;
 }
 
-/* MESSAGE */
+/* Books */
+
+#books {
+    left: 42%;
+    bottom: 26%;
+
+    font-size: 65px;
+}
+
+#books .objectLabel {
+    top: -25px;
+    left: 0;
+}
+
+/* Bag */
+
+#bag {
+    left: 67%;
+    bottom: 20%;
+
+    font-size: 70px;
+}
+
+#bag .objectLabel {
+    top: -20px;
+    left: 5px;
+}
+
+/* Computer */
+
+#computer {
+    right: 18%;
+    top: 36%;
+
+    font-size: 65px;
+}
+
+#computer .objectLabel {
+    top: -25px;
+    left: 0;
+}
+
+/* Door */
+
+#door {
+    right: 4%;
+    top: 12%;
+
+    width: 125px;
+    height: 250px;
+
+    background: linear-gradient(
+        90deg,
+        #473225,
+        #60442e,
+        #3b291f
+    );
+
+    border: 8px solid #211812;
+}
+
+#door::before {
+    content: "EXIT";
+
+    position: absolute;
+    top: 18px;
+    left: 29px;
+
+    color: #d6ad65;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    border: 1px solid #80653d;
+    padding: 4px 7px;
+}
+
+#door::after {
+    content: "";
+
+    position: absolute;
+    right: 17px;
+    top: 130px;
+
+    width: 10px;
+    height: 10px;
+
+    background: #c4a26a;
+    border-radius: 50%;
+}
+
+#door .objectLabel {
+    top: 265px;
+    left: 30px;
+}
+
+/* ---------- MESSAGE ---------- */
 
 #message {
     position: absolute;
+
     left: 50%;
     bottom: 20px;
+
     transform: translateX(-50%);
-    background: rgba(0,0,0,.85);
-    padding: 15px 25px;
-    border-radius: 10px;
-    font-size: 17px;
-    text-align: center;
+
+    min-width: 330px;
     max-width: 550px;
+
+    background: rgba(9,13,24,.92);
+    border: 1px solid #303a52;
+
+    padding: 13px 22px;
+
+    border-radius: 8px;
+
+    text-align: center;
+    font-size: 14px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.25);
 }
 
-/* INVENTORY */
+/* ---------- INVENTORY ---------- */
 
 #inventory {
     height: 60px;
-    background: #090b10;
+
+    background: #090d18;
+    border-top: 1px solid #252d40;
+
     display: flex;
     align-items: center;
-    padding-left: 20px;
-    gap: 12px;
+
+    gap: 10px;
+    padding-left: 22px;
+}
+
+.inventoryTitle {
+    color: #727c93;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-right: 5px;
 }
 
 .item {
-    background: #242934;
-    border: 1px solid #555;
-    padding: 8px 14px;
-    border-radius: 8px;
+    background: #171e30;
+    border: 1px solid #303a52;
+
+    padding: 7px 13px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
 }
 
-/* PUZZLE */
+/* ---------- PUZZLE ---------- */
 
 #puzzle {
     display: none;
+
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.8);
+
+    background: rgba(3,5,10,.78);
+
     justify-content: center;
     align-items: center;
-    z-index: 10;
+
+    z-index: 20;
 }
 
 #puzzleBox {
-    background: #171b24;
-    padding: 35px;
-    border-radius: 18px;
-    width: 350px;
+    width: 360px;
+
+    background: #121827;
+    border: 1px solid #38435d;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
     text-align: center;
-    border: 2px solid #444;
-    box-shadow: 0 0 40px rgba(0,0,0,.7);
+
+    box-shadow: 0 20px 70px rgba(0,0,0,.6);
 }
 
 #puzzleBox h2 {
-    margin-top: 0;
+    font-family: "Special Elite", cursive;
+    color: #e7dbc3;
 }
 
 #password {
     width: 100%;
-    padding: 13px;
-    margin: 15px 0;
-    background: #0c0f15;
-    border: 1px solid #555;
-    border-radius: 8px;
+
+    background: #080c16;
     color: white;
-    font-size: 20px;
+
+    border: 1px solid #3c465e;
+    border-radius: 6px;
+
+    padding: 12px;
+
     text-align: center;
+    font-size: 18px;
+
+    margin: 12px 0;
 }
 
 button {
-    padding: 11px 25px;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
+
+    padding: 10px 20px;
+
     cursor: pointer;
     font-weight: bold;
-    font-size: 16px;
 }
 
 #submit {
-    background: #4caf50;
-    color: white;
+    background: #d2a85f;
+    color: #15100a;
 }
 
 #close {
-    background: #444;
+    background: #30384a;
     color: white;
-    margin-left: 8px;
+    margin-left: 6px;
+}
+
+#wrong {
+    color: #d77b7b;
+    min-height: 20px;
+}
+
+/* ---------- LOW TIMER ---------- */
+
+.lowTime {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    50% {
+        opacity: .55;
+    }
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width: 700px) {
+
+    #title {
+        font-size: 18px;
+    }
+
+    #window {
+        left: 3%;
+        width: 120px;
+        height: 110px;
+    }
+
+    #board {
+        left: 25%;
+        width: 50%;
+        height: 130px;
+    }
+
+    #boardText {
+        font-size: 16px;
+    }
+
+    #desk {
+        left: 5%;
+        width: 150px;
+    }
+
+    #books {
+        left: 40%;
+        font-size: 45px;
+    }
+
+    #bag {
+        left: 58%;
+        font-size: 50px;
+    }
+
+    #computer {
+        right: 20%;
+        font-size: 45px;
+    }
+
+    #door {
+        width: 85px;
+        height: 180px;
+    }
+
+    #message {
+        min-width: 280px;
+        font-size: 12px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div id="game">
+<div id="topbar">
 
-    <div id="topbar">
-        <div id="title">DON'T GET CAUGHT</div>
+    <div id="title">
+        DON'T GET CAUGHT
+    </div>
+
+    <div id="timerBox">
+        <div id="timerLabel">TIME LEFT</div>
         <div id="timer">05:00</div>
-    </div>
-
-    <div id="room">
-
-        <div id="floor"></div>
-
-        <div class="object" id="desk" onclick="inspect('desk')"></div>
-
-        <div class="object" id="books" onclick="inspect('books')">
-            📚
-        </div>
-
-        <div class="object" id="bag" onclick="inspect('bag')">
-            🎒
-        </div>
-
-        <div class="object" id="computer" onclick="inspect('computer')">
-            💻
-        </div>
-
-        <div class="object" id="door" onclick="inspect('door')"></div>
-
-        <div id="message">
-            The classroom is empty...
-            <br>
-            <b>Find a way out.</b>
-        </div>
-
-    </div>
-
-    <div id="inventory">
-        <b>INVENTORY:</b>
     </div>
 
 </div>
 
 
-<!-- PUZZLE WINDOW -->
+<div id="room">
+
+    <div id="window">
+        <div id="rain"></div>
+    </div>
+
+
+    <div id="board">
+        <div id="boardText">
+            Why are you still here?
+            <br>
+            <span>— The bell rang an hour ago.</span>
+        </div>
+    </div>
+
+
+    <div id="floor"></div>
+
+
+    <div class="object" id="desk" onclick="inspect('desk')">
+        <div class="objectLabel">DESK</div>
+    </div>
+
+
+    <div class="object" id="books" onclick="inspect('books')">
+        📚
+        <div class="objectLabel">BOOKSHELF</div>
+    </div>
+
+
+    <div class="object" id="bag" onclick="inspect('bag')">
+        🎒
+        <div class="objectLabel">SCHOOL BAG</div>
+    </div>
+
+
+    <div class="object" id="computer" onclick="inspect('computer')">
+        💻
+        <div class="objectLabel">COMPUTER</div>
+    </div>
+
+
+    <div class="object" id="door" onclick="inspect('door')">
+        <div class="objectLabel">EXIT</div>
+    </div>
+
+
+    <div id="message">
+        The classroom is empty...
+        <br>
+        <b>Find a way out.</b>
+    </div>
+
+</div>
+
+
+<div id="inventory">
+
+    <div class="inventoryTitle">
+        INVENTORY
+    </div>
+
+</div>
+
+
+<!-- PUZZLE -->
 
 <div id="puzzle">
 
     <div id="puzzleBox">
 
-        <h2>💻 COMPUTER LOCKED</h2>
+        <h2>COMPUTER LOCKED</h2>
 
-        <p>Enter the password you discovered.</p>
+        <p>
+            The screen asks for a 3-digit password.
+        </p>
 
         <input
             id="password"
             type="text"
-            placeholder="Password"
+            maxlength="3"
+            placeholder="___"
         >
 
         <br>
@@ -335,88 +694,96 @@ const timer = setInterval(() => {
     let seconds = time % 60;
 
     document.getElementById("timer").textContent =
-        String(minutes).padStart(2, "0") + ":" +
+        String(minutes).padStart(2, "0") +
+        ":" +
         String(seconds).padStart(2, "0");
 
+
     if (time <= 30) {
-        document.getElementById("timer").style.color = "red";
+
+        document
+            .getElementById("timer")
+            .classList.add("lowTime");
+
     }
+
 
     if (time <= 0) {
 
         clearInterval(timer);
 
         document.getElementById("message").innerHTML =
-            "🚨 TIME'S UP!<br><br>" +
-            "<b>You got caught.</b>";
+            "⏰ <b>TIME'S UP.</b><br>" +
+            "You stayed too long.";
+
     }
 
 }, 1000);
 
 
-/* OBJECT INTERACTIONS */
+/* INTERACTIONS */
 
 function inspect(object) {
 
-    const message = document.getElementById("message");
+    const message =
+        document.getElementById("message");
 
-
-    /* BOOKS */
 
     if (object === "books") {
 
         foundClue = true;
 
         message.innerHTML =
-            "You flip through the books...<br><br>" +
-            "📖 A note falls out:<br>" +
+            "You open the old books...<br><br>" +
+            "A folded note falls out.<br>" +
             "<b>THE PASSWORD IS 472</b>";
 
         return;
     }
 
 
-    /* COMPUTER */
-
     if (object === "computer") {
 
         if (!foundClue) {
 
             message.innerHTML =
-                "💻 The computer is locked.<br>" +
-                "Maybe there's a clue somewhere.";
+                "The computer is locked.<br>" +
+                "<b>Maybe there's a clue somewhere.</b>";
 
         } else if (!computerUnlocked) {
 
-            document.getElementById("puzzle").style.display = "flex";
+            document.getElementById("puzzle")
+                .style.display = "flex";
+
+            document.getElementById("password")
+                .focus();
 
         } else {
 
             message.innerHTML =
                 "The computer is already unlocked.";
+
         }
 
         return;
     }
 
 
-    /* DESK */
-
     if (object === "desk") {
 
         if (!computerUnlocked) {
 
             message.innerHTML =
-                "🗄️ Nothing useful here...<br>" +
-                "Maybe unlock the computer first.";
+                "Just an ordinary teacher's desk.<br>" +
+                "There's nothing you can use yet.";
 
         } else if (!hasKey) {
 
             hasKey = true;
 
             message.innerHTML =
-                "🗝️ You open the secret drawer...<br>" +
-                "<b>You found the escape key!</b>";
+                "You hear a tiny CLICK...<br><br>" +
+                "🗝️ <b>A hidden drawer opened.</b>";
 
             addItem("🗝️ Escape Key");
 
@@ -426,27 +793,23 @@ function inspect(object) {
     }
 
 
-    /* BAG */
-
     if (object === "bag") {
 
         message.innerHTML =
-            "🎒 Just someone's school bag.<br>" +
-            "Definitely not yours.";
+            "A forgotten school bag.<br><br>" +
+            "<i>You probably shouldn't be snooping.</i>";
 
         return;
     }
 
-
-    /* DOOR */
 
     if (object === "door") {
 
         if (!hasKey) {
 
             message.innerHTML =
-                "🔒 LOCKED.<br>" +
-                "You need the escape key.";
+                "The exit is locked.<br>" +
+                "<b>Something is missing.</b>";
 
         } else {
 
@@ -455,9 +818,9 @@ function inspect(object) {
             clearInterval(timer);
 
             message.innerHTML =
-                "🔓 CLICK!<br><br>" +
-                "🎉 <b>YOU ESCAPED!</b><br><br>" +
-                "You made it out before the teacher returned.";
+                "🔓 <b>THE DOOR OPENS.</b><br><br>" +
+                "You escaped.<br>" +
+                "<small>...but who locked you in?</small>";
 
         }
 
@@ -481,29 +844,31 @@ function checkPassword() {
 
         computerUnlocked = true;
 
-        document.getElementById("puzzle").style.display = "none";
+        document.getElementById("puzzle")
+            .style.display = "none";
 
-        document.getElementById("message").innerHTML =
-            "💻 ACCESS GRANTED!<br><br>" +
-            "The computer unlocked a secret drawer.";
+        message.innerHTML =
+            "💻 <b>ACCESS GRANTED.</b><br>" +
+            "You hear something click inside the desk.";
 
         addItem("💻 Computer Unlocked");
 
     } else {
 
         wrong.textContent =
-            "❌ Wrong password. Look for another clue.";
+            "Wrong password. Think carefully.";
 
     }
 
 }
 
 
-/* CLOSE PUZZLE */
+/* CLOSE */
 
 function closePuzzle() {
 
-    document.getElementById("puzzle").style.display = "none";
+    document.getElementById("puzzle")
+        .style.display = "none";
 
 }
 
