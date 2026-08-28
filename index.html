@@ -1,10 +1,335 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DON'T GET CAUGHT</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    overflow: hidden;
+}
+
+#game {
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(#202838, #10131a);
+}
+
+/* TOP BAR */
+#topbar {
+    height: 70px;
+    background: #090b10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    border-bottom: 2px solid #333;
+}
+
+#title {
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+#timer {
+    font-size: 25px;
+    color: #ff5555;
+    font-weight: bold;
+}
+
+/* CLASSROOM */
+#room {
+    position: relative;
+    height: calc(100vh - 130px);
+    background:
+        linear-gradient(rgba(20,25,35,.25), rgba(5,7,10,.7)),
+        repeating-linear-gradient(
+            90deg,
+            #303744 0px,
+            #303744 80px,
+            #29303b 80px,
+            #29303b 160px
+        );
+}
+
+/* FLOOR */
+#floor {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 28%;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #4b362b 0px,
+            #4b362b 70px,
+            #3d2c24 70px,
+            #3d2c24 140px
+        );
+    border-top: 5px solid #241a16;
+}
+
+/* OBJECTS */
+.object {
+    position: absolute;
+    cursor: pointer;
+    transition: .2s;
+    user-select: none;
+}
+
+.object:hover {
+    transform: scale(1.08);
+    filter: brightness(1.35);
+}
+
+#desk {
+    width: 190px;
+    height: 90px;
+    background: #754c2d;
+    left: 18%;
+    bottom: 24%;
+    border-radius: 8px;
+    box-shadow: 0 15px 0 #4a301f;
+}
+
+#desk::before {
+    content: "🗄️";
+    font-size: 55px;
+    position: absolute;
+    left: 65px;
+    top: 15px;
+}
+
+#books {
+    font-size: 75px;
+    left: 45%;
+    bottom: 30%;
+}
+
+#bag {
+    font-size: 75px;
+    left: 70%;
+    bottom: 25%;
+}
+
+#computer {
+    font-size: 75px;
+    left: 75%;
+    top: 22%;
+}
+
+#door {
+    width: 130px;
+    height: 250px;
+    background: #553622;
+    right: 5%;
+    top: 15%;
+    border: 8px solid #291b13;
+    border-radius: 4px;
+}
+
+#door::after {
+    content: "🚪";
+    font-size: 75px;
+    position: absolute;
+    top: 80px;
+    left: 25px;
+}
+
+/* MESSAGE */
+#message {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,.8);
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 17px;
+    text-align: center;
+    max-width: 500px;
+}
+
+/* INVENTORY */
+#inventory {
+    height: 60px;
+    background: #090b10;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    gap: 12px;
+}
+
+.item {
+    background: #242934;
+    border: 1px solid #555;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+</style>
 </head>
+
 <body>
-    <h1>Hello, World!</h1>
-    <p>Welcome to my first GitHub website.</p>
+
+<div id="game">
+
+    <div id="topbar">
+        <div id="title">DON'T GET CAUGHT</div>
+        <div id="timer">05:00</div>
+    </div>
+
+    <div id="room">
+
+        <div id="floor"></div>
+
+        <div class="object" id="desk" onclick="inspect('desk')"></div>
+
+        <div class="object" id="books" onclick="inspect('books')">
+            📚
+        </div>
+
+        <div class="object" id="bag" onclick="inspect('bag')">
+            🎒
+        </div>
+
+        <div class="object" id="computer" onclick="inspect('computer')">
+            💻
+        </div>
+
+        <div class="object" id="door" onclick="inspect('door')"></div>
+
+        <div id="message">
+            The classroom is empty...
+            <br>
+            <b>Find a way out.</b>
+        </div>
+
+    </div>
+
+    <div id="inventory">
+        <b>INVENTORY:</b>
+    </div>
+
+</div>
+
+<script>
+
+let time = 300;
+let hasKey = false;
+
+const timer = setInterval(() => {
+
+    time--;
+
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    document.getElementById("timer").textContent =
+        String(minutes).padStart(2, "0") + ":" +
+        String(seconds).padStart(2, "0");
+
+    if (time <= 0) {
+        clearInterval(timer);
+
+        document.getElementById("message").innerHTML =
+            "🚨 TOO LATE!<br><b>You got caught.</b>";
+    }
+
+}, 1000);
+
+
+function inspect(object) {
+
+    const message = document.getElementById("message");
+
+    if (object === "desk") {
+
+        if (!hasKey) {
+            hasKey = true;
+
+            message.innerHTML =
+                "You searched the desk...<br>🔑 <b>You found a key!</b>";
+
+            addItem("🔑 Key");
+
+        } else {
+            message.innerHTML =
+                "There's nothing else useful here.";
+        }
+    }
+
+
+    if (object === "books") {
+
+        message.innerHTML =
+            "One book looks suspicious...<br>" +
+            "Someone wrote: <b>THE PASSWORD IS 472</b>";
+    }
+
+
+    if (object === "bag") {
+
+        message.innerHTML =
+            "Just an old school bag.<br>" +
+            "Nothing useful inside.";
+    }
+
+
+    if (object === "computer") {
+
+        message.innerHTML =
+            "The computer is locked.<br>" +
+            "Maybe you can find the password somewhere...";
+    }
+
+
+    if (object === "door") {
+
+        if (hasKey) {
+
+            clearInterval(timer);
+
+            message.innerHTML =
+                "🔓 CLICK!<br><br>" +
+                "🎉 <b>YOU ESCAPED!</b><br>" +
+                "You made it out before the teacher returned.";
+
+        } else {
+
+            message.innerHTML =
+                "🔒 The door is locked.<br>" +
+                "You need a key.";
+
+        }
+    }
+}
+
+
+function addItem(item) {
+
+    const inventory = document.getElementById("inventory");
+
+    const newItem = document.createElement("div");
+
+    newItem.className = "item";
+
+    newItem.textContent = item;
+
+    inventory.appendChild(newItem);
+}
+
+</script>
+
 </body>
 </html>
