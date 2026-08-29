@@ -1,791 +1,753 @@
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Perfect Day Market 🛒</title>
+<title>My Perfect Day</title>
 
 <style>
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 body {
-    background: #f5edd8;
+    margin: 0;
     font-family: Arial, sans-serif;
+    background: #fff5d7;
     overflow: hidden;
 }
 
-/* GAME SCREEN */
+/* GAME */
 
 #game {
     width: 100vw;
     height: 100vh;
     position: relative;
     overflow: hidden;
-}
-
-/* TOP BAR */
-
-.topbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background: #fffaf0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 25px;
-    z-index: 20;
-    box-shadow: 0 3px 15px #0002;
-}
-
-.logo {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.instructions {
-    color: #777;
-    font-size: 13px;
-}
-
-.cart {
-    background: #53684e;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 30px;
-}
-
-/* SUPERMARKET */
-
-.market {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 70px);
     background:
-        linear-gradient(#e9dfc8 1px, transparent 1px),
-        linear-gradient(90deg, #e9dfc8 1px, transparent 1px);
-    background-size: 40px 40px;
+        linear-gradient(#8ed6ff 0%, #c9f1ff 55%, #9bd36a 55%, #75bd55 100%);
 }
 
-/* AISLES */
+/* SUN */
 
-.aisle {
+.sun {
     position: absolute;
-    width: 210px;
+    top: 35px;
+    right: 60px;
+    width: 90px;
+    height: 90px;
+    background: #ffd93d;
+    border-radius: 50%;
+    box-shadow: 0 0 35px #ffd93d;
+}
+
+/* CLOUDS */
+
+.cloud {
+    position: absolute;
+    background: white;
+    width: 110px;
+    height: 35px;
+    border-radius: 30px;
+    opacity: .9;
+}
+
+.cloud:before,
+.cloud:after {
+    content: "";
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+}
+
+.cloud:before {
+    width: 45px;
+    height: 45px;
+    top: -22px;
+    left: 20px;
+}
+
+.cloud:after {
+    width: 55px;
+    height: 55px;
+    top: -30px;
+    right: 15px;
+}
+
+.cloud1 {
+    top: 80px;
+    left: 12%;
+}
+
+.cloud2 {
+    top: 160px;
+    left: 55%;
+}
+
+/* ROAD */
+
+.road {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+    background: #777;
+    transform: perspective(300px) rotateX(10deg);
+}
+
+.road:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 45%;
+    width: 100%;
+    border-top: 8px dashed white;
+}
+
+/* HOUSES */
+
+.house {
+    position: absolute;
+    bottom: 42%;
+    width: 130px;
     height: 100px;
-    background: #d7c7a7;
-    border-radius: 12px;
-    border: 5px solid #bcae91;
-    box-shadow: 0 8px 15px #0002;
+    background: #ff9f68;
+    border: 5px solid #743b2c;
 }
 
-.aisle h3 {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 15px;
-    color: #514b40;
-}
-
-.shelf {
-    height: 12px;
-    background: #8f836e;
-    margin: 8px 12px;
-    border-radius: 5px;
-}
-
-/* AISLE POSITIONS */
-
-.bakery {
-    left: 8%;
-    top: 15%;
-}
-
-.drinks {
-    right: 8%;
-    top: 15%;
-}
-
-.snacks {
-    left: 8%;
-    top: 55%;
-}
-
-.fun {
-    right: 8%;
-    top: 55%;
-}
-
-/* CHECKOUT */
-
-.checkout {
+.house:before {
+    content: "";
     position: absolute;
-    bottom: 8%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
-    height: 75px;
-    background: #78906c;
-    border-radius: 15px;
-    border: 5px solid #596c51;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
+    top: -65px;
+    left: -15px;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-bottom: 65px solid #d94f4f;
 }
 
-/* CHARACTER */
+.window {
+    position: absolute;
+    width: 30px;
+    height: 35px;
+    background: #8ee5ff;
+    border: 4px solid #743b2c;
+    top: 25px;
+    left: 20px;
+}
+
+.door {
+    position: absolute;
+    width: 35px;
+    height: 55px;
+    background: #70452f;
+    bottom: 0;
+    right: 20px;
+}
+
+.house1 {
+    left: 5%;
+}
+
+.house2 {
+    right: 8%;
+    background: #ffc857;
+}
+
+/* PLAYER */
 
 #player {
     position: absolute;
-    width: 45px;
-    height: 55px;
+    width: 55px;
+    height: 65px;
     left: 50%;
-    top: 40%;
+    bottom: 25%;
+    transform: translateX(-50%);
+    transition: .08s;
     z-index: 10;
-    transition: left .08s linear, top .08s linear;
 }
-
-/* HEAD */
 
 .head {
-    width: 28px;
-    height: 28px;
-    background: #f2c6a0;
+    width: 42px;
+    height: 42px;
+    background: #f2b28d;
     border-radius: 50%;
+    margin: auto;
+    position: relative;
+    border: 3px solid #542f27;
+}
+
+.head:before {
+    content: "🎀";
     position: absolute;
+    top: -18px;
     left: 8px;
-    top: 0;
-    border: 2px solid #333;
+    font-size: 25px;
 }
-
-/* HAIR */
-
-.hair {
-    width: 30px;
-    height: 18px;
-    background: #4a3024;
-    border-radius: 20px 20px 5px 5px;
-    position: absolute;
-    left: 7px;
-    top: -2px;
-}
-
-/* BODY */
 
 .body {
-    width: 32px;
+    width: 38px;
     height: 30px;
-    background: #d88989;
+    background: #8b5cf6;
     border-radius: 12px 12px 5px 5px;
-    position: absolute;
-    left: 6px;
-    top: 25px;
-    border: 2px solid #333;
+    margin: -2px auto;
 }
 
-/* SHOPPING CART */
+/* ITEMS */
 
-.cart-icon {
+.item {
     position: absolute;
-    font-size: 28px;
-    right: -25px;
-    bottom: -3px;
+    font-size: 45px;
+    cursor: pointer;
+    z-index: 5;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-8px); }
+}
+
+#sunItem {
+    left: 20%;
+    bottom: 55%;
+}
+
+#foodItem {
+    left: 70%;
+    bottom: 47%;
+}
+
+#musicItem {
+    left: 43%;
+    bottom: 62%;
+}
+
+/* BAD ITEMS */
+
+.bad {
+    position: absolute;
+    font-size: 40px;
+    z-index: 5;
+}
+
+#alarm {
+    left: 32%;
+    bottom: 48%;
+}
+
+#homework {
+    right: 25%;
+    bottom: 60%;
+}
+
+/* UI */
+
+#topbar {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 20;
+}
+
+.panel {
+    background: rgba(255,255,255,.9);
+    padding: 12px 18px;
+    border-radius: 20px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+/* CONTROLS */
+
+#controls {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    z-index: 30;
+}
+
+button {
+    border: none;
+    background: white;
+    padding: 13px 18px;
+    margin: 3px;
+    border-radius: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,.2);
+}
+
+button:active {
+    transform: scale(.9);
+}
+
+/* START SCREEN */
+
+#startScreen {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.startBox {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 500px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.2);
+}
+
+.startBox h1 {
+    font-size: 45px;
+    margin-bottom: 5px;
+}
+
+.startBox p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.startButton {
+    background: #7c5cff;
+    color: white;
+    font-size: 22px;
+    padding: 15px 30px;
+}
+
+/* END SCREEN */
+
+#endScreen {
+    position: absolute;
+    inset: 0;
+    background: rgba(30,20,50,.92);
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    text-align: center;
+}
+
+.endBox {
+    background: #ffffff;
+    color: #333;
+    padding: 40px;
+    border-radius: 30px;
+    width: min(90%,500px);
+}
+
+.endBox h1 {
+    font-size: 40px;
+}
+
+.restart {
+    background: #ff7b7b;
+    color: white;
 }
 
 /* MESSAGE */
 
-.message {
+#message {
     position: absolute;
-    bottom: 25px;
-    left: 25px;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
     background: white;
-    padding: 13px 18px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px #0002;
-    font-size: 13px;
-    z-index: 30;
-}
-
-/* MOBILE */
-
-@media(max-width:700px) {
-
-    .instructions {
-        display: none;
-    }
-
-    .aisle {
-        width: 150px;
-        height: 85px;
-    }
-
-    .aisle h3 {
-        font-size: 12px;
-    }
-
+    padding: 12px 25px;
+    border-radius: 20px;
+    display: none;
+    z-index: 50;
+    font-weight: bold;
 }
 
 </style>
 </head>
 
-
 <body>
 
 <div id="game">
 
-    <!-- TOP BAR -->
+    <div class="sun"></div>
 
-    <div class="topbar">
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
 
-        <div class="logo">
-            ☀️ Perfect Day Market
+    <div class="house house1">
+        <div class="window"></div>
+        <div class="door"></div>
+    </div>
+
+    <div class="house house2">
+        <div class="window"></div>
+        <div class="door"></div>
+    </div>
+
+    <div class="road"></div>
+
+    <!-- ITEMS -->
+
+    <div class="item" id="sunItem" onclick="collect('morning')">
+        ☀️
+    </div>
+
+    <div class="item" id="foodItem" onclick="collect('food')">
+        🍕
+    </div>
+
+    <div class="item" id="musicItem" onclick="collect('fun')">
+        🎵
+    </div>
+
+    <!-- OBSTACLES -->
+
+    <div class="bad" id="alarm" onclick="annoy('alarm')">
+        ⏰
+    </div>
+
+    <div class="bad" id="homework" onclick="annoy('homework')">
+        📚
+    </div>
+
+    <!-- PLAYER -->
+
+    <div id="player">
+        <div class="head"></div>
+        <div class="body"></div>
+    </div>
+
+    <!-- UI -->
+
+    <div id="topbar">
+
+        <div class="panel">
+            🌈 MY PERFECT DAY
         </div>
 
-        <div class="instructions">
-            Use WASD or Arrow Keys to move
-        </div>
-
-        <div class="cart">
-            🛒 0 items
+        <div class="panel">
+            ⭐ Perfect Points: <span id="score">0</span>
         </div>
 
     </div>
 
+    <div id="message"></div>
 
-    <!-- SUPERMARKET -->
+    <!-- CONTROLS -->
 
-    <div class="market">
+    <div id="controls">
 
+        <button onclick="move('left')">⬅️</button>
+        <button onclick="move('up')">⬆️</button>
+        <button onclick="move('down')">⬇️</button>
+        <button onclick="move('right')">➡️</button>
 
-        <!-- BAKERY -->
+    </div>
 
-        <div class="aisle bakery">
+    <!-- START -->
 
-            <h3>🥐 BAKERY</h3>
+    <div id="startScreen">
 
-            <div class="shelf"></div>
-            <div class="shelf"></div>
+        <div class="startBox">
 
-        </div>
+            <h1>🌈 My Perfect Day</h1>
 
+            <p>
+                Your alarm went off... 😴<br>
+                Your homework is waiting... 📚<br><br>
 
-        <!-- DRINKS -->
+                BUT TODAY IS YOUR DAY. ✨
+            </p>
 
-        <div class="aisle drinks">
+            <p>
+                Explore the town and collect the things
+                that make YOUR perfect day.
+            </p>
 
-            <h3>🥤 DRINKS</h3>
-
-            <div class="shelf"></div>
-            <div class="shelf"></div>
-
-        </div>
-
-
-        <!-- SNACKS -->
-
-        <div class="aisle snacks">
-
-            <h3>🍕 SNACKS</h3>
-
-            <div class="shelf"></div>
-            <div class="shelf"></div>
+            <button class="startButton" onclick="startGame()">
+                START MY DAY ☀️
+            </button>
 
         </div>
 
+    </div>
 
-        <!-- FUN -->
+    <!-- END -->
 
-        <div class="aisle fun">
+    <div id="endScreen">
 
-            <h3>🎮 FUN</h3>
+        <div class="endBox">
 
-            <div class="shelf"></div>
-            <div class="shelf"></div>
+            <h1 id="endingTitle">
+                🎉 PERFECT DAY!
+            </h1>
 
-        </div>
+            <p id="endingText"></p>
 
+            <h2>
+                ⭐ Final Score:
+                <span id="finalScore">0</span>
+            </h2>
 
-        <!-- CHECKOUT -->
-
-        <div class="checkout">
-            🧾 CHECKOUT
-        </div>
-
-
-        <!-- PLAYER -->
-
-        <div id="player">
-
-            <div class="hair"></div>
-
-            <div class="head"></div>
-
-            <div class="body"></div>
-
-            <div class="cart-icon">
-                🛒
-            </div>
+            <button class="restart" onclick="location.reload()">
+                🔄 LIVE ANOTHER DAY
+            </button>
 
         </div>
-
-
-        <!-- MESSAGE -->
-
-        <div class="message" id="message">
-
-            👋 Welcome to Perfect Day Market!
-            <br>
-            Walk around and build your perfect day.
-
-        </div>
-
 
     </div>
 
 </div>
 
-
 <script>
 
-/* ================================
-   PLAYER
-================================ */
+let score = 0;
 
-const player =
-    document.getElementById("player");
+let collected = {
+    morning: false,
+    food: false,
+    fun: false
+};
 
-const message =
-    document.getElementById("message");
+let playerX = window.innerWidth / 2;
+let playerY = window.innerHeight * .7;
 
+const player = document.getElementById("player");
 
-let x = window.innerWidth / 2;
+function startGame() {
 
-let y = window.innerHeight * .4;
+    document.getElementById("startScreen").style.display = "none";
 
-let speed = 5;
+    showMessage("Your perfect day starts NOW! ✨");
 
+}
 
-/* ================================
-   KEYBOARD
-================================ */
+function move(direction) {
 
-const keys = {};
+    const speed = 35;
 
+    if(direction === "left") {
+        playerX -= speed;
+    }
 
-document.addEventListener("keydown", function(event) {
+    if(direction === "right") {
+        playerX += speed;
+    }
 
-    keys[event.key.toLowerCase()] = true;
+    if(direction === "up") {
+        playerY -= speed;
+    }
+
+    if(direction === "down") {
+        playerY += speed;
+    }
+
+    playerX = Math.max(20, Math.min(window.innerWidth - 70, playerX));
+
+    playerY = Math.max(120, Math.min(window.innerHeight - 120, playerY));
+
+    player.style.left = playerX + "px";
+    player.style.top = playerY + "px";
+
+    checkNearby();
+
+}
+
+document.addEventListener("keydown", function(e) {
+
+    if(e.key === "ArrowLeft") move("left");
+
+    if(e.key === "ArrowRight") move("right");
+
+    if(e.key === "ArrowUp") move("up");
+
+    if(e.key === "ArrowDown") move("down");
 
 });
 
+function checkNearby() {
 
-document.addEventListener("keyup", function(event) {
+    const playerRect = player.getBoundingClientRect();
 
-    keys[event.key.toLowerCase()] = false;
+    document.querySelectorAll(".item").forEach(item => {
 
-});
+        const rect = item.getBoundingClientRect();
 
+        if(
+            Math.abs(playerRect.left - rect.left) < 55 &&
+            Math.abs(playerRect.top - rect.top) < 55
+        ) {
 
-/* ================================
-   MOVEMENT
-================================ */
+            if(item.id === "sunItem") {
+                collect("morning");
+            }
 
-function move() {
+            if(item.id === "foodItem") {
+                collect("food");
+            }
 
-    let moving = false;
-
-
-    if(keys["arrowup"] || keys["w"]) {
-
-        y -= speed;
-
-        moving = true;
-
-    }
-
-
-    if(keys["arrowdown"] || keys["s"]) {
-
-        y += speed;
-
-        moving = true;
-
-    }
-
-
-    if(keys["arrowleft"] || keys["a"]) {
-
-        x -= speed;
-
-        moving = true;
-
-    }
-
-
-    if(keys["arrowright"] || keys["d"]) {
-
-        x += speed;
-
-        moving = true;
-
-    }
-
-
-    /* KEEP PLAYER ON SCREEN */
-
-    x = Math.max(5, Math.min(
-        window.innerWidth - 55,
-        x
-    ));
-
-    y = Math.max(80, Math.min(
-        window.innerHeight - 65,
-        y
-    ));
-
-
-    player.style.left = x + "px";
-
-    player.style.top = y + "px";
-
-
-    checkAreas();
-
-
-    requestAnimationFrame(move);
-
-}
-
-
-/* ================================
-   AREA DETECTION
-================================ */
-
-function checkAreas() {
-
-    const px = x;
-    const py = y;
-
-
-    /* BAKERY */
-
-    if(
-        px > window.innerWidth * .05 &&
-        px < window.innerWidth * .35 &&
-        py > window.innerHeight * .20 &&
-        py < window.innerHeight * .40
-    ) {
-
-        message.innerHTML =
-            "🥐 You're near the bakery!<br>" +
-            "Something smells suspiciously good.";
-
-        return;
-
-    }
-
-
-    /* DRINKS */
-
-    if(
-        px > window.innerWidth * .60 &&
-        py > window.innerHeight * .20 &&
-        py < window.innerHeight * .40
-    ) {
-
-        message.innerHTML =
-            "🥤 The drinks aisle.<br>" +
-            "Hydration or questionable amounts of caffeine?";
-
-        return;
-
-    }
-
-
-    /* SNACKS */
-
-    if(
-        px > window.innerWidth * .05 &&
-        px < window.innerWidth * .35 &&
-        py > window.innerHeight * .55 &&
-        py < window.innerHeight * .75
-    ) {
-
-        message.innerHTML =
-            "🍕 Snacks detected.<br>" +
-            "Your self-control has left the building.";
-
-        return;
-
-    }
-
-
-    /* FUN */
-
-    if(
-        px > window.innerWidth * .60 &&
-        py > window.innerHeight * .55 &&
-        py < window.innerHeight * .75
-    ) {
-
-        message.innerHTML =
-            "🎮 FUN AISLE<br>" +
-            "You definitely don't need this...";
-
-        return;
-
-    }
-
-
-    message.innerHTML =
-        "🛒 Explore the supermarket!<br>" +
-        "Find something for your perfect day.";
-
-}
-
-```javascript
-/* ================================
-   INTERACTION SYSTEM
-================================ */
-
-let nearbyArea = null;
-
-
-/* CHECK WHICH AISLE PLAYER IS NEAR */
-
-function checkAreas() {
-
-    const px = x;
-    const py = y;
-
-    nearbyArea = null;
-
-
-    /* BAKERY */
-
-    if(
-        px > window.innerWidth * .05 &&
-        px < window.innerWidth * .38 &&
-        py > window.innerHeight * .18 &&
-        py < window.innerHeight * .43
-    ) {
-
-        nearbyArea = "bakery";
-
-        message.innerHTML =
-            "🥐 BAKERY<br>" +
-            "<b>Press E to explore</b>";
-
-        return;
-    }
-
-
-    /* DRINKS */
-
-    if(
-        px > window.innerWidth * .57 &&
-        py > window.innerHeight * .18 &&
-        py < window.innerHeight * .43
-    ) {
-
-        nearbyArea = "drinks";
-
-        message.innerHTML =
-            "🥤 DRINKS<br>" +
-            "<b>Press E to explore</b>";
-
-        return;
-    }
-
-
-    /* SNACKS */
-
-    if(
-        px > window.innerWidth * .05 &&
-        px < window.innerWidth * .38 &&
-        py > window.innerHeight * .50 &&
-        py < window.innerHeight * .78
-    ) {
-
-        nearbyArea = "snacks";
-
-        message.innerHTML =
-            "🍕 SNACKS<br>" +
-            "<b>Press E to explore</b>";
-
-        return;
-    }
-
-
-    /* FUN */
-
-    if(
-        px > window.innerWidth * .57 &&
-        py > window.innerHeight * .50 &&
-        py < window.innerHeight * .78
-    ) {
-
-        nearbyArea = "fun";
-
-        message.innerHTML =
-            "🎮 FUN<br>" +
-            "<b>Press E to explore</b>";
-
-        return;
-    }
-
-
-    message.innerHTML =
-        "🛒 Explore the supermarket!<br>" +
-        "Find something for your perfect day.";
-
-}
-
-
-/* ================================
-   PRESS E
-================================ */
-
-document.addEventListener("keydown", function(event) {
-
-    if(event.key.toLowerCase() === "e") {
-
-        if(nearbyArea) {
-
-            openChoices(nearbyArea);
+            if(item.id === "musicItem") {
+                collect("fun");
+            }
 
         }
 
-    }
-
-});
-
-
-/* ================================
-   CHOICE POPUP
-================================ */
-
-function openChoices(area) {
-
-    let title = "";
-    let option1 = "";
-    let option2 = "";
-    let emoji1 = "";
-    let emoji2 = "";
-
-
-    if(area === "bakery") {
-
-        title = "🥐 The Bakery";
-
-        option1 = "Croissant";
-        option2 = "Donut";
-
-        emoji1 = "🥐";
-        emoji2 = "🍩";
-
-    }
-
-
-    if(area === "drinks") {
-
-        title = "🥤 The Drinks Aisle";
-
-        option1 = "Iced Coffee";
-        option2 = "Strawberry Milk";
-
-        emoji1 = "☕";
-        emoji2 = "🥛";
-
-    }
-
-
-    if(area === "snacks") {
-
-        title = "🍕 The Snack Aisle";
-
-        option1 = "Pizza";
-        option2 = "Salad";
-
-        emoji1 = "🍕";
-        emoji2 = "🥗";
-
-    }
-
-
-    if(area === "fun") {
-
-        title = "🎮 The Fun Aisle";
-
-        option1 = "Video Game";
-        option2 = "Movie Ticket";
-
-        emoji1 = "🎮";
-        emoji2 = "🎟️";
-
-    }
-
-
-    document.getElementById("choiceTitle").textContent =
-        title;
-
-
-    document.getElementById("choice1").innerHTML =
-        emoji1 + "<br><strong>" + option1 + "</strong>";
-
-
-    document.getElementById("choice2").innerHTML =
-        emoji2 + "<br><strong>" + option2 + "</strong>";
-
-
-    document.getElementById("choicePopup")
-        .style.display = "flex";
-
+    });
 
 }
 
+function collect(type) {
 
-/* ================================
-   CHOOSE ITEM
-================================ */
+    if(collected[type]) return;
 
-function chooseItem(item) {
+    collected[type] = true;
 
-    alert(
-        "You chose " + item + "! 🛒\n\n" +
-        "This will affect your Perfect Day..."
-    );
+    score += 100;
 
+    document.getElementById("score").innerText = score;
 
-    document.getElementById("choicePopup")
-        .style.display = "none";
+    if(type === "morning") {
+
+        document.getElementById("sunItem").style.display = "none";
+
+        showMessage("☀️ You chose a peaceful morning!");
+
+    }
+
+    if(type === "food") {
+
+        document.getElementById("foodItem").style.display = "none";
+
+        showMessage("🍕 FOOD ACQUIRED. Priorities. 😂");
+
+    }
+
+    if(type === "fun") {
+
+        document.getElementById("musicItem").style.display = "none";
+
+        showMessage("🎵 LET'S GOOOO! Fun unlocked!");
+
+    }
+
+    checkWin();
 
 }
 
+function annoy(type) {
 
-/* START GAME */
+    if(type === "alarm") {
 
-move();
-```
+        score -= 20;
 
+        showMessage("⏰ THE ALARM ATTACKED! -20 points 😭");
+
+        document.getElementById("alarm").style.display = "none";
+
+    }
+
+    if(type === "homework") {
+
+        score -= 20;
+
+        showMessage("📚 You found homework. RUN. -20 points 💀");
+
+        document.getElementById("homework").style.display = "none";
+
+    }
+
+    document.getElementById("score").innerText = score;
+
+}
+
+function checkWin() {
+
+    if(
+        collected.morning &&
+        collected.food &&
+        collected.fun
+    ) {
+
+        setTimeout(endGame, 700);
+
+    }
+
+}
+
+function endGame() {
+
+    document.getElementById("endScreen").style.display = "flex";
+
+    document.getElementById("finalScore").innerText = score;
+
+    let title;
+    let text;
+
+    if(score >= 300) {
+
+        title = "🌟 ABSOLUTELY PERFECT!";
+
+        text =
+        "You created the ultimate perfect day. " +
+        "Good vibes, good food and absolutely zero regrets. 😂";
+
+    }
+
+    else if(score >= 240) {
+
+        title = "✨ PRETTY PERFECT!";
+
+        text =
+        "Not everything went according to plan..." +
+        "but honestly, that's what made the day memorable.";
+
+    }
+
+    else {
+
+        title = "😂 CHAOTIC PERFECT DAY!";
+
+        text =
+        "Was this actually a perfect day? " +
+        "Probably not. Was it entertaining? DEFINITELY.";
+
+    }
+
+    document.getElementById("endingTitle").innerText = title;
+
+    document.getElementById("endingText").innerText = text;
+
+}
+
+function showMessage(text) {
+
+    const box = document.getElementById("message");
+
+    box.innerText = text;
+
+    box.style.display = "block";
+
+    setTimeout(() => {
+
+        box.style.display = "none";
+
+    }, 1800);
+
+}
 
 </script>
 
 </body>
 </html>
-```
 
 
 
