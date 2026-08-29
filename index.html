@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,19 +16,22 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #fff5d7;
     overflow: hidden;
 }
 
-/* GAME */
+/* ================= GAME ================= */
 
 #game {
     width: 100vw;
     height: 100vh;
     position: relative;
     overflow: hidden;
-    background:
-        linear-gradient(#8ed6ff 0%, #c9f1ff 55%, #9bd36a 55%, #75bd55 100%);
+    background: linear-gradient(
+        #8ed6ff 0%,
+        #c9f1ff 55%,
+        #9bd36a 55%,
+        #75bd55 100%
+    );
 }
 
 /* SUN */
@@ -95,7 +99,6 @@ body {
     width: 100%;
     height: 45%;
     background: #777;
-    transform: perspective(300px) rotateX(10deg);
 }
 
 .road:before {
@@ -156,46 +159,71 @@ body {
     background: #ffc857;
 }
 
-/* PLAYER */
+/* ================= CHARACTER ================= */
 
 #player {
     position: absolute;
-    width: 55px;
-    height: 65px;
+    width: 70px;
+    height: 90px;
     left: 50%;
-    bottom: 25%;
+    top: 65%;
     transform: translateX(-50%);
     transition: .08s;
     z-index: 10;
 }
 
 .head {
-    width: 42px;
-    height: 42px;
-    background: #d99a6c;
+    width: 48px;
+    height: 48px;
+    background: #f2b28d;
     border-radius: 50%;
     margin: auto;
     position: relative;
     border: 3px solid #542f27;
 }
 
-.head:before {
-    content: "👑";
+/* Hair */
+
+#hair {
     position: absolute;
-    top: -18px;
-    left: 8px;
-    font-size: 25px;
+    top: -10px;
+    left: 5px;
+    width: 38px;
+    height: 20px;
+    background: #4b2e20;
+    border-radius: 50% 50% 20% 20%;
 }
 
+/* Eyes */
+
+.head:after {
+    content: "•  •";
+    position: absolute;
+    top: 17px;
+    left: 10px;
+    font-size: 14px;
+}
+
+/* Outfit */
+
 .body {
-    width: 38px;
-    height: 30px;
-    background: #ff6b9d;
+    width: 42px;
+    height: 38px;
+    background: #8b5cf6;
     border-radius: 12px 12px 5px 5px;
     margin: -2px auto;
 }
 
-/* ITEMS */
+/* Accessory */
+
+#accessory {
+    position: absolute;
+    top: -28px;
+    left: 15px;
+    font-size: 24px;
+}
+
+/* ================= ITEMS ================= */
 
 .item {
     position: absolute;
@@ -206,8 +234,13 @@ body {
 }
 
 @keyframes bounce {
-    from { transform: translateY(0); }
-    to { transform: translateY(-8px); }
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-8px);
+    }
 }
 
 #sunItem {
@@ -231,6 +264,7 @@ body {
     position: absolute;
     font-size: 40px;
     z-index: 5;
+    cursor: pointer;
 }
 
 #alarm {
@@ -243,7 +277,7 @@ body {
     bottom: 60%;
 }
 
-/* UI */
+/* ================= UI ================= */
 
 #topbar {
     position: absolute;
@@ -261,6 +295,19 @@ body {
     border-radius: 20px;
     font-weight: bold;
     box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+#message {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 12px 25px;
+    border-radius: 20px;
+    display: none;
+    z-index: 50;
+    font-weight: bold;
 }
 
 /* CONTROLS */
@@ -287,7 +334,7 @@ button:active {
     transform: scale(.9);
 }
 
-/* START SCREEN */
+/* ================= START SCREEN ================= */
 
 #startScreen {
     position: absolute;
@@ -297,35 +344,66 @@ button:active {
     align-items: center;
     justify-content: center;
     z-index: 100;
+    overflow-y: auto;
 }
 
-.startBox {
+.creator {
     background: white;
-    padding: 40px;
+    padding: 30px;
     border-radius: 30px;
     text-align: center;
-    max-width: 500px;
+    width: min(90%,600px);
     box-shadow: 0 15px 40px rgba(0,0,0,.2);
 }
 
-.startBox h1 {
-    font-size: 45px;
-    margin-bottom: 5px;
+.creator h1 {
+    font-size: 40px;
+    margin: 5px;
 }
 
-.startBox p {
-    font-size: 18px;
-    line-height: 1.5;
+.creator p {
+    color: #666;
+}
+
+.preview {
+    margin: 15px auto;
+    width: 110px;
+    height: 130px;
+    background: #f5f5f5;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.optionTitle {
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.options button {
+    font-size: 16px;
+    padding: 10px 13px;
+}
+
+.nameInput {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+    width: 80%;
+    margin: 5px;
 }
 
 .startButton {
     background: #7c5cff;
     color: white;
-    font-size: 22px;
+    font-size: 21px;
     padding: 15px 30px;
+    margin-top: 15px;
 }
 
-/* END SCREEN */
+/* ================= END SCREEN ================= */
 
 #endScreen {
     position: absolute;
@@ -340,7 +418,7 @@ button:active {
 }
 
 .endBox {
-    background: #ffffff;
+    background: white;
     color: #333;
     padding: 40px;
     border-radius: 30px;
@@ -354,21 +432,6 @@ button:active {
 .restart {
     background: #ff7b7b;
     color: white;
-}
-
-/* MESSAGE */
-
-#message {
-    position: absolute;
-    top: 90px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    padding: 12px 25px;
-    border-radius: 20px;
-    display: none;
-    z-index: 50;
-    font-weight: bold;
 }
 
 </style>
@@ -402,7 +465,7 @@ button:active {
     </div>
 
     <div class="item" id="foodItem" onclick="collect('food')">
-        🥞
+        🍕
     </div>
 
     <div class="item" id="musicItem" onclick="collect('fun')">
@@ -422,8 +485,17 @@ button:active {
     <!-- PLAYER -->
 
     <div id="player">
-        <div class="head"></div>
+
+        <div class="head">
+
+            <div id="hair"></div>
+
+            <div id="accessory"></div>
+
+        </div>
+
         <div class="body"></div>
+
     </div>
 
     <!-- UI -->
@@ -431,11 +503,11 @@ button:active {
     <div id="topbar">
 
         <div class="panel">
-            my PERFECT day :)
+            🌈 <span id="playerName">MY PERFECT DAY</span>
         </div>
 
         <div class="panel">
-            ⭐ Perfect Points: <span id="score">0</span>
+            ⭐ Points: <span id="score">0</span>
         </div>
 
     </div>
@@ -453,35 +525,131 @@ button:active {
 
     </div>
 
-    <!-- START -->
+
+    <!-- CHARACTER CREATOR -->
 
     <div id="startScreen">
 
-        <div class="startBox">
+        <div class="creator">
 
             <h1>🌈 My Perfect Day</h1>
 
             <p>
-                Your alarm went off 😴<br>
-                You are still inside the blankets 🛌<br><br>
-
-                but still today is your day.
+                Before your adventure begins...<br>
+                <b>Create YOUR character!</b>
             </p>
 
-            <p>
-                Explore the town and collect the things
-                that make your perfect day.
-            </p>
+            <input
+                class="nameInput"
+                id="nameInput"
+                placeholder="Enter your name..."
+            >
 
-            <button class="startButton" onclick="startGame()">
-                Start my day ☀️
+            <div class="preview">
+
+                <div id="previewPlayer">
+
+                    <div class="head">
+
+                        <div id="previewHair"></div>
+
+                        <div id="previewAccessory"></div>
+
+                    </div>
+
+                    <div class="body"></div>
+
+                </div>
+
+            </div>
+
+            <div class="optionTitle">
+                💇 Choose Hair
+            </div>
+
+            <div class="options">
+
+                <button onclick="changeHair('#2b1b14')">
+                    🖤 Black
+                </button>
+
+                <button onclick="changeHair('#6b3e26')">
+                    🤎 Brown
+                </button>
+
+                <button onclick="changeHair('#e6b84f')">
+                    💛 Blonde
+                </button>
+
+                <button onclick="changeHair('#e85d9e')">
+                    🩷 Pink
+                </button>
+
+            </div>
+
+            <div class="optionTitle">
+                👕 Choose Outfit
+            </div>
+
+            <div class="options">
+
+                <button onclick="changeOutfit('#8b5cf6')">
+                    💜 Purple
+                </button>
+
+                <button onclick="changeOutfit('#3498db')">
+                    💙 Blue
+                </button>
+
+                <button onclick="changeOutfit('#55b878')">
+                    💚 Green
+                </button>
+
+                <button onclick="changeOutfit('#ff6b6b')">
+                    ❤️ Red
+                </button>
+
+            </div>
+
+            <div class="optionTitle">
+                ✨ Choose Accessory
+            </div>
+
+            <div class="options">
+
+                <button onclick="changeAccessory('🎀')">
+                    🎀 Bow
+                </button>
+
+                <button onclick="changeAccessory('👑')">
+                    👑 Crown
+                </button>
+
+                <button onclick="changeAccessory('🧢')">
+                    🧢 Cap
+                </button>
+
+                <button onclick="changeAccessory('')">
+                    ❌ None
+                </button>
+
+            </div>
+
+            <br>
+
+            <button
+                class="startButton"
+                onclick="startGame()"
+            >
+                START MY PERFECT DAY ☀️
             </button>
 
         </div>
 
     </div>
 
-    <!-- END -->
+
+    <!-- END SCREEN -->
 
     <div id="endScreen">
 
@@ -508,28 +676,91 @@ button:active {
 
 </div>
 
+
 <script>
+
+/* ================= CHARACTER ================= */
+
+let hairColor = "#4b2e20";
+let outfitColor = "#8b5cf6";
+let accessory = "🎀";
+
+function changeHair(color) {
+
+    hairColor = color;
+
+    document.getElementById("previewHair").style.background = color;
+
+}
+
+function changeOutfit(color) {
+
+    outfitColor = color;
+
+    document.querySelector("#previewPlayer .body").style.background = color;
+
+}
+
+function changeAccessory(item) {
+
+    accessory = item;
+
+    document.getElementById("previewAccessory").innerText = item;
+
+}
+
+
+/* ================= START GAME ================= */
+
+function startGame() {
+
+    let name = document.getElementById("nameInput").value;
+
+    if(name.trim() === "") {
+
+        name = "PLAYER";
+
+    }
+
+    document.getElementById("playerName").innerText =
+        "🌈 " + name + "'S PERFECT DAY";
+
+    document.getElementById("hair").style.background =
+        hairColor;
+
+    document.querySelector("#player .body").style.background =
+        outfitColor;
+
+    document.getElementById("accessory").innerText =
+        accessory;
+
+    document.getElementById("startScreen").style.display =
+        "none";
+
+    showMessage(
+        "Welcome, " + name + "! ✨ Create your perfect day!"
+    );
+
+}
+
+
+/* ================= MOVEMENT ================= */
 
 let score = 0;
 
 let collected = {
+
     morning: false,
     food: false,
     fun: false
+
 };
 
 let playerX = window.innerWidth / 2;
-let playerY = window.innerHeight * .7;
+let playerY = window.innerHeight * .65;
 
 const player = document.getElementById("player");
 
-function startGame() {
-
-    document.getElementById("startScreen").style.display = "none";
-
-    showMessage("Your perfect day starts NOW! ✨");
-
-}
 
 function move(direction) {
 
@@ -551,16 +782,24 @@ function move(direction) {
         playerY += speed;
     }
 
-    playerX = Math.max(20, Math.min(window.innerWidth - 70, playerX));
+    playerX =
+        Math.max(20,
+        Math.min(window.innerWidth - 70, playerX));
 
-    playerY = Math.max(120, Math.min(window.innerHeight - 120, playerY));
+    playerY =
+        Math.max(120,
+        Math.min(window.innerHeight - 120, playerY));
 
     player.style.left = playerX + "px";
+
     player.style.top = playerY + "px";
 
     checkNearby();
 
 }
+
+
+/* KEYBOARD */
 
 document.addEventListener("keydown", function(e) {
 
@@ -574,13 +813,18 @@ document.addEventListener("keydown", function(e) {
 
 });
 
+
+/* ================= COLLECT ITEMS ================= */
+
 function checkNearby() {
 
-    const playerRect = player.getBoundingClientRect();
+    const playerRect =
+        player.getBoundingClientRect();
 
     document.querySelectorAll(".item").forEach(item => {
 
-        const rect = item.getBoundingClientRect();
+        const rect =
+            item.getBoundingClientRect();
 
         if(
             Math.abs(playerRect.left - rect.left) < 55 &&
@@ -605,6 +849,7 @@ function checkNearby() {
 
 }
 
+
 function collect(type) {
 
     if(collected[type]) return;
@@ -613,35 +858,52 @@ function collect(type) {
 
     score += 100;
 
-    document.getElementById("score").innerText = score;
+    document.getElementById("score").innerText =
+        score;
+
 
     if(type === "morning") {
 
-        document.getElementById("sunItem").style.display = "none";
+        document.getElementById("sunItem").style.display =
+            "none";
 
-        showMessage("☀️ You chose a peaceful morning!");
+        showMessage(
+            "☀️ Perfect morning unlocked!"
+        );
 
     }
+
 
     if(type === "food") {
 
-        document.getElementById("foodItem").style.display = "none";
+        document.getElementById("foodItem").style.display =
+            "none";
 
-        showMessage("🍕 FOOD ACQUIRED. Priorities. 😂");
+        showMessage(
+            "🍕 FOOD ACQUIRED! Priorities 😂"
+        );
 
     }
+
 
     if(type === "fun") {
 
-        document.getElementById("musicItem").style.display = "none";
+        document.getElementById("musicItem").style.display =
+            "none";
 
-        showMessage("🎵 LET'S GOOOO! Fun unlocked!");
+        showMessage(
+            "🎵 FUN UNLOCKED! LET'S GOOOO!"
+        );
 
     }
+
 
     checkWin();
 
 }
+
+
+/* ================= OBSTACLES ================= */
 
 function annoy(type) {
 
@@ -649,25 +911,37 @@ function annoy(type) {
 
         score -= 20;
 
-        showMessage("⏰ THE ALARM ATTACKED! -20 points 😭");
+        showMessage(
+            "⏰ THE ALARM ATTACKED! -20 😭"
+        );
 
-        document.getElementById("alarm").style.display = "none";
+        document.getElementById("alarm").style.display =
+            "none";
 
     }
+
 
     if(type === "homework") {
 
         score -= 20;
 
-        showMessage("📚 You found homework. RUN. -20 points 💀");
+        showMessage(
+            "📚 HOMEWORK FOUND! RUN! -20 💀"
+        );
 
-        document.getElementById("homework").style.display = "none";
+        document.getElementById("homework").style.display =
+            "none";
 
     }
 
-    document.getElementById("score").innerText = score;
+
+    document.getElementById("score").innerText =
+        score;
 
 }
+
+
+/* ================= WIN ================= */
 
 function checkWin() {
 
@@ -683,22 +957,28 @@ function checkWin() {
 
 }
 
+
+/* ================= ENDING ================= */
+
 function endGame() {
 
-    document.getElementById("endScreen").style.display = "flex";
+    document.getElementById("endScreen").style.display =
+        "flex";
 
-    document.getElementById("finalScore").innerText = score;
+    document.getElementById("finalScore").innerText =
+        score;
 
     let title;
     let text;
+
 
     if(score >= 300) {
 
         title = "🌟 ABSOLUTELY PERFECT!";
 
         text =
-        "You created the ultimate perfect day. " +
-        "Good vibes, good food and absolutely zero regrets. 😂";
+        "You created the ultimate perfect day! " +
+        "Good vibes, good food and zero regrets. 😂";
 
     }
 
@@ -707,8 +987,8 @@ function endGame() {
         title = "✨ PRETTY PERFECT!";
 
         text =
-        "Not everything went according to plan..." +
-        "but honestly, that's what made the day memorable.";
+        "Not everything went according to plan... " +
+        "but honestly, that's what made it memorable.";
 
     }
 
@@ -722,15 +1002,22 @@ function endGame() {
 
     }
 
-    document.getElementById("endingTitle").innerText = title;
 
-    document.getElementById("endingText").innerText = text;
+    document.getElementById("endingTitle").innerText =
+        title;
+
+    document.getElementById("endingText").innerText =
+        text;
 
 }
 
+
+/* ================= MESSAGE ================= */
+
 function showMessage(text) {
 
-    const box = document.getElementById("message");
+    const box =
+        document.getElementById("message");
 
     box.innerText = text;
 
@@ -748,6 +1035,8 @@ function showMessage(text) {
 
 </body>
 </html>
+```
+
 
 
 
