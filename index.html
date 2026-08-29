@@ -555,10 +555,231 @@ function checkAreas() {
 
 }
 
+```javascript
+/* ================================
+   INTERACTION SYSTEM
+================================ */
+
+let nearbyArea = null;
+
+
+/* CHECK WHICH AISLE PLAYER IS NEAR */
+
+function checkAreas() {
+
+    const px = x;
+    const py = y;
+
+    nearbyArea = null;
+
+
+    /* BAKERY */
+
+    if(
+        px > window.innerWidth * .05 &&
+        px < window.innerWidth * .38 &&
+        py > window.innerHeight * .18 &&
+        py < window.innerHeight * .43
+    ) {
+
+        nearbyArea = "bakery";
+
+        message.innerHTML =
+            "🥐 BAKERY<br>" +
+            "<b>Press E to explore</b>";
+
+        return;
+    }
+
+
+    /* DRINKS */
+
+    if(
+        px > window.innerWidth * .57 &&
+        py > window.innerHeight * .18 &&
+        py < window.innerHeight * .43
+    ) {
+
+        nearbyArea = "drinks";
+
+        message.innerHTML =
+            "🥤 DRINKS<br>" +
+            "<b>Press E to explore</b>";
+
+        return;
+    }
+
+
+    /* SNACKS */
+
+    if(
+        px > window.innerWidth * .05 &&
+        px < window.innerWidth * .38 &&
+        py > window.innerHeight * .50 &&
+        py < window.innerHeight * .78
+    ) {
+
+        nearbyArea = "snacks";
+
+        message.innerHTML =
+            "🍕 SNACKS<br>" +
+            "<b>Press E to explore</b>";
+
+        return;
+    }
+
+
+    /* FUN */
+
+    if(
+        px > window.innerWidth * .57 &&
+        py > window.innerHeight * .50 &&
+        py < window.innerHeight * .78
+    ) {
+
+        nearbyArea = "fun";
+
+        message.innerHTML =
+            "🎮 FUN<br>" +
+            "<b>Press E to explore</b>";
+
+        return;
+    }
+
+
+    message.innerHTML =
+        "🛒 Explore the supermarket!<br>" +
+        "Find something for your perfect day.";
+
+}
+
+
+/* ================================
+   PRESS E
+================================ */
+
+document.addEventListener("keydown", function(event) {
+
+    if(event.key.toLowerCase() === "e") {
+
+        if(nearbyArea) {
+
+            openChoices(nearbyArea);
+
+        }
+
+    }
+
+});
+
+
+/* ================================
+   CHOICE POPUP
+================================ */
+
+function openChoices(area) {
+
+    let title = "";
+    let option1 = "";
+    let option2 = "";
+    let emoji1 = "";
+    let emoji2 = "";
+
+
+    if(area === "bakery") {
+
+        title = "🥐 The Bakery";
+
+        option1 = "Croissant";
+        option2 = "Donut";
+
+        emoji1 = "🥐";
+        emoji2 = "🍩";
+
+    }
+
+
+    if(area === "drinks") {
+
+        title = "🥤 The Drinks Aisle";
+
+        option1 = "Iced Coffee";
+        option2 = "Strawberry Milk";
+
+        emoji1 = "☕";
+        emoji2 = "🥛";
+
+    }
+
+
+    if(area === "snacks") {
+
+        title = "🍕 The Snack Aisle";
+
+        option1 = "Pizza";
+        option2 = "Salad";
+
+        emoji1 = "🍕";
+        emoji2 = "🥗";
+
+    }
+
+
+    if(area === "fun") {
+
+        title = "🎮 The Fun Aisle";
+
+        option1 = "Video Game";
+        option2 = "Movie Ticket";
+
+        emoji1 = "🎮";
+        emoji2 = "🎟️";
+
+    }
+
+
+    document.getElementById("choiceTitle").textContent =
+        title;
+
+
+    document.getElementById("choice1").innerHTML =
+        emoji1 + "<br><strong>" + option1 + "</strong>";
+
+
+    document.getElementById("choice2").innerHTML =
+        emoji2 + "<br><strong>" + option2 + "</strong>";
+
+
+    document.getElementById("choicePopup")
+        .style.display = "flex";
+
+
+}
+
+
+/* ================================
+   CHOOSE ITEM
+================================ */
+
+function chooseItem(item) {
+
+    alert(
+        "You chose " + item + "! 🛒\n\n" +
+        "This will affect your Perfect Day..."
+    );
+
+
+    document.getElementById("choicePopup")
+        .style.display = "none";
+
+}
+
 
 /* START GAME */
 
 move();
+```
+
 
 </script>
 
