@@ -1,231 +1,681 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Build Your Perfect Day ☀️</title>
+<title>Build Your Perfect Day ☀️</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    background: #fff8e8;
+    color: #3c3a32;
+    overflow-x: hidden;
+}
+
+/* Floating background shapes */
+
+.bg-circle {
+    position: fixed;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.circle1 {
+    width: 300px;
+    height: 300px;
+    background: #ffe2a8;
+    top: -100px;
+    left: -100px;
+}
+
+.circle2 {
+    width: 250px;
+    height: 250px;
+    background: #dcebc9;
+    bottom: -80px;
+    right: -70px;
+}
+
+/* Main */
+
+.app {
+    width: min(850px, 92%);
+    margin: auto;
+    min-height: 100vh;
+    padding: 45px 0;
+}
+
+/* Header */
+
+header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.sun {
+    font-size: 55px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    50% {
+        transform: translateY(-8px);
     }
+}
 
-    body {
-      min-height: 100vh;
-      font-family: Georgia, "Times New Roman", serif;
-      color: #3d3a35;
-      background: linear-gradient(135deg, #fff7df, #e8f1df);
-      transition: background 0.8s ease;
-    }
+header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: normal;
+    margin: 10px 0;
+}
 
-    .app {
-      width: min(900px, 92%);
-      margin: auto;
-      min-height: 100vh;
-      padding: 50px 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+header p {
+    color: #777365;
+    font-size: 1rem;
+}
 
-    /* Header */
+/* Progress */
 
-    .header {
-      text-align: center;
-      margin-bottom: 35px;
-    }
+.progress-area {
+    margin-bottom: 25px;
+}
 
-    .sun {
-      font-size: 3rem;
-      margin-bottom: 15px;
-    }
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #827c6e;
+    margin-bottom: 8px;
+}
 
-    .header h1 {
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      font-weight: normal;
-      line-height: 0.95;
-      margin-bottom: 18px;
-    }
+.progress {
+    height: 7px;
+    background: #eee5d2;
+    border-radius: 20px;
+    overflow: hidden;
+}
 
-    .header p {
-      color: #777064;
-      font-size: 1.1rem;
-    }
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #6d8159;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
 
-    /* Progress */
+/* Card */
 
-    .progress-container {
-      margin-bottom: 30px;
-    }
+.card {
+    background: rgba(255,255,255,0.82);
+    border: 1px solid rgba(120,100,60,0.08);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(80,70,40,0.12);
+    backdrop-filter: blur(10px);
+}
 
-    .progress-text {
-      display: flex;
-      justify-content: space-between;
-      font-family: Arial, sans-serif;
-      font-size: 0.75rem;
-      color: #817a6d;
-      margin-bottom: 8px;
-    }
+/* Question */
 
-    .progress {
-      height: 6px;
-      background: rgba(70, 60, 40, 0.12);
-      border-radius: 10px;
-      overflow: hidden;
-    }
+.question {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: #536b52;
-      border-radius: 10px;
-      transition: width 0.4s ease;
-    }
+.question .mini {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #84936e;
+    margin-bottom: 10px;
+}
 
-    /* Card */
+.question h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.3rem;
+    font-weight: normal;
+}
 
+.question p {
+    margin-top: 8px;
+    color: #817a6d;
+}
+
+/* Options */
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.option {
+    border: 2px solid transparent;
+    background: #f7f0df;
+    border-radius: 22px;
+    padding: 30px 25px;
+    cursor: pointer;
+    transition: 0.25s;
+    text-align: center;
+}
+
+.option:hover {
+    transform: translateY(-5px);
+    background: #eee5d2;
+    box-shadow: 0 10px 25px rgba(80,70,40,0.08);
+}
+
+.option.selected {
+    border-color: #6d8159;
+    background: #e8f0df;
+    transform: translateY(-5px);
+}
+
+.option .emoji {
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.option strong {
+    display: block;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 6px;
+}
+
+.option span {
+    color: #817a6d;
+    font-size: 0.9rem;
+}
+
+/* Navigation */
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+
+button {
+    border: none;
+    border-radius: 50px;
+    padding: 13px 25px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.back {
+    background: transparent;
+    color: #777064;
+}
+
+.back:hover {
+    background: #eee7d8;
+}
+
+.next {
+    background: #52684f;
+    color: white;
+}
+
+.next:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(50,70,50,0.2);
+}
+
+.next:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Result */
+
+.result {
+    display: none;
+    text-align: center;
+}
+
+.result.show {
+    display: block;
+}
+
+.result .big-sun {
+    font-size: 70px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.result h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    font-weight: normal;
+    margin: 10px 0;
+}
+
+.result-intro {
+    color: #777064;
+    margin-bottom: 25px;
+}
+
+/* Day plan */
+
+.day-plan {
+    text-align: left;
+    background: #f7f1e3;
+    border-radius: 22px;
+    padding: 25px;
+    margin: 25px 0;
+}
+
+.day-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #e4dac6;
+}
+
+.day-item:last-child {
+    border-bottom: none;
+}
+
+.day-item .icon {
+    font-size: 1.5rem;
+}
+
+.day-item strong {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.day-item span {
+    font-size: 0.85rem;
+    color: #817a6d;
+}
+
+.restart {
+    background: #52684f;
+    color: white;
+    margin-top: 5px;
+}
+
+/* Mobile */
+
+@media(max-width:600px) {
     .card {
-      background: rgba(255, 253, 247, 0.88);
-      backdrop-filter: blur(10px);
-      border-radius: 30px;
-      padding: 45px;
-      box-shadow: 0 20px 70px rgba(80, 70, 45, 0.12);
+        padding: 25px 18px;
     }
 
-    .question {
-      text-align: center;
-      margin-bottom: 30px;
+    .options {
+        grid-template-columns: 1fr;
     }
 
     .question h2 {
-      font-size: 2.3rem;
-      font-weight: normal;
-      margin-bottom: 8px;
+        font-size: 1.9rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-circle circle1"></div>
+<div class="bg-circle circle2"></div>
+
+<div class="app">
+
+<header>
+    <div class="sun">☀️</div>
+    <h1>Build Your Perfect Day</h1>
+    <p>There are no wrong choices. Just choose what feels like you.</p>
+</header>
+
+<div id="game">
+
+    <div class="progress-area">
+        <div class="progress-text">
+            <span id="stepText">Question 1 of 5</span>
+            <span id="percent">0%</span>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="question">
+            <div class="mini" id="category">Morning</div>
+            <h2 id="question">How would you like to wake up?</h2>
+            <p id="subtitle">Your perfect day starts here.</p>
+        </div>
+
+        <div class="options" id="options"></div>
+
+        <div class="navigation">
+            <button class="back" id="backBtn" onclick="previousQuestion()">
+                ← Back
+            </button>
+
+            <button class="next" id="nextBtn" onclick="nextQuestion()" disabled>
+                Choose an option →
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div class="card result" id="result">
+
+    <div class="big-sun">🌞</div>
+
+    <h2>Your Perfect Day</h2>
+
+    <p class="result-intro">
+        You made the choices. Here's the day you created.
+    </p>
+
+    <div class="day-plan" id="dayPlan"></div>
+
+    <button class="restart" onclick="restart()">
+        Create Another Day ↻
+    </button>
+
+</div>
+
+</div>
+
+
+<script>
+
+const questions = [
+
+    {
+        category: "Morning",
+        question: "How would you like to wake up?",
+        subtitle: "Your perfect day starts here.",
+        options: [
+            {
+                emoji: "🌅",
+                title: "Early & peaceful",
+                text: "Wake up with the sunrise.",
+                result: "Start the morning slowly with a peaceful sunrise."
+            },
+            {
+                emoji: "😴",
+                title: "Sleep in",
+                text: "No alarms. Just vibes.",
+                result: "Sleep in and let the day begin whenever you're ready."
+            }
+        ]
+    },
+
+    {
+        category: "Breakfast",
+        question: "What's calling your name?",
+        subtitle: "A perfect morning needs good food.",
+        options: [
+            {
+                emoji: "🥞",
+                title: "Pancake morning",
+                text: "Sweet, fluffy & delicious.",
+                result: "Enjoy a cozy stack of pancakes for breakfast."
+            },
+            {
+                emoji: "🥐",
+                title: "Café breakfast",
+                text: "Coffee, pastries & people watching.",
+                result: "Head to a cute café for coffee and a pastry."
+            }
+        ]
+    },
+
+    {
+        category: "Adventure",
+        question: "What are we doing today?",
+        subtitle: "Time to make some memories.",
+        options: [
+            {
+                emoji: "🏖️",
+                title: "Beach day",
+                text: "Sun, sand & ocean.",
+                result: "Spend the afternoon by the water."
+            },
+            {
+                emoji: "🌲",
+                title: "Nature escape",
+                text: "Fresh air & exploring.",
+                result: "Explore somewhere green and peaceful."
+            }
+        ]
+    },
+
+    {
+        category: "Evening",
+        question: "How should the day wind down?",
+        subtitle: "The best days end beautifully.",
+        options: [
+            {
+                emoji: "🎬",
+                title: "Movie night",
+                text: "Blanket + snacks + favourite movie.",
+                result: "Have a cozy movie night with all your favourite snacks."
+            },
+            {
+                emoji: "🌆",
+                title: "Sunset walk",
+                text: "Golden skies & good conversations.",
+                result: "Take a sunset walk and watch the sky change colours."
+            }
+        ]
+    },
+
+    {
+        category: "Night",
+        question: "One last choice...",
+        subtitle: "How does your perfect day end?",
+        options: [
+            {
+                emoji: "✨",
+                title: "Stargazing",
+                text: "Look up and dream big.",
+                result: "End the night under the stars."
+            },
+            {
+                emoji: "📖",
+                title: "Cozy & quiet",
+                text: "Books, blankets & calm.",
+                result: "Finish the day somewhere warm, quiet and cozy."
+            }
+        ]
     }
 
-    .question p {
-      color: #817a6d;
+];
+
+
+let current = 0;
+let answers = [];
+
+const questionEl = document.getElementById("question");
+const subtitleEl = document.getElementById("subtitle");
+const categoryEl = document.getElementById("category");
+const optionsEl = document.getElementById("options");
+const nextBtn = document.getElementById("nextBtn");
+const backBtn = document.getElementById("backBtn");
+const progressBar = document.getElementById("progressBar");
+const stepText = document.getElementById("stepText");
+const percent = document.getElementById("percent");
+
+
+function loadQuestion() {
+
+    const q = questions[current];
+
+    categoryEl.textContent = q.category;
+    questionEl.textContent = q.question;
+    subtitleEl.textContent = q.subtitle;
+
+    optionsEl.innerHTML = "";
+
+    q.options.forEach((option, index) => {
+
+        const div = document.createElement("div");
+
+        div.className = "option";
+
+        if (answers[current] === index) {
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = `
+            <span class="emoji">${option.emoji}</span>
+            <strong>${option.title}</strong>
+            <span>${option.text}</span>
+        `;
+
+        div.onclick = () => selectOption(index);
+
+        optionsEl.appendChild(div);
+
+    });
+
+    const progress = (current / questions.length) * 100;
+
+    progressBar.style.width = progress + "%";
+    percent.textContent = Math.round(progress) + "%";
+    stepText.textContent =
+        `Question ${current + 1} of ${questions.length}`;
+
+    backBtn.style.visibility =
+        current === 0 ? "hidden" : "visible";
+
+    nextBtn.disabled = answers[current] === undefined;
+
+    nextBtn.textContent =
+        current === questions.length - 1
+        ? "Reveal my day ✨"
+        : "Choose an option →";
+}
+
+
+function selectOption(index) {
+
+    answers[current] = index;
+
+    document.querySelectorAll(".option").forEach((option, i) => {
+        option.classList.toggle("selected", i === index);
+    });
+
+    nextBtn.disabled = false;
+}
+
+
+function nextQuestion() {
+
+    if (answers[current] === undefined) return;
+
+    if (current < questions.length - 1) {
+
+        current++;
+
+        loadQuestion();
+
+    } else {
+
+        showResult();
+
+    }
+}
+
+
+function previousQuestion() {
+
+    if (current > 0) {
+        current--;
+        loadQuestion();
     }
 
-    /* Options */
+}
 
-    .options {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
 
-    .option {
-      border: 2px solid transparent;
-      background: #f4eee1;
-      border-radius: 20px;
-      padding: 24px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      text-align: left;
-    }
+function showResult() {
 
-    .option:hover {
-      transform: translateY(-3px);
-      background: #eee5d3;
-    }
+    document.getElementById("game").style.display = "none";
 
-    .option.selected {
-      border-color: #536b52;
-      background: #e5eddc;
-      transform: translateY(-3px);
-    }
+    const result = document.getElementById("result");
 
-    .option .emoji {
-      font-size: 2rem;
-      display: block;
-      margin-bottom: 10px;
-    }
+    result.classList.add("show");
 
-    .option strong {
-      display: block;
-      font-size: 1.2rem;
-      font-weight: normal;
-      margin-bottom: 4px;
-    }
+    const dayPlan = document.getElementById("dayPlan");
 
-    .option span {
-      color: #817a6d;
-      font-size: 0.9rem;
-    }
+    dayPlan.innerHTML = "";
 
-    /* Navigation */
+    answers.forEach((answer, index) => {
 
-    .navigation {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 30px;
-    }
+        const choice = questions[index].options[answer];
 
-    button {
-      border: none;
-      border-radius: 999px;
-      padding: 13px 25px;
-      font-family: Arial, sans-serif;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.25s ease;
-    }
+        const item = document.createElement("div");
 
-    .back {
-      background: transparent;
-      color: #777064;
-    }
+        item.className = "day-item";
 
-    .back:hover {
-      background: #eee7d8;
-    }
+        item.innerHTML = `
+            <div class="icon">${choice.emoji}</div>
+            <div>
+                <strong>${questions[index].category}</strong>
+                <span>${choice.result}</span>
+            </div>
+        `;
 
-    .next {
-      background: #536b52;
-      color: white;
-    }
+        dayPlan.appendChild(item);
 
-    .next:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(50, 70, 50, 0.2);
-    }
+    });
 
-    .next:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
+    progressBar.style.width = "100%";
+}
 
-    /* Result */
 
-    .result {
-      display: none;
-      text-align: center;
-    }
+function restart() {
 
-    .result.visible {
-      display: block;
-    }
+    current = 0;
+    answers = [];
 
-    .result .big-sun {
-      font-size: 4rem;
-      margin-bottom: 15px;
-    }
+    document.getElementById("result").classList.remove("show");
 
-    .result h2 {
-      font-size: 3rem;
-      font-weight: normal;
-      margin-bottom: 10px;
-    }
+    document.getElementById("game").style.display = "block";
 
-    .result-intro {
-      color: #777064;
-      margin-bottom: 35px;
-    }  
-    </body>
-    </html>
+    loadQuestion();
+
+}
+
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
+```
+
