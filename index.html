@@ -5,9 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build Your Perfect Day ☀️</title>
+<title>My Perfect Day ☀️</title>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap');
 
 * {
@@ -18,279 +19,364 @@
 
 body {
     min-height: 100vh;
-    font-family: 'Inter', sans-serif;
-    background: #fff8e8;
-    color: #3c3a32;
+    font-family: Inter, sans-serif;
+    color: #302f29;
+    background: #f8efd9;
+    transition: background 1s ease;
     overflow-x: hidden;
 }
 
-/* Floating background shapes */
+/* BACKGROUND */
 
-.bg-circle {
+.blob {
     position: fixed;
     border-radius: 50%;
+    filter: blur(5px);
+    opacity: .45;
     z-index: -1;
-    opacity: 0.5;
 }
 
-.circle1 {
+.blob.one {
+    width: 350px;
+    height: 350px;
+    background: #f6cf82;
+    top: -150px;
+    left: -120px;
+}
+
+.blob.two {
     width: 300px;
     height: 300px;
-    background: #ffe2a8;
-    top: -100px;
-    left: -100px;
+    background: #bcd3a8;
+    bottom: -120px;
+    right: -100px;
 }
 
-.circle2 {
-    width: 250px;
-    height: 250px;
-    background: #dcebc9;
-    bottom: -80px;
-    right: -70px;
-}
-
-/* Main */
+/* APP */
 
 .app {
-    width: min(850px, 92%);
+    width: min(900px, 92%);
     margin: auto;
     min-height: 100vh;
     padding: 45px 0;
 }
 
-/* Header */
+/* LANDING */
 
-header {
+.landing {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    margin-bottom: 35px;
 }
 
 .sun {
-    font-size: 55px;
+    font-size: 75px;
     animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
+
     50% {
-        transform: translateY(-8px);
+        transform: translateY(-12px) rotate(4deg);
     }
+
 }
 
-header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(3rem, 8vw, 5rem);
+.landing h1 {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(4rem, 10vw, 7rem);
     font-weight: normal;
-    margin: 10px 0;
+    line-height: .9;
+    margin: 20px 0;
 }
 
-header p {
-    color: #777365;
-    font-size: 1rem;
+.landing p {
+    color: #777264;
+    max-width: 500px;
+    line-height: 1.7;
 }
 
-/* Progress */
-
-.progress-area {
-    margin-bottom: 25px;
+.start {
+    margin-top: 35px;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 50px;
+    background: #53684e;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s;
 }
 
-.progress-text {
+.start:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px #53684e44;
+}
+
+/* GAME */
+
+.game {
+    display: none;
+}
+
+.top {
     display: flex;
     justify-content: space-between;
-    font-size: 0.8rem;
-    color: #827c6e;
-    margin-bottom: 8px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.logo {
+    font-family: "DM Serif Display", serif;
+    font-size: 22px;
+}
+
+.counter {
+    color: #81796a;
+    font-size: 13px;
 }
 
 .progress {
-    height: 7px;
-    background: #eee5d2;
+    height: 6px;
+    background: #e5dcc8;
     border-radius: 20px;
     overflow: hidden;
+    margin-bottom: 40px;
 }
 
 .progress-bar {
     height: 100%;
     width: 0%;
-    background: #6d8159;
-    border-radius: 20px;
-    transition: width 0.4s ease;
+    background: #53684e;
+    transition: width .6s ease;
 }
 
-/* Card */
+/* TIMELINE */
+
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 17px;
+    left: 7%;
+    right: 7%;
+    height: 2px;
+    background: #d8cfba;
+    z-index: -1;
+}
+
+.time {
+    text-align: center;
+    width: 20%;
+}
+
+.time-circle {
+    width: 35px;
+    height: 35px;
+    margin: auto;
+    background: #f8efd9;
+    border: 2px solid #d8cfba;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.time.active .time-circle {
+    background: #53684e;
+    border-color: #53684e;
+    color: white;
+}
+
+.time span {
+    font-size: 10px;
+    color: #8b8374;
+    display: block;
+    margin-top: 7px;
+}
+
+/* CARD */
 
 .card {
-    background: rgba(255,255,255,0.82);
-    border: 1px solid rgba(120,100,60,0.08);
-    border-radius: 30px;
-    padding: 40px;
-    box-shadow: 0 20px 60px rgba(80,70,40,0.12);
-    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,.75);
+    border: 1px solid rgba(80,70,40,.08);
+    border-radius: 32px;
+    padding: 45px;
+    box-shadow: 0 25px 70px rgba(70,60,40,.12);
+    backdrop-filter: blur(12px);
 }
 
-/* Question */
+.category {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 11px;
+    color: #758563;
+    text-align: center;
+    margin-bottom: 12px;
+}
 
 .question {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.question .mini {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #84936e;
-    margin-bottom: 10px;
-}
-
-.question h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.3rem;
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
     font-weight: normal;
+    text-align: center;
+    line-height: 1.05;
 }
 
-.question p {
-    margin-top: 8px;
-    color: #817a6d;
+.subtitle {
+    text-align: center;
+    color: #81796c;
+    margin-top: 10px;
 }
 
-/* Options */
+/* OPTIONS */
 
 .options {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
+    margin-top: 35px;
 }
 
 .option {
+    padding: 28px;
+    border-radius: 24px;
+    background: #f5eddb;
     border: 2px solid transparent;
-    background: #f7f0df;
-    border-radius: 22px;
-    padding: 30px 25px;
     cursor: pointer;
-    transition: 0.25s;
-    text-align: center;
+    transition: .3s;
+    position: relative;
+    overflow: hidden;
 }
 
 .option:hover {
-    transform: translateY(-5px);
-    background: #eee5d2;
-    box-shadow: 0 10px 25px rgba(80,70,40,0.08);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(70,60,40,.1);
 }
 
 .option.selected {
-    border-color: #6d8159;
-    background: #e8f0df;
+    background: #e5eedc;
+    border-color: #53684e;
     transform: translateY(-5px);
 }
 
 .option .emoji {
+    font-size: 42px;
     display: block;
-    font-size: 3rem;
     margin-bottom: 15px;
 }
 
-.option strong {
-    display: block;
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.5rem;
+.option h3 {
+    font-family: "DM Serif Display", serif;
+    font-size: 23px;
     font-weight: normal;
-    margin-bottom: 6px;
+    margin-bottom: 7px;
 }
 
-.option span {
-    color: #817a6d;
-    font-size: 0.9rem;
+.option p {
+    color: #81796c;
+    font-size: 13px;
+    line-height: 1.5;
 }
 
-/* Navigation */
+/* NAVIGATION */
 
-.navigation {
+.nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 30px;
 }
 
-button {
-    border: none;
-    border-radius: 50px;
-    padding: 13px 25px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-    transition: 0.25s;
-}
-
 .back {
+    border: none;
     background: transparent;
-    color: #777064;
-}
-
-.back:hover {
-    background: #eee7d8;
+    color: #81796c;
+    cursor: pointer;
+    padding: 10px;
 }
 
 .next {
-    background: #52684f;
+    border: none;
+    background: #53684e;
     color: white;
+    padding: 14px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    opacity: .35;
+    transition: .3s;
 }
 
-.next:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(50,70,50,0.2);
+.next.ready {
+    opacity: 1;
 }
 
-.next:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
+.next.ready:hover {
+    transform: translateY(-3px);
 }
 
-/* Result */
+/* RESULT */
 
 .result {
     display: none;
+}
+
+.result-card {
     text-align: center;
 }
 
-.result.show {
-    display: block;
+.result-sun {
+    font-size: 65px;
 }
 
-.result .big-sun {
-    font-size: 70px;
-    animation: float 3s ease-in-out infinite;
-}
-
-.result h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 3rem;
+.result-card h1 {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(3rem, 8vw, 5rem);
     font-weight: normal;
     margin: 10px 0;
 }
 
-.result-intro {
-    color: #777064;
-    margin-bottom: 25px;
+.result-card .intro {
+    color: #777264;
+    line-height: 1.6;
 }
 
-/* Day plan */
+.personality {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 10px 18px;
+    border-radius: 50px;
+    background: #e5eedc;
+    color: #53684e;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
 
-.day-plan {
+.day {
     text-align: left;
-    background: #f7f1e3;
-    border-radius: 22px;
-    padding: 25px;
-    margin: 25px 0;
+    margin-top: 20px;
+    background: #f5eddb;
+    border-radius: 24px;
+    padding: 10px 25px;
 }
 
 .day-item {
     display: flex;
-    gap: 15px;
-    padding: 15px 0;
-    border-bottom: 1px solid #e4dac6;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px solid #dfd5c1;
 }
 
 .day-item:last-child {
@@ -298,113 +384,201 @@ button {
 }
 
 .day-item .icon {
-    font-size: 1.5rem;
+    font-size: 27px;
 }
 
 .day-item strong {
     display: block;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
 }
 
-.day-item span {
-    font-size: 0.85rem;
-    color: #817a6d;
+.day-item p {
+    color: #81796c;
+    font-size: 13px;
 }
 
 .restart {
-    background: #52684f;
+    margin-top: 25px;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 50px;
+    background: #53684e;
     color: white;
-    margin-top: 5px;
+    cursor: pointer;
 }
 
-/* Mobile */
+/* MOBILE */
 
 @media(max-width:600px) {
+
     .card {
-        padding: 25px 18px;
+        padding: 28px 18px;
     }
 
     .options {
         grid-template-columns: 1fr;
     }
 
-    .question h2 {
-        font-size: 1.9rem;
+    .timeline span {
+        display: none;
     }
+
+    .timeline {
+        margin-bottom: 25px;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="bg-circle circle1"></div>
-<div class="bg-circle circle2"></div>
+<div class="blob one"></div>
+<div class="blob two"></div>
 
 <div class="app">
 
-<header>
+<!-- LANDING -->
+
+<section class="landing" id="landing">
+
     <div class="sun">☀️</div>
-    <h1>Build Your Perfect Day</h1>
-    <p>There are no wrong choices. Just choose what feels like you.</p>
-</header>
 
-<div id="game">
+    <h1>
+        My<br>
+        Perfect Day
+    </h1>
 
-    <div class="progress-area">
-        <div class="progress-text">
-            <span id="stepText">Question 1 of 5</span>
-            <span id="percent">0%</span>
+    <p>
+        What makes a day perfect isn't the plan.
+        It's the little choices you make along the way.
+    </p>
+
+    <p style="margin-top:10px;">
+        <strong>32 possible days. Find yours.</strong>
+    </p>
+
+    <button class="start" onclick="startGame()">
+        Build my day →
+    </button>
+
+</section>
+
+
+<!-- GAME -->
+
+<section class="game" id="game">
+
+    <div class="top">
+
+        <div class="logo">☀️ My Perfect Day</div>
+
+        <div class="counter" id="counter">
+            01 / 05
         </div>
 
-        <div class="progress">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
     </div>
+
+    <div class="progress">
+        <div class="progress-bar" id="progress"></div>
+    </div>
+
+
+    <!-- TIMELINE -->
+
+    <div class="timeline">
+
+        <div class="time active" id="t0">
+            <div class="time-circle">🌅</div>
+            <span>Morning</span>
+        </div>
+
+        <div class="time" id="t1">
+            <div class="time-circle">☀️</div>
+            <span>Midday</span>
+        </div>
+
+        <div class="time" id="t2">
+            <div class="time-circle">🌿</div>
+            <span>Afternoon</span>
+        </div>
+
+        <div class="time" id="t3">
+            <div class="time-circle">🌆</div>
+            <span>Evening</span>
+        </div>
+
+        <div class="time" id="t4">
+            <div class="time-circle">🌙</div>
+            <span>Night</span>
+        </div>
+
+    </div>
+
 
     <div class="card">
 
-        <div class="question">
-            <div class="mini" id="category">Morning</div>
-            <h2 id="question">How would you like to wake up?</h2>
-            <p id="subtitle">Your perfect day starts here.</p>
+        <div class="category" id="category">
+            Morning
         </div>
+
+        <h2 class="question" id="question">
+            Your alarm goes off.
+            What happens next?
+        </h2>
+
+        <p class="subtitle" id="subtitle">
+            There is no wrong answer.
+        </p>
+
 
         <div class="options" id="options"></div>
 
-        <div class="navigation">
-            <button class="back" id="backBtn" onclick="previousQuestion()">
+
+        <div class="nav">
+
+            <button class="back" onclick="back()">
                 ← Back
             </button>
 
-            <button class="next" id="nextBtn" onclick="nextQuestion()" disabled>
-                Choose an option →
+            <button class="next" id="next" onclick="next()">
+                Continue →
             </button>
+
         </div>
 
     </div>
 
-</div>
+</section>
 
 
 <!-- RESULT -->
 
-<div class="card result" id="result">
+<section class="result" id="result">
 
-    <div class="big-sun">🌞</div>
+    <div class="card result-card">
 
-    <h2>Your Perfect Day</h2>
+        <div class="result-sun">✨</div>
 
-    <p class="result-intro">
-        You made the choices. Here's the day you created.
-    </p>
+        <h1>Your Perfect Day</h1>
 
-    <div class="day-plan" id="dayPlan"></div>
+        <p class="intro">
+            You made the choices.<br>
+            Here's the day that feels most like you.
+        </p>
 
-    <button class="restart" onclick="restart()">
-        Create Another Day ↻
-    </button>
+        <div class="personality" id="personality"></div>
 
-</div>
+        <div class="day" id="day"></div>
+
+        <button class="restart" onclick="restart()">
+            ↻ Create another day
+        </button>
+
+    </div>
+
+</section>
 
 </div>
 
@@ -413,105 +587,105 @@ button {
 
 const questions = [
 
-    {
-        category: "Morning",
-        question: "How would you like to wake up?",
-        subtitle: "Your perfect day starts here.",
-        options: [
-            {
-                emoji: "🌅",
-                title: "Early & peaceful",
-                text: "Wake up with the sunrise.",
-                result: "Start the morning slowly with a peaceful sunrise."
-            },
-            {
-                emoji: "😴",
-                title: "Sleep in",
-                text: "No alarms. Just vibes.",
-                result: "Sleep in and let the day begin whenever you're ready."
-            }
-        ]
-    },
+{
+    category: "Morning",
+    question: "Your alarm goes off. What happens next?",
+    subtitle: "Be honest. Nobody's judging.",
+    options: [
+        {
+            emoji: "🌅",
+            title: "Beat the sunrise",
+            text: "Up early. Quiet morning. Main character energy.",
+            result: "Start before the world wakes up."
+        },
+        {
+            emoji: "😴",
+            title: "Five more minutes...",
+            text: "The alarm can wait. Sleep is important.",
+            result: "Sleep in and let the day find you."
+        }
+    ]
+},
 
-    {
-        category: "Breakfast",
-        question: "What's calling your name?",
-        subtitle: "A perfect morning needs good food.",
-        options: [
-            {
-                emoji: "🥞",
-                title: "Pancake morning",
-                text: "Sweet, fluffy & delicious.",
-                result: "Enjoy a cozy stack of pancakes for breakfast."
-            },
-            {
-                emoji: "🥐",
-                title: "Café breakfast",
-                text: "Coffee, pastries & people watching.",
-                result: "Head to a cute café for coffee and a pastry."
-            }
-        ]
-    },
+{
+    category: "Midday",
+    question: "A mystery envelope lands in your hand.",
+    subtitle: "Inside is a ticket. You can choose one.",
+    options: [
+        {
+            emoji: "✈️",
+            title: "Somewhere unknown",
+            text: "No destination. Just go.",
+            result: "Take a spontaneous trip somewhere new."
+        },
+        {
+            emoji: "🎟️",
+            title: "Your favourite thing",
+            text: "A guaranteed amazing experience.",
+            result: "Spend the day doing something you absolutely love."
+        }
+    ]
+},
 
-    {
-        category: "Adventure",
-        question: "What are we doing today?",
-        subtitle: "Time to make some memories.",
-        options: [
-            {
-                emoji: "🏖️",
-                title: "Beach day",
-                text: "Sun, sand & ocean.",
-                result: "Spend the afternoon by the water."
-            },
-            {
-                emoji: "🌲",
-                title: "Nature escape",
-                text: "Fresh air & exploring.",
-                result: "Explore somewhere green and peaceful."
-            }
-        ]
-    },
+{
+    category: "Afternoon",
+    question: "You suddenly have three completely free hours.",
+    subtitle: "What do you do with them?",
+    options: [
+        {
+            emoji: "🎨",
+            title: "Make something",
+            text: "Draw, build, write, create.",
+            result: "Spend the afternoon creating something just for fun."
+        },
+        {
+            emoji: "🚗",
+            title: "Go somewhere",
+            text: "Grab your people and disappear.",
+            result: "Go exploring with the people you love."
+        }
+    ]
+},
 
-    {
-        category: "Evening",
-        question: "How should the day wind down?",
-        subtitle: "The best days end beautifully.",
-        options: [
-            {
-                emoji: "🎬",
-                title: "Movie night",
-                text: "Blanket + snacks + favourite movie.",
-                result: "Have a cozy movie night with all your favourite snacks."
-            },
-            {
-                emoji: "🌆",
-                title: "Sunset walk",
-                text: "Golden skies & good conversations.",
-                result: "Take a sunset walk and watch the sky change colours."
-            }
-        ]
-    },
+{
+    category: "Evening",
+    question: "The sky turns golden. What's the move?",
+    subtitle: "This is the part you'll remember.",
+    options: [
+        {
+            emoji: "🌆",
+            title: "Chase the sunset",
+            text: "Find the best view in town.",
+            result: "Watch the sunset from the perfect spot."
+        },
+        {
+            emoji: "🎶",
+            title: "Turn the music up",
+            text: "Good music. Better company.",
+            result: "Have an unplanned music-filled evening."
+        }
+    ]
+},
 
-    {
-        category: "Night",
-        question: "One last choice...",
-        subtitle: "How does your perfect day end?",
-        options: [
-            {
-                emoji: "✨",
-                title: "Stargazing",
-                text: "Look up and dream big.",
-                result: "End the night under the stars."
-            },
-            {
-                emoji: "📖",
-                title: "Cozy & quiet",
-                text: "Books, blankets & calm.",
-                result: "Finish the day somewhere warm, quiet and cozy."
-            }
-        ]
-    }
+{
+    category: "Night",
+    question: "The day is almost over. How do you finish it?",
+    subtitle: "One final choice.",
+    options: [
+        {
+            emoji: "✨",
+            title: "Look at the stars",
+            text: "Quiet sky. Big thoughts.",
+            result: "End the day under a sky full of stars."
+        },
+        {
+            emoji: "🛋️",
+            title: "Disappear into comfort",
+            text: "Blanket. Snacks. Zero responsibilities.",
+            result: "Finish with the coziest night imaginable."
+        }
+    ]
+}
 
 ];
 
@@ -519,26 +693,44 @@ const questions = [
 let current = 0;
 let answers = [];
 
-const questionEl = document.getElementById("question");
-const subtitleEl = document.getElementById("subtitle");
-const categoryEl = document.getElementById("category");
-const optionsEl = document.getElementById("options");
-const nextBtn = document.getElementById("nextBtn");
-const backBtn = document.getElementById("backBtn");
-const progressBar = document.getElementById("progressBar");
-const stepText = document.getElementById("stepText");
-const percent = document.getElementById("percent");
+function startGame() {
+
+    document.getElementById("landing").style.display = "none";
+    document.getElementById("game").style.display = "block";
+
+    loadQuestion();
+}
 
 
 function loadQuestion() {
 
     const q = questions[current];
 
-    categoryEl.textContent = q.category;
-    questionEl.textContent = q.question;
-    subtitleEl.textContent = q.subtitle;
+    document.getElementById("category").textContent = q.category;
 
-    optionsEl.innerHTML = "";
+    document.getElementById("question").textContent = q.question;
+
+    document.getElementById("subtitle").textContent = q.subtitle;
+
+    document.getElementById("counter").textContent =
+        "0" + (current + 1) + " / 05";
+
+    document.getElementById("progress").style.width =
+        ((current) / questions.length * 100) + "%";
+
+
+    for(let i = 0; i < 5; i++) {
+
+        document.getElementById("t" + i)
+        .classList.toggle("active", i <= current);
+
+    }
+
+
+    const options = document.getElementById("options");
+
+    options.innerHTML = "";
+
 
     q.options.forEach((option, index) => {
 
@@ -546,58 +738,82 @@ function loadQuestion() {
 
         div.className = "option";
 
-        if (answers[current] === index) {
+        if(answers[current] === index) {
             div.classList.add("selected");
         }
 
         div.innerHTML = `
             <span class="emoji">${option.emoji}</span>
-            <strong>${option.title}</strong>
-            <span>${option.text}</span>
+            <h3>${option.title}</h3>
+            <p>${option.text}</p>
         `;
 
-        div.onclick = () => selectOption(index);
+        div.onclick = function() {
+            select(index);
+        };
 
-        optionsEl.appendChild(div);
+        options.appendChild(div);
 
     });
 
-    const progress = (current / questions.length) * 100;
 
-    progressBar.style.width = progress + "%";
-    percent.textContent = Math.round(progress) + "%";
-    stepText.textContent =
-        `Question ${current + 1} of ${questions.length}`;
+    const nextButton = document.getElementById("next");
 
-    backBtn.style.visibility =
-        current === 0 ? "hidden" : "visible";
+    if(answers[current] !== undefined) {
 
-    nextBtn.disabled = answers[current] === undefined;
+        nextButton.classList.add("ready");
 
-    nextBtn.textContent =
-        current === questions.length - 1
-        ? "Reveal my day ✨"
-        : "Choose an option →";
+    } else {
+
+        nextButton.classList.remove("ready");
+
+    }
+
+    document.getElementById("game").scrollIntoView({
+        behavior: "smooth"
+    });
+
 }
 
 
-function selectOption(index) {
+function select(index) {
 
     answers[current] = index;
 
-    document.querySelectorAll(".option").forEach((option, i) => {
-        option.classList.toggle("selected", i === index);
+    document.querySelectorAll(".option").forEach((el, i) => {
+
+        el.classList.toggle(
+            "selected",
+            i === index
+        );
+
     });
 
-    nextBtn.disabled = false;
+    document.getElementById("next")
+    .classList.add("ready");
+
 }
 
 
-function nextQuestion() {
+function next() {
 
-    if (answers[current] === undefined) return;
+    if(answers[current] === undefined) {
 
-    if (current < questions.length - 1) {
+        document.getElementById("next").animate(
+            [
+                { transform: "translateX(0)" },
+                { transform: "translateX(-5px)" },
+                { transform: "translateX(5px)" },
+                { transform: "translateX(0)" }
+            ],
+            { duration: 250 }
+        );
+
+        return;
+    }
+
+
+    if(current < questions.length - 1) {
 
         current++;
 
@@ -608,14 +824,18 @@ function nextQuestion() {
         showResult();
 
     }
+
 }
 
 
-function previousQuestion() {
+function back() {
 
-    if (current > 0) {
+    if(current > 0) {
+
         current--;
+
         loadQuestion();
+
     }
 
 }
@@ -625,17 +845,62 @@ function showResult() {
 
     document.getElementById("game").style.display = "none";
 
-    const result = document.getElementById("result");
+    document.getElementById("result").style.display = "block";
 
-    result.classList.add("show");
 
-    const dayPlan = document.getElementById("dayPlan");
+    let early = answers[0] === 0;
+    let adventure = answers[1] === 0;
+    let creative = answers[2] === 0;
+    let sunset = answers[3] === 0;
+    let stars = answers[4] === 0;
 
-    dayPlan.innerHTML = "";
 
-    answers.forEach((answer, index) => {
+    let score =
+        (early ? 1 : 0) +
+        (adventure ? 1 : 0) +
+        (creative ? 1 : 0) +
+        (sunset ? 1 : 0) +
+        (stars ? 1 : 0);
 
-        const choice = questions[index].options[answer];
+
+    let personality;
+
+
+    if(score >= 4) {
+
+        personality = "THE ADVENTUROUS DREAMER ✦";
+
+    } else if(score === 3) {
+
+        personality = "THE MAIN CHARACTER ✦";
+
+    } else if(score === 2) {
+
+        personality = "THE HAPPY BALANCER ✦";
+
+    } else if(score === 1) {
+
+        personality = "THE COZY EXPLORER ✦";
+
+    } else {
+
+        personality = "THE COMFORT SEEKER ✦";
+
+    }
+
+
+    document.getElementById("personality")
+    .textContent = personality;
+
+
+    const day = document.getElementById("day");
+
+    day.innerHTML = "";
+
+
+    answers.forEach((answer, i) => {
+
+        const choice = questions[i].options[answer];
 
         const item = document.createElement("div");
 
@@ -644,38 +909,47 @@ function showResult() {
         item.innerHTML = `
             <div class="icon">${choice.emoji}</div>
             <div>
-                <strong>${questions[index].category}</strong>
-                <span>${choice.result}</span>
+                <strong>${questions[i].category}</strong>
+                <p>${choice.result}</p>
             </div>
         `;
 
-        dayPlan.appendChild(item);
+        day.appendChild(item);
 
     });
 
-    progressBar.style.width = "100%";
+
+    document.getElementById("result")
+    .scrollIntoView({
+        behavior: "smooth"
+    });
+
 }
 
 
 function restart() {
 
     current = 0;
+
     answers = [];
 
-    document.getElementById("result").classList.remove("show");
+    document.getElementById("result").style.display = "none";
 
-    document.getElementById("game").style.display = "block";
+    document.getElementById("landing").style.display = "flex";
 
-    loadQuestion();
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
 }
 
-
-loadQuestion();
 
 </script>
 
 </body>
 </html>
+```
+
 ```
 
