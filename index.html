@@ -9,7 +9,7 @@
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap');
 
 * {
     box-sizing: border-box;
@@ -20,13 +20,15 @@
 body {
     min-height: 100vh;
     font-family: Inter, sans-serif;
-    color: #302f29;
-    background: #f8efd9;
-    transition: background 1s ease;
+    color: #292820;
+    background: #fff7df;
+    transition: background 0.8s ease;
     overflow-x: hidden;
 }
 
-/* BACKGROUND */
+/* =========================
+   BACKGROUND
+========================= */
 
 .blob {
     position: fixed;
@@ -34,37 +36,42 @@ body {
     filter: blur(5px);
     opacity: .45;
     z-index: -1;
+    transition: 1s;
 }
 
-.blob.one {
+.blob1 {
     width: 350px;
     height: 350px;
-    background: #f6cf82;
+    background: #ffd98a;
     top: -150px;
-    left: -120px;
+    left: -100px;
 }
 
-.blob.two {
+.blob2 {
     width: 300px;
     height: 300px;
-    background: #bcd3a8;
-    bottom: -120px;
+    background: #c9dfb9;
+    bottom: -130px;
     right: -100px;
 }
 
-/* APP */
+/* =========================
+   APP
+========================= */
 
 .app {
     width: min(900px, 92%);
     margin: auto;
     min-height: 100vh;
-    padding: 45px 0;
+    padding: 40px 0;
 }
 
-/* LANDING */
+/* =========================
+   LANDING
+========================= */
 
 .landing {
-    min-height: 85vh;
+    min-height: 88vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -78,45 +85,53 @@ body {
 }
 
 @keyframes float {
-
     50% {
-        transform: translateY(-12px) rotate(4deg);
+        transform: translateY(-12px) rotate(5deg);
     }
-
 }
 
 .landing h1 {
     font-family: "DM Serif Display", serif;
     font-size: clamp(4rem, 10vw, 7rem);
     font-weight: normal;
-    line-height: .9;
+    line-height: .85;
     margin: 20px 0;
 }
 
-.landing p {
+.landing .tagline {
+    max-width: 540px;
     color: #777264;
-    max-width: 500px;
     line-height: 1.7;
+    font-size: 16px;
+}
+
+.landing .warning {
+    margin-top: 18px;
+    font-size: 13px;
+    color: #8b806b;
 }
 
 .start {
     margin-top: 35px;
-    padding: 16px 32px;
     border: none;
     border-radius: 50px;
     background: #53684e;
     color: white;
+    padding: 16px 32px;
     font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
     transition: .3s;
 }
 
 .start:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 25px #53684e44;
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px #53684e44;
 }
 
-/* GAME */
+/* =========================
+   GAME
+========================= */
 
 .game {
     display: none;
@@ -126,7 +141,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .logo {
@@ -135,112 +150,86 @@ body {
 }
 
 .counter {
-    color: #81796a;
     font-size: 13px;
+    color: #837b6b;
 }
 
 .progress {
     height: 6px;
-    background: #e5dcc8;
     border-radius: 20px;
+    background: #e9dfc9;
     overflow: hidden;
-    margin-bottom: 40px;
 }
 
 .progress-bar {
     height: 100%;
     width: 0%;
     background: #53684e;
-    transition: width .6s ease;
+    transition: width .5s ease;
 }
 
-/* TIMELINE */
+/* =========================
+   STATS
+========================= */
 
-.timeline {
+.stats {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 35px;
-    position: relative;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 20px 0;
 }
 
-.timeline::before {
-    content: "";
-    position: absolute;
-    top: 17px;
-    left: 7%;
-    right: 7%;
-    height: 2px;
-    background: #d8cfba;
-    z-index: -1;
+.stat {
+    background: rgba(255,255,255,.6);
+    border-radius: 50px;
+    padding: 7px 11px;
+    font-size: 11px;
+    color: #70695d;
 }
 
-.time {
-    text-align: center;
-    width: 20%;
+.stat b {
+    color: #53684e;
 }
 
-.time-circle {
-    width: 35px;
-    height: 35px;
-    margin: auto;
-    background: #f8efd9;
-    border: 2px solid #d8cfba;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    transition: .3s;
-}
-
-.time.active .time-circle {
-    background: #53684e;
-    border-color: #53684e;
-    color: white;
-}
-
-.time span {
-    font-size: 10px;
-    color: #8b8374;
-    display: block;
-    margin-top: 7px;
-}
-
-/* CARD */
+/* =========================
+   CARD
+========================= */
 
 .card {
-    background: rgba(255,255,255,.75);
-    border: 1px solid rgba(80,70,40,.08);
+    background: rgba(255,255,255,.82);
     border-radius: 32px;
     padding: 45px;
-    box-shadow: 0 25px 70px rgba(70,60,40,.12);
+    box-shadow: 0 25px 70px rgba(70,60,40,.13);
+    border: 1px solid rgba(80,70,40,.08);
     backdrop-filter: blur(12px);
 }
 
 .category {
+    text-align: center;
     text-transform: uppercase;
     letter-spacing: 3px;
     font-size: 11px;
-    color: #758563;
-    text-align: center;
+    color: #788867;
     margin-bottom: 12px;
 }
 
 .question {
-    font-family: "DM Serif Display", serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: normal;
     text-align: center;
+    font-family: "DM Serif Display", serif;
+    font-weight: normal;
+    font-size: clamp(2rem, 5vw, 3.1rem);
     line-height: 1.05;
 }
 
 .subtitle {
     text-align: center;
-    color: #81796c;
+    color: #837b6e;
     margin-top: 10px;
 }
 
-/* OPTIONS */
+/* =========================
+   OPTIONS
+========================= */
 
 .options {
     display: grid;
@@ -250,71 +239,92 @@ body {
 }
 
 .option {
-    padding: 28px;
-    border-radius: 24px;
-    background: #f5eddb;
+    background: #f6eedb;
     border: 2px solid transparent;
+    border-radius: 25px;
+    padding: 28px;
     cursor: pointer;
-    transition: .3s;
-    position: relative;
-    overflow: hidden;
+    transition: .25s;
 }
 
 .option:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(70,60,40,.1);
+    transform: translateY(-7px) rotate(-.5deg);
+    box-shadow: 0 15px 30px rgba(70,60,40,.1);
 }
 
 .option.selected {
-    background: #e5eedc;
+    background: #e4efd9;
     border-color: #53684e;
     transform: translateY(-5px);
 }
 
 .option .emoji {
-    font-size: 42px;
     display: block;
+    font-size: 45px;
     margin-bottom: 15px;
 }
 
 .option h3 {
     font-family: "DM Serif Display", serif;
-    font-size: 23px;
     font-weight: normal;
+    font-size: 23px;
     margin-bottom: 7px;
 }
 
 .option p {
-    color: #81796c;
     font-size: 13px;
     line-height: 1.5;
+    color: #7f786b;
 }
 
-/* NAVIGATION */
+/* =========================
+   CONSEQUENCE
+========================= */
 
-.nav {
+.consequence {
+    min-height: 25px;
+    text-align: center;
+    margin-top: 18px;
+    font-size: 12px;
+    color: #68755f;
+    opacity: 0;
+    transition: .3s;
+}
+
+.consequence.show {
+    opacity: 1;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.navigation {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 30px;
+    margin-top: 20px;
+}
+
+button {
+    font-family: Inter, sans-serif;
 }
 
 .back {
     border: none;
     background: transparent;
-    color: #81796c;
+    color: #827a6c;
     cursor: pointer;
-    padding: 10px;
+    padding: 12px;
 }
 
 .next {
     border: none;
     background: #53684e;
     color: white;
-    padding: 14px 25px;
     border-radius: 50px;
+    padding: 14px 25px;
     cursor: pointer;
-    opacity: .35;
+    opacity: .3;
     transition: .3s;
 }
 
@@ -324,9 +334,12 @@ body {
 
 .next.ready:hover {
     transform: translateY(-3px);
+    box-shadow: 0 8px 20px #53684e33;
 }
 
-/* RESULT */
+/* =========================
+   RESULT
+========================= */
 
 .result {
     display: none;
@@ -336,54 +349,103 @@ body {
     text-align: center;
 }
 
-.result-sun {
-    font-size: 65px;
+.result-emoji {
+    font-size: 70px;
+    animation: float 3s infinite ease-in-out;
 }
 
 .result-card h1 {
     font-family: "DM Serif Display", serif;
-    font-size: clamp(3rem, 8vw, 5rem);
+    font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: normal;
-    margin: 10px 0;
+    line-height: .9;
+    margin: 15px 0;
 }
 
-.result-card .intro {
+.result-description {
     color: #777264;
+    max-width: 560px;
+    margin: auto;
     line-height: 1.6;
 }
 
-.personality {
+.badge {
     display: inline-block;
     margin: 20px 0;
     padding: 10px 18px;
     border-radius: 50px;
     background: #e5eedc;
     color: #53684e;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 700;
     letter-spacing: 1px;
 }
 
-.day {
+/* =========================
+   SCOREBOARD
+========================= */
+
+.scoreboard {
+    background: #f6eedb;
+    border-radius: 25px;
+    padding: 25px;
+    margin: 25px 0;
     text-align: left;
-    margin-top: 20px;
-    background: #f5eddb;
-    border-radius: 24px;
-    padding: 10px 25px;
+}
+
+.score-row {
+    margin-bottom: 16px;
+}
+
+.score-row:last-child {
+    margin-bottom: 0;
+}
+
+.score-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.score-bar {
+    height: 9px;
+    background: #e0d6c1;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.score-fill {
+    height: 100%;
+    background: #6d8159;
+    border-radius: 20px;
+    width: 0;
+    transition: width 1s ease;
+}
+
+/* =========================
+   DAY PLAN
+========================= */
+
+.day-plan {
+    text-align: left;
+    background: #fbf5e7;
+    border-radius: 25px;
+    padding: 12px 25px;
 }
 
 .day-item {
     display: flex;
-    gap: 18px;
+    gap: 17px;
     padding: 18px 0;
-    border-bottom: 1px solid #dfd5c1;
+    border-bottom: 1px solid #e2d8c4;
 }
 
 .day-item:last-child {
     border-bottom: none;
 }
 
-.day-item .icon {
+.day-icon {
     font-size: 27px;
 }
 
@@ -393,13 +455,32 @@ body {
 }
 
 .day-item p {
-    color: #81796c;
+    color: #81796d;
     font-size: 13px;
+    line-height: 1.5;
 }
+
+/* =========================
+   QUOTE
+========================= */
+
+.quote {
+    margin-top: 25px;
+    padding: 20px;
+    border-left: 3px solid #6d8159;
+    background: #f6eedb;
+    text-align: left;
+    font-family: "DM Serif Display", serif;
+    font-size: 19px;
+}
+
+/* =========================
+   RESTART
+========================= */
 
 .restart {
     margin-top: 25px;
-    padding: 14px 25px;
+    padding: 15px 27px;
     border: none;
     border-radius: 50px;
     background: #53684e;
@@ -407,9 +488,11 @@ body {
     cursor: pointer;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
-@media(max-width:600px) {
+@media(max-width:650px) {
 
     .card {
         padding: 28px 18px;
@@ -419,12 +502,12 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .timeline span {
-        display: none;
+    .landing h1 {
+        font-size: 4rem;
     }
 
-    .timeline {
-        margin-bottom: 25px;
+    .stats {
+        justify-content: center;
     }
 
 }
@@ -432,14 +515,18 @@ body {
 </style>
 </head>
 
+
 <body>
 
-<div class="blob one"></div>
-<div class="blob two"></div>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
 
 <div class="app">
 
-<!-- LANDING -->
+
+<!-- =========================
+     LANDING
+========================= -->
 
 <section class="landing" id="landing">
 
@@ -450,23 +537,25 @@ body {
         Perfect Day
     </h1>
 
-    <p>
-        What makes a day perfect isn't the plan.
-        It's the little choices you make along the way.
+    <p class="tagline">
+        You have one day to make it perfect.
+        Unfortunately, the universe has opinions.
     </p>
 
-    <p style="margin-top:10px;">
-        <strong>32 possible days. Find yours.</strong>
+    <p class="warning">
+        ⚠️ There are 32 possible outcomes. Choose wisely.
     </p>
 
     <button class="start" onclick="startGame()">
-        Build my day →
+        Let's ruin—I mean, build my day →
     </button>
 
 </section>
 
 
-<!-- GAME -->
+<!-- =========================
+     GAME
+========================= -->
 
 <section class="game" id="game">
 
@@ -480,38 +569,30 @@ body {
 
     </div>
 
+
     <div class="progress">
         <div class="progress-bar" id="progress"></div>
     </div>
 
 
-    <!-- TIMELINE -->
+    <!-- LIVE STATS -->
 
-    <div class="timeline">
+    <div class="stats">
 
-        <div class="time active" id="t0">
-            <div class="time-circle">🌅</div>
-            <span>Morning</span>
+        <div class="stat">
+            ☀️ Happiness: <b id="happy">0</b>
         </div>
 
-        <div class="time" id="t1">
-            <div class="time-circle">☀️</div>
-            <span>Midday</span>
+        <div class="stat">
+            🌀 Chaos: <b id="chaos">0</b>
         </div>
 
-        <div class="time" id="t2">
-            <div class="time-circle">🌿</div>
-            <span>Afternoon</span>
+        <div class="stat">
+            🍕 Snacks: <b id="snacks">0</b>
         </div>
 
-        <div class="time" id="t3">
-            <div class="time-circle">🌆</div>
-            <span>Evening</span>
-        </div>
-
-        <div class="time" id="t4">
-            <div class="time-circle">🌙</div>
-            <span>Night</span>
+        <div class="stat">
+            ✨ Memories: <b id="memories">0</b>
         </div>
 
     </div>
@@ -520,7 +601,7 @@ body {
     <div class="card">
 
         <div class="category" id="category">
-            Morning
+            08:00 AM
         </div>
 
         <h2 class="question" id="question">
@@ -529,14 +610,18 @@ body {
         </h2>
 
         <p class="subtitle" id="subtitle">
-            There is no wrong answer.
+            Be honest. Nobody's judging.
         </p>
 
 
         <div class="options" id="options"></div>
 
 
-        <div class="nav">
+        <div class="consequence" id="consequence">
+        </div>
+
+
+        <div class="navigation">
 
             <button class="back" onclick="back()">
                 ← Back
@@ -553,27 +638,108 @@ body {
 </section>
 
 
-<!-- RESULT -->
+<!-- =========================
+     RESULT
+========================= -->
 
 <section class="result" id="result">
 
     <div class="card result-card">
 
-        <div class="result-sun">✨</div>
+        <div class="result-emoji" id="resultEmoji">
+            ✨
+        </div>
 
-        <h1>Your Perfect Day</h1>
+        <h1 id="resultTitle">
+            Your Perfect Day
+        </h1>
 
-        <p class="intro">
-            You made the choices.<br>
-            Here's the day that feels most like you.
+        <div class="badge" id="badge">
+            THE MAIN CHARACTER
+        </div>
+
+        <p class="result-description" id="description">
         </p>
 
-        <div class="personality" id="personality"></div>
 
-        <div class="day" id="day"></div>
+        <!-- SCOREBOARD -->
+
+        <div class="scoreboard">
+
+            <div class="score-row">
+
+                <div class="score-label">
+                    <span>☀️ Happiness</span>
+                    <span id="happyScore">0</span>
+                </div>
+
+                <div class="score-bar">
+                    <div class="score-fill" id="happyBar"></div>
+                </div>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <div class="score-label">
+                    <span>🌀 Chaos</span>
+                    <span id="chaosScore">0</span>
+                </div>
+
+                <div class="score-bar">
+                    <div class="score-fill" id="chaosBar"></div>
+                </div>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <div class="score-label">
+                    <span>🍕 Snack Energy</span>
+                    <span id="snackScore">0</span>
+                </div>
+
+                <div class="score-bar">
+                    <div class="score-fill" id="snackBar"></div>
+                </div>
+
+            </div>
+
+
+            <div class="score-row">
+
+                <div class="score-label">
+                    <span>✨ Memories</span>
+                    <span id="memoryScore">0</span>
+                </div>
+
+                <div class="score-bar">
+                    <div class="score-fill" id="memoryBar"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <h2 style="font-family:'DM Serif Display',serif;
+                   font-weight:normal;
+                   font-size:30px;
+                   margin-bottom:15px;">
+            Your completely scientific itinerary
+        </h2>
+
+
+        <div class="day-plan" id="dayPlan"></div>
+
+
+        <div class="quote" id="quote"></div>
+
 
         <button class="restart" onclick="restart()">
-            ↻ Create another day
+            ↻ Try a different life
         </button>
 
     </div>
@@ -585,146 +751,199 @@ body {
 
 <script>
 
+/* =========================================
+   QUESTIONS
+========================================= */
+
 const questions = [
 
 {
-    category: "Morning",
+    category: "08:00 AM",
     question: "Your alarm goes off. What happens next?",
     subtitle: "Be honest. Nobody's judging.",
     options: [
+
         {
             emoji: "🌅",
-            title: "Beat the sunrise",
-            text: "Up early. Quiet morning. Main character energy.",
-            result: "Start before the world wakes up."
+            title: "Get up immediately",
+            text: "Become the person motivational reels promised you'd be.",
+            result: "You actually got up on time. Suspicious.",
+            stats: [15, 5, 0, 10]
         },
+
         {
             emoji: "😴",
             title: "Five more minutes...",
-            text: "The alarm can wait. Sleep is important.",
-            result: "Sleep in and let the day find you."
+            text: "Your bed has presented a compelling legal argument.",
+            result: "You negotiated with your alarm and somehow won.",
+            stats: [20, 15, 0, 5]
         }
+
     ]
 },
 
 {
-    category: "Midday",
-    question: "A mystery envelope lands in your hand.",
+    category: "11:00 AM",
+    question: "Someone gives you a mystery envelope.",
     subtitle: "Inside is a ticket. You can choose one.",
     options: [
+
         {
             emoji: "✈️",
             title: "Somewhere unknown",
-            text: "No destination. Just go.",
-            result: "Take a spontaneous trip somewhere new."
+            text: "No destination. No plan. Just go.",
+            result: "You chose chaos. The GPS is concerned.",
+            stats: [20, 30, 0, 30]
         },
+
         {
             emoji: "🎟️",
             title: "Your favourite thing",
             text: "A guaranteed amazing experience.",
-            result: "Spend the day doing something you absolutely love."
+            result: "You chose happiness over plot development.",
+            stats: [30, 5, 5, 20]
         }
+
     ]
 },
 
 {
-    category: "Afternoon",
+    category: "03:00 PM",
     question: "You suddenly have three completely free hours.",
     subtitle: "What do you do with them?",
     options: [
+
         {
             emoji: "🎨",
             title: "Make something",
-            text: "Draw, build, write, create.",
-            result: "Spend the afternoon creating something just for fun."
+            text: "Draw, build, write, create. Become an artist for no reason.",
+            result: "You made something nobody asked for. Perfect.",
+            stats: [20, 10, 0, 30]
         },
+
         {
             emoji: "🚗",
-            title: "Go somewhere",
-            text: "Grab your people and disappear.",
-            result: "Go exploring with the people you love."
+            title: "Disappear with friends",
+            text: "Grab your people and figure out the plan later.",
+            result: "The group chat has officially become a navigation system.",
+            stats: [25, 35, 10, 35]
         }
+
     ]
 },
 
 {
-    category: "Evening",
+    category: "07:45 PM",
     question: "The sky turns golden. What's the move?",
     subtitle: "This is the part you'll remember.",
     options: [
+
         {
             emoji: "🌆",
             title: "Chase the sunset",
             text: "Find the best view in town.",
-            result: "Watch the sunset from the perfect spot."
+            result: "You found the perfect sunset. Camera roll destroyed.",
+            stats: [30, 15, 0, 35]
         },
+
         {
             emoji: "🎶",
             title: "Turn the music up",
-            text: "Good music. Better company.",
-            result: "Have an unplanned music-filled evening."
+            text: "Good music. Better company. Questionable dancing.",
+            result: "There was dancing. Nobody will discuss it.",
+            stats: [30, 30, 10, 30]
         }
+
     ]
 },
 
 {
-    category: "Night",
-    question: "The day is almost over. How do you finish it?",
-    subtitle: "One final choice.",
+    category: "11:59 PM",
+    question: "The day is almost over. Final choice.",
+    subtitle: "Choose your ending wisely.",
     options: [
+
         {
             emoji: "✨",
             title: "Look at the stars",
-            text: "Quiet sky. Big thoughts.",
-            result: "End the day under a sky full of stars."
+            text: "Quiet sky. Big thoughts. Tiny existential crisis.",
+            result: "You stared at the stars and remembered life is actually pretty cool.",
+            stats: [25, 5, 0, 40]
         },
+
         {
             emoji: "🛋️",
-            title: "Disappear into comfort",
-            text: "Blanket. Snacks. Zero responsibilities.",
-            result: "Finish with the coziest night imaginable."
+            title: "Enter blanket mode",
+            text: "Snacks. Blanket. Zero responsibilities.",
+            result: "You achieved peak human comfort.",
+            stats: [35, 0, 30, 15]
         }
+
     ]
 }
 
 ];
 
 
+/* =========================================
+   GAME VARIABLES
+========================================= */
+
 let current = 0;
+
 let answers = [];
+
+let stats = {
+    happiness: 0,
+    chaos: 0,
+    snacks: 0,
+    memories: 0
+};
+
+
+/* =========================================
+   START
+========================================= */
 
 function startGame() {
 
     document.getElementById("landing").style.display = "none";
+
     document.getElementById("game").style.display = "block";
 
+    document.getElementById("result").style.display = "none";
+
     loadQuestion();
+
 }
 
+
+/* =========================================
+   LOAD QUESTION
+========================================= */
 
 function loadQuestion() {
 
     const q = questions[current];
 
-    document.getElementById("category").textContent = q.category;
+    document.getElementById("category").textContent =
+        q.category;
 
-    document.getElementById("question").textContent = q.question;
+    document.getElementById("question").textContent =
+        q.question;
 
-    document.getElementById("subtitle").textContent = q.subtitle;
+    document.getElementById("subtitle").textContent =
+        q.subtitle;
 
     document.getElementById("counter").textContent =
         "0" + (current + 1) + " / 05";
+
 
     document.getElementById("progress").style.width =
         ((current) / questions.length * 100) + "%";
 
 
-    for(let i = 0; i < 5; i++) {
-
-        document.getElementById("t" + i)
-        .classList.toggle("active", i <= current);
-
-    }
+    updateStats();
 
 
     const options = document.getElementById("options");
@@ -738,88 +957,220 @@ function loadQuestion() {
 
         div.className = "option";
 
-        if(answers[current] === index) {
+
+        if (answers[current] === index) {
+
             div.classList.add("selected");
+
         }
 
+
         div.innerHTML = `
-            <span class="emoji">${option.emoji}</span>
-            <h3>${option.title}</h3>
-            <p>${option.text}</p>
+
+            <span class="emoji">
+                ${option.emoji}
+            </span>
+
+            <h3>
+                ${option.title}
+            </h3>
+
+            <p>
+                ${option.text}
+            </p>
+
         `;
 
+
         div.onclick = function() {
-            select(index);
+
+            selectOption(index);
+
         };
+
 
         options.appendChild(div);
 
     });
 
 
-    const nextButton = document.getElementById("next");
+    const next = document.getElementById("next");
 
-    if(answers[current] !== undefined) {
 
-        nextButton.classList.add("ready");
+    if (answers[current] !== undefined) {
 
-    } else {
+        next.classList.add("ready");
 
-        nextButton.classList.remove("ready");
+        document.getElementById("consequence")
+            .classList.add("show");
+
+        document.getElementById("consequence")
+            .textContent =
+            q.options[answers[current]].result;
 
     }
 
-    document.getElementById("game").scrollIntoView({
-        behavior: "smooth"
-    });
+    else {
+
+        next.classList.remove("ready");
+
+        document.getElementById("consequence")
+            .classList.remove("show");
+
+    }
 
 }
 
 
-function select(index) {
+/* =========================================
+   SELECT
+========================================= */
+
+function selectOption(index) {
+
+    /*
+       Remove previous stats if user changes
+       an already selected answer.
+    */
+
+    if (answers[current] !== undefined) {
+
+        removeStats(
+            questions[current].options[answers[current]].stats
+        );
+
+    }
+
 
     answers[current] = index;
 
-    document.querySelectorAll(".option").forEach((el, i) => {
 
-        el.classList.toggle(
-            "selected",
-            i === index
-        );
+    addStats(
+        questions[current].options[index].stats
+    );
 
-    });
+
+    document.querySelectorAll(".option")
+        .forEach((el, i) => {
+
+            el.classList.toggle(
+                "selected",
+                i === index
+            );
+
+        });
+
+
+    const consequence =
+        document.getElementById("consequence");
+
+    consequence.textContent =
+        questions[current].options[index].result;
+
+    consequence.classList.add("show");
+
 
     document.getElementById("next")
-    .classList.add("ready");
+        .classList.add("ready");
+
+
+    updateStats();
 
 }
 
 
+/* =========================================
+   STATS
+========================================= */
+
+function addStats(s) {
+
+    stats.happiness += s[0];
+
+    stats.chaos += s[1];
+
+    stats.snacks += s[2];
+
+    stats.memories += s[3];
+
+}
+
+
+function removeStats(s) {
+
+    stats.happiness -= s[0];
+
+    stats.chaos -= s[1];
+
+    stats.snacks -= s[2];
+
+    stats.memories -= s[3];
+
+}
+
+
+function updateStats() {
+
+    document.getElementById("happy").textContent =
+        stats.happiness;
+
+    document.getElementById("chaos").textContent =
+        stats.chaos;
+
+    document.getElementById("snacks").textContent =
+        stats.snacks;
+
+    document.getElementById("memories").textContent =
+        stats.memories;
+
+}
+
+
+/* =========================================
+   NEXT
+========================================= */
+
 function next() {
 
-    if(answers[current] === undefined) {
+    if (answers[current] === undefined) {
 
-        document.getElementById("next").animate(
+        const button =
+            document.getElementById("next");
+
+        button.animate(
+
             [
                 { transform: "translateX(0)" },
-                { transform: "translateX(-5px)" },
-                { transform: "translateX(5px)" },
+                { transform: "translateX(-6px)" },
+                { transform: "translateX(6px)" },
                 { transform: "translateX(0)" }
             ],
-            { duration: 250 }
+
+            {
+                duration: 250
+            }
+
         );
 
         return;
+
     }
 
 
-    if(current < questions.length - 1) {
+    if (current < questions.length - 1) {
 
         current++;
 
         loadQuestion();
 
-    } else {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+    else {
 
         showResult();
 
@@ -828,9 +1179,13 @@ function next() {
 }
 
 
+/* =========================================
+   BACK
+========================================= */
+
 function back() {
 
-    if(current > 0) {
+    if (current > 0) {
 
         current--;
 
@@ -841,101 +1196,242 @@ function back() {
 }
 
 
+/* =========================================
+   RESULT
+========================================= */
+
 function showResult() {
 
-    document.getElementById("game").style.display = "none";
+    document.getElementById("game")
+        .style.display = "none";
 
-    document.getElementById("result").style.display = "block";
-
-
-    let early = answers[0] === 0;
-    let adventure = answers[1] === 0;
-    let creative = answers[2] === 0;
-    let sunset = answers[3] === 0;
-    let stars = answers[4] === 0;
+    document.getElementById("result")
+        .style.display = "block";
 
 
     let score =
-        (early ? 1 : 0) +
-        (adventure ? 1 : 0) +
-        (creative ? 1 : 0) +
-        (sunset ? 1 : 0) +
-        (stars ? 1 : 0);
+        stats.happiness +
+        stats.chaos +
+        stats.snacks +
+        stats.memories;
 
 
-    let personality;
+    let title;
+    let description;
+    let emoji;
+    let quote;
 
 
-    if(score >= 4) {
+    /*
+       SECRET ENDING
+    */
 
-        personality = "THE ADVENTUROUS DREAMER ✦";
+    if (
+        stats.chaos >= 80 &&
+        stats.memories >= 80
+    ) {
 
-    } else if(score === 3) {
+        emoji = "🚀";
 
-        personality = "THE MAIN CHARACTER ✦";
+        title = "THE LEGEND";
 
-    } else if(score === 2) {
+        description =
+            "You didn't build a perfect day. " +
+            "You accidentally created a story " +
+            "people will still be talking about next year.";
 
-        personality = "THE HAPPY BALANCER ✦";
+        quote =
+            "Some people plan memories. " +
+            "You apparently just walk into them.";
 
-    } else if(score === 1) {
+    }
 
-        personality = "THE COZY EXPLORER ✦";
+    else if (stats.snacks >= 35) {
 
-    } else {
+        emoji = "🍕";
 
-        personality = "THE COMFORT SEEKER ✦";
+        title = "THE COZY ICON";
+
+        description =
+            "Your perfect day contains food, " +
+            "comfort and absolutely no unnecessary suffering. " +
+            "Honestly? A flawless strategy.";
+
+        quote =
+            "Life is short. Order the fries.";
+
+    }
+
+    else if (stats.chaos >= 60) {
+
+        emoji = "🌀";
+
+        title = "THE CHAOS ENGINE";
+
+        description =
+            "Plans are merely suggestions to you. " +
+            "You thrive when absolutely nobody knows " +
+            "what is happening next.";
+
+        quote =
+            "If there's no plan, technically nothing went wrong.";
+
+    }
+
+    else if (stats.memories >= 80) {
+
+        emoji = "✨";
+
+        title = "THE MEMORY MAKER";
+
+        description =
+            "You care less about having a perfect schedule " +
+            "and more about having a day you'll remember.";
+
+        quote =
+            "The best days rarely go exactly as planned.";
+
+    }
+
+    else if (stats.happiness >= 80) {
+
+        emoji = "☀️";
+
+        title = "THE SUNSHINE HUMAN";
+
+        description =
+            "You have mastered the ancient art of " +
+            "choosing happiness whenever possible. " +
+            "Scientists are taking notes.";
+
+        quote =
+            "A good day starts with a good choice.";
+
+    }
+
+    else {
+
+        emoji = "🌿";
+
+        title = "THE BALANCED LEGEND";
+
+        description =
+            "A little adventure. A little comfort. " +
+            "A little chaos. You somehow found the sweet spot.";
+
+        quote =
+            "Perfect doesn't mean predictable.";
 
     }
 
 
-    document.getElementById("personality")
-    .textContent = personality;
+    document.getElementById("resultEmoji")
+        .textContent = emoji;
+
+    document.getElementById("resultTitle")
+        .textContent = title;
+
+    document.getElementById("description")
+        .textContent = description;
+
+    document.getElementById("quote")
+        .textContent = "“" + quote + "”";
 
 
-    const day = document.getElementById("day");
+    document.getElementById("badge")
+        .textContent =
+        "PERFECT DAY TYPE • " + score + " POINTS";
+
+
+    /*
+       SCORE NUMBERS
+    */
+
+    document.getElementById("happyScore")
+        .textContent = stats.happiness;
+
+    document.getElementById("chaosScore")
+        .textContent = stats.chaos;
+
+    document.getElementById("snackScore")
+        .textContent = stats.snacks;
+
+    document.getElementById("memoryScore")
+        .textContent = stats.memories;
+
+
+    /*
+       BAR WIDTHS
+    */
+
+    setTimeout(() => {
+
+        document.getElementById("happyBar")
+            .style.width =
+            Math.min(stats.happiness, 100) + "%";
+
+        document.getElementById("chaosBar")
+            .style.width =
+            Math.min(stats.chaos, 100) + "%";
+
+        document.getElementById("snackBar")
+            .style.width =
+            Math.min(stats.snacks * 2, 100) + "%";
+
+        document.getElementById("memoryBar")
+            .style.width =
+            Math.min(stats.memories, 100) + "%";
+
+    }, 200);
+
+
+    /*
+       BUILD DAY
+    */
+
+    const day = document.getElementById("dayPlan");
 
     day.innerHTML = "";
 
 
-    answers.forEach((answer, i) => {
+    answers.forEach((answer, index) => {
 
-        const choice = questions[i].options[answer];
+        const q = questions[index];
 
-        const item = document.createElement("div");
+        const choice = q.options[answer];
+
+
+        const item =
+            document.createElement("div");
 
         item.className = "day-item";
 
+
         item.innerHTML = `
-            <div class="icon">${choice.emoji}</div>
-            <div>
-                <strong>${questions[i].category}</strong>
-                <p>${choice.result}</p>
+
+            <div class="day-icon">
+                ${choice.emoji}
             </div>
+
+            <div>
+
+                <strong>
+                    ${q.category} — ${choice.title}
+                </strong>
+
+                <p>
+                    ${choice.result}
+                </p>
+
+            </div>
+
         `;
+
 
         day.appendChild(item);
 
     });
 
-
-    document.getElementById("result")
-    .scrollIntoView({
-        behavior: "smooth"
-    });
-
-}
-
-
-function restart() {
-
-    current = 0;
-
-    answers = [];
-
-    document.getElementById("result").style.display = "none";
-
-    document.getElementById("landing").style.display = "flex";
 
     window.scrollTo({
         top: 0,
@@ -945,11 +1441,48 @@ function restart() {
 }
 
 
+/* =========================================
+   RESTART
+========================================= */
+
+function restart() {
+
+    current = 0;
+
+    answers = [];
+
+    stats = {
+        happiness: 0,
+        chaos: 0,
+        snacks: 0,
+        memories: 0
+    };
+
+
+    document.getElementById("result")
+        .style.display = "none";
+
+    document.getElementById("game")
+        .style.display = "none";
+
+    document.getElementById("landing")
+        .style.display = "flex";
+
+
+    updateStats();
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
 </script>
 
 </body>
 </html>
 ```
 
-```
 
