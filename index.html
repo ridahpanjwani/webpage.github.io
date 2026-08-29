@@ -26,23 +26,22 @@ body {
     height: 100vh;
     position: relative;
     overflow: hidden;
-    background: url("mybackground.png");
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
+
+    /* LIGHT BLUE BACKGROUND */
+    background: #bde7ff;
 }
 
 /* SUN */
 
 .sun {
     position: absolute;
-    top: 35px;
-    right: 60px;
-    width: 90px;
-    height: 90px;
-    background: #ffd93d;
+    top: 45px;
+    right: 70px;
+    width: 75px;
+    height: 75px;
+    background: #ffe066;
     border-radius: 50%;
-    box-shadow: 0 0 35px #ffd93d;
+    box-shadow: 0 0 30px #ffe066;
 }
 
 /* CLOUDS */
@@ -50,10 +49,10 @@ background-repeat: no-repeat;
 .cloud {
     position: absolute;
     background: white;
-    width: 110px;
-    height: 35px;
+    width: 120px;
+    height: 38px;
     border-radius: 30px;
-    opacity: .9;
+    opacity: .85;
 }
 
 .cloud:before,
@@ -65,15 +64,15 @@ background-repeat: no-repeat;
 }
 
 .cloud:before {
-    width: 45px;
-    height: 45px;
-    top: -22px;
+    width: 48px;
+    height: 48px;
+    top: -23px;
     left: 20px;
 }
 
 .cloud:after {
-    width: 55px;
-    height: 55px;
+    width: 58px;
+    height: 58px;
     top: -30px;
     right: 15px;
 }
@@ -84,7 +83,7 @@ background-repeat: no-repeat;
 }
 
 .cloud2 {
-    top: 160px;
+    top: 170px;
     left: 55%;
 }
 
@@ -95,28 +94,28 @@ background-repeat: no-repeat;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 45%;
-    background: #777;
+    height: 42%;
+    background: #8d99a6;
 }
 
 .road:before {
     content: "";
     position: absolute;
     left: 0;
-    top: 45%;
+    top: 48%;
     width: 100%;
-    border-top: 8px dashed white;
+    border-top: 7px dashed #f8f8f8;
 }
 
 /* HOUSES */
 
 .house {
     position: absolute;
-    bottom: 42%;
+    bottom: 39%;
     width: 130px;
     height: 100px;
-    background: #ff9f68;
-    border: 5px solid #743b2c;
+    background: #ffb38a;
+    border: 5px solid #70453a;
 }
 
 .house:before {
@@ -126,15 +125,15 @@ background-repeat: no-repeat;
     left: -15px;
     border-left: 80px solid transparent;
     border-right: 80px solid transparent;
-    border-bottom: 65px solid #d94f4f;
+    border-bottom: 65px solid #ef7777;
 }
 
 .window {
     position: absolute;
     width: 30px;
     height: 35px;
-    background: #8ee5ff;
-    border: 4px solid #743b2c;
+    background: #9be7ff;
+    border: 4px solid #70453a;
     top: 25px;
     left: 20px;
 }
@@ -143,7 +142,7 @@ background-repeat: no-repeat;
     position: absolute;
     width: 35px;
     height: 55px;
-    background: #70452f;
+    background: #795548;
     bottom: 0;
     right: 20px;
 }
@@ -154,15 +153,19 @@ background-repeat: no-repeat;
 
 .house2 {
     right: 8%;
-    background: #ffc857;
+    background: #ffd477;
+}
+
+.house2:before {
+    border-bottom-color: #e99a5b;
 }
 
 /* ================= CHARACTER ================= */
 
 #player {
     position: absolute;
-    width: 70px;
-    height: 90px;
+    width: 80px;
+    height: 100px;
     left: 50%;
     top: 65%;
     transform: translateX(-50%);
@@ -171,8 +174,8 @@ background-repeat: no-repeat;
 }
 
 .head {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     background: #f2b28d;
     border-radius: 50%;
     margin: auto;
@@ -182,12 +185,13 @@ background-repeat: no-repeat;
 
 /* Hair */
 
-#hair {
+#hair,
+#previewHair {
     position: absolute;
     top: -10px;
-    left: 5px;
-    width: 38px;
-    height: 20px;
+    left: 6px;
+    width: 40px;
+    height: 22px;
     background: #4b2e20;
     border-radius: 50% 50% 20% 20%;
 }
@@ -197,16 +201,16 @@ background-repeat: no-repeat;
 .head:after {
     content: "•  •";
     position: absolute;
-    top: 17px;
-    left: 10px;
+    top: 18px;
+    left: 11px;
     font-size: 14px;
 }
 
 /* Outfit */
 
 .body {
-    width: 42px;
-    height: 38px;
+    width: 45px;
+    height: 40px;
     background: #8b5cf6;
     border-radius: 12px 12px 5px 5px;
     margin: -2px auto;
@@ -214,11 +218,12 @@ background-repeat: no-repeat;
 
 /* Accessory */
 
-#accessory {
+#accessory,
+#previewAccessory {
     position: absolute;
-    top: -28px;
+    top: -30px;
     left: 15px;
-    font-size: 24px;
+    font-size: 25px;
 }
 
 /* ================= ITEMS ================= */
@@ -295,6 +300,8 @@ background-repeat: no-repeat;
     box-shadow: 0 4px 12px rgba(0,0,0,.15);
 }
 
+/* MESSAGE */
+
 #message {
     position: absolute;
     top: 90px;
@@ -326,6 +333,11 @@ button {
     font-size: 20px;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0,0,0,.2);
+    transition: .15s;
+}
+
+button:hover {
+    transform: translateY(-2px);
 }
 
 button:active {
@@ -337,16 +349,23 @@ button:active {
 #startScreen {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+
+    background: linear-gradient(
+        135deg,
+        #bde7ff,
+        #dff6ff
+    );
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     z-index: 100;
     overflow-y: auto;
 }
 
 .creator {
-    background: white;
+    background: rgba(255,255,255,.96);
     padding: 30px;
     border-radius: 30px;
     text-align: center;
@@ -357,6 +376,7 @@ button:active {
 .creator h1 {
     font-size: 40px;
     margin: 5px;
+    color: #536dfe;
 }
 
 .creator p {
@@ -367,11 +387,18 @@ button:active {
     margin: 15px auto;
     width: 110px;
     height: 130px;
-    background: #f5f5f5;
+    background: #eefaff;
     border-radius: 25px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#previewPlayer {
+    position: relative;
+    width: 70px;
+    height: 100px;
 }
 
 .optionTitle {
@@ -408,9 +435,11 @@ button:active {
     inset: 0;
     background: rgba(30,20,50,.92);
     color: white;
+
     display: none;
     align-items: center;
     justify-content: center;
+
     z-index: 200;
     text-align: center;
 }
@@ -485,11 +514,8 @@ button:active {
     <div id="player">
 
         <div class="head">
-
             <div id="hair"></div>
-
             <div id="accessory"></div>
-
         </div>
 
         <div class="body"></div>
@@ -548,11 +574,8 @@ button:active {
                 <div id="previewPlayer">
 
                     <div class="head">
-
                         <div id="previewHair"></div>
-
                         <div id="previewAccessory"></div>
-
                     </div>
 
                     <div class="body"></div>
@@ -560,6 +583,7 @@ button:active {
                 </div>
 
             </div>
+
 
             <div class="optionTitle">
                 💇 Choose Hair
@@ -585,6 +609,7 @@ button:active {
 
             </div>
 
+
             <div class="optionTitle">
                 👕 Choose Outfit
             </div>
@@ -592,14 +617,27 @@ button:active {
             <div class="options">
 
                 <button onclick="changeOutfit('#8b5cf6')">
-                    💜 Purple
+                    💜 Fitted
+                </button>
+
+                <button onclick="changeOutfit('#ff7b9c')">
+                    🩷 Dress
+                </button>
+
+                <button onclick="changeOutfit('#4dabf7')">
+                    💙 Baggy
+                </button>
+
+            </div>
 
 
             <div class="optionTitle">
                 ✨ Choose Accessory
             </div>
 
-            <div on onclick="changeAccesory('🎀')">
+            <div class="options">
+
+                <button onclick="changeAccessory('🎀')">
                     🎀 Bow
                 </button>
 
@@ -665,30 +703,37 @@ button:active {
 
 let hairColor = "#4b2e20";
 let outfitColor = "#8b5cf6";
-let outfitstyle= "fitted";
 let accessory = "🎀";
+
 
 function changeHair(color) {
 
     hairColor = color;
 
-    document.getElementById("previewHair").style.background = color;
+    document.getElementById("previewHair").style.background =
+        color;
 
 }
+
 
 function changeOutfit(color) {
 
     outfitColor = color;
 
-    document.querySelector("#previewPlayer .body").style.background = color;
+    document.querySelector(
+        "#previewPlayer .body"
+    ).style.background = color;
 
 }
+
 
 function changeAccessory(item) {
 
     accessory = item;
 
-    document.getElementById("previewAccessory").innerText = item;
+    document.getElementById(
+        "previewAccessory"
+    ).innerText = item;
 
 }
 
@@ -697,12 +742,11 @@ function changeAccessory(item) {
 
 function startGame() {
 
-    let name = document.getElementById("nameInput").value;
+    let name =
+        document.getElementById("nameInput").value;
 
     if(name.trim() === "") {
-
         name = "PLAYER";
-
     }
 
     document.getElementById("playerName").innerText =
@@ -711,8 +755,9 @@ function startGame() {
     document.getElementById("hair").style.background =
         hairColor;
 
-    document.querySelector("#player .body").style.background =
-        outfitColor;
+    document.querySelector(
+        "#player .body"
+    ).style.background = outfitColor;
 
     document.getElementById("accessory").innerText =
         accessory;
@@ -721,7 +766,8 @@ function startGame() {
         "none";
 
     showMessage(
-        "Welcome, " + name + "! ✨ Create your perfect day!"
+        "Welcome, " + name +
+        "! ✨ Create your perfect day!"
     );
 
 }
@@ -732,17 +778,19 @@ function startGame() {
 let score = 0;
 
 let collected = {
-
     morning: false,
     food: false,
     fun: false
-
 };
 
-let playerX = window.innerWidth / 2;
-let playerY = window.innerHeight * .65;
+let playerX =
+    window.innerWidth / 2;
 
-const player = document.getElementById("player");
+let playerY =
+    window.innerHeight * .65;
+
+const player =
+    document.getElementById("player");
 
 
 function move(direction) {
@@ -766,35 +814,54 @@ function move(direction) {
     }
 
     playerX =
-        Math.max(20,
-        Math.min(window.innerWidth - 70, playerX));
+        Math.max(
+            20,
+            Math.min(
+                window.innerWidth - 70,
+                playerX
+            )
+        );
 
     playerY =
-        Math.max(120,
-        Math.min(window.innerHeight - 120, playerY));
+        Math.max(
+            120,
+            Math.min(
+                window.innerHeight - 120,
+                playerY
+            )
+        );
 
-    player.style.left = playerX + "px";
+    player.style.left =
+        playerX + "px";
 
-    player.style.top = playerY + "px";
+    player.style.top =
+        playerY + "px";
 
     checkNearby();
 
 }
 
 
-/* KEYBOARD */
+/* ================= KEYBOARD ================= */
 
-document.addEventListener("keydown", function(e) {
+document.addEventListener(
+    "keydown",
+    function(e) {
 
-    if(e.key === "ArrowLeft") move("left");
+        if(e.key === "ArrowLeft")
+            move("left");
 
-    if(e.key === "ArrowRight") move("right");
+        if(e.key === "ArrowRight")
+            move("right");
 
-    if(e.key === "ArrowUp") move("up");
+        if(e.key === "ArrowUp")
+            move("up");
 
-    if(e.key === "ArrowDown") move("down");
+        if(e.key === "ArrowDown")
+            move("down");
 
-});
+    }
+);
 
 
 /* ================= COLLECT ITEMS ================= */
@@ -804,38 +871,45 @@ function checkNearby() {
     const playerRect =
         player.getBoundingClientRect();
 
-    document.querySelectorAll(".item").forEach(item => {
+    document
+        .querySelectorAll(".item")
+        .forEach(item => {
 
-        const rect =
-            item.getBoundingClientRect();
+            const rect =
+                item.getBoundingClientRect();
 
-        if(
-            Math.abs(playerRect.left - rect.left) < 55 &&
-            Math.abs(playerRect.top - rect.top) < 55
-        ) {
+            if(
+                Math.abs(
+                    playerRect.left -
+                    rect.left
+                ) < 55 &&
 
-            if(item.id === "sunItem") {
-                collect("morning");
+                Math.abs(
+                    playerRect.top -
+                    rect.top
+                ) < 55
+            ) {
+
+                if(item.id === "sunItem")
+                    collect("morning");
+
+                if(item.id === "foodItem")
+                    collect("food");
+
+                if(item.id === "musicItem")
+                    collect("fun");
+
             }
 
-            if(item.id === "foodItem") {
-                collect("food");
-            }
-
-            if(item.id === "musicItem") {
-                collect("fun");
-            }
-
-        }
-
-    });
+        });
 
 }
 
 
 function collect(type) {
 
-    if(collected[type]) return;
+    if(collected[type])
+        return;
 
     collected[type] = true;
 
@@ -847,8 +921,9 @@ function collect(type) {
 
     if(type === "morning") {
 
-        document.getElementById("sunItem").style.display =
-            "none";
+        document.getElementById(
+            "sunItem"
+        ).style.display = "none";
 
         showMessage(
             "☀️ Perfect morning unlocked!"
@@ -859,8 +934,9 @@ function collect(type) {
 
     if(type === "food") {
 
-        document.getElementById("foodItem").style.display =
-            "none";
+        document.getElementById(
+            "foodItem"
+        ).style.display = "none";
 
         showMessage(
             "🍕 FOOD ACQUIRED! Priorities 😂"
@@ -871,15 +947,15 @@ function collect(type) {
 
     if(type === "fun") {
 
-        document.getElementById("musicItem").style.display =
-            "none";
+        document.getElementById(
+            "musicItem"
+        ).style.display = "none";
 
         showMessage(
             "🎵 FUN UNLOCKED! LET'S GOOOO!"
         );
 
     }
-
 
     checkWin();
 
@@ -898,8 +974,9 @@ function annoy(type) {
             "⏰ THE ALARM ATTACKED! -20 😭"
         );
 
-        document.getElementById("alarm").style.display =
-            "none";
+        document.getElementById(
+            "alarm"
+        ).style.display = "none";
 
     }
 
@@ -912,8 +989,9 @@ function annoy(type) {
             "📚 HOMEWORK FOUND! RUN! -20 💀"
         );
 
-        document.getElementById("homework").style.display =
-            "none";
+        document.getElementById(
+            "homework"
+        ).style.display = "none";
 
     }
 
@@ -934,7 +1012,10 @@ function checkWin() {
         collected.fun
     ) {
 
-        setTimeout(endGame, 700);
+        setTimeout(
+            endGame,
+            700
+        );
 
     }
 
@@ -945,11 +1026,14 @@ function checkWin() {
 
 function endGame() {
 
-    document.getElementById("endScreen").style.display =
-        "flex";
+    document.getElementById(
+        "endScreen"
+    ).style.display = "flex";
 
-    document.getElementById("finalScore").innerText =
-        score;
+    document.getElementById(
+        "finalScore"
+    ).innerText = score;
+
 
     let title;
     let text;
@@ -957,40 +1041,45 @@ function endGame() {
 
     if(score >= 300) {
 
-        title = "🌟 ABSOLUTELY PERFECT!";
+        title =
+            "🌟 ABSOLUTELY PERFECT!";
 
         text =
-        "You created the ultimate perfect day! " +
-        "Good vibes, good food and zero regrets. 😂";
+            "You created the ultimate perfect day! " +
+            "Good vibes, good food and zero regrets. 😂";
 
     }
 
     else if(score >= 240) {
 
-        title = "✨ PRETTY PERFECT!";
+        title =
+            "✨ PRETTY PERFECT!";
 
         text =
-        "Not everything went according to plan... " +
-        "but honestly, that's what made it memorable.";
+            "Not everything went according to plan... " +
+            "but honestly, that's what made it memorable.";
 
     }
 
     else {
 
-        title = "😂 CHAOTIC PERFECT DAY!";
+        title =
+            "😂 CHAOTIC PERFECT DAY!";
 
         text =
-        "Was this actually a perfect day? " +
-        "Probably not. Was it entertaining? DEFINITELY.";
+            "Was this actually a perfect day? " +
+            "Probably not. Was it entertaining? DEFINITELY.";
 
     }
 
 
-    document.getElementById("endingTitle").innerText =
-        title;
+    document.getElementById(
+        "endingTitle"
+    ).innerText = title;
 
-    document.getElementById("endingText").innerText =
-        text;
+    document.getElementById(
+        "endingText"
+    ).innerText = text;
 
 }
 
@@ -1019,7 +1108,3 @@ function showMessage(text) {
 </body>
 </html>
 ```
-
-
-
-
